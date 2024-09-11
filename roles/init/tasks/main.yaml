@@ -4,7 +4,7 @@
 - name: Create user juri
   ansible.builtin.user:
     name: juri
-    sate: present
+    state: present
     shell: /bin/bash
     create_home: yes
 
