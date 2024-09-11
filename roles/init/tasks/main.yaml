@@ -29,3 +29,9 @@
     key: |
       ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDFligqCTgPl8lcKVsgHq9K9zEelCfTP+hcuG9tdhHgBoHwlZPilvTmi4veyORSGTuS9x8XwJuDAnAZsT75TFQVbOjp0XqqcpV/jF4ix6mS6kmdJzzruAaYSI6FWit4ZeRz8/XfNOmg2xaPn3A6hWAUAOhpeOiXtKcSZVOIitJOirjjYrK5Sq+cW8pFGjVWpweU46WwKYoPr1EyEN1PqUjDTOU4LvShEK1TF/kZOeRMysPf9lz1JQO6BKEr0oRWaROCMZwuTDlmh9i0LZEwje6e5ADxMyTHp9fgpCV9a4hDOE7EQdmePDtDO9PHjGQD3m060ydOiFbjSI98q0puzEKxpfzcyMEb/ztdiLWOBO5ANOMzADZ9f+D0S3bqHbSlq/pHXJ2aF2DfROKOrIg1ABFcgz4ugaGhQzYmxsKc2SXgzk/D7952k+FP5FxvW5FpX+xgkMGkt2XlLzjpvZO5eH/rHDppO1v+Pr876di5NbiXCC0GL3C80H2dl4QIrpeDtlFIO5spVtMqFBbUcXticNC9C6dXjOL5p5jhLq82tKHlc5Mnx0cyPRHeO8XCkA0MsipMOGy+tIiOPKaO/dDMT7kiYZKYvaNaUrmdB0MISydE8kTknHBVX9b/qOOysHglMJgmfIYP2YWXDVQFWq9hkWFVIS+yPiaEViphRKbTZMBbLQ==
     state: present
+
+- name: Update APT cache
+  ansible.builtin.apt:
+    update_cache: yes
+    cache_valid_time: 86400
+
