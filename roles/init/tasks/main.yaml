@@ -1,4 +1,4 @@
-#- name: Ansible ping module
+te#- name: Ansible ping module
 #  ansible.builtin.ping:
 
 - name: Create user juri
@@ -6,12 +6,14 @@
     name: juri
     sate: present
     shell: /bin/bash
+    create_home: yes
 
 - name: Create user roman
   ansible.builtin.user:
     name: roman
     state: present
     shell: /bin/bash
+    create_home: yes
 
 - name: Set up authorized key for juri
   ansible.builtin.authorized_key:
