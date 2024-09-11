@@ -1,2 +1,27 @@
-- name: Ansible ping module
-  ansible.builtin.ping:
+#- name: Ansible ping module
+#  ansible.builtin.ping:
+
+- name: Create user juri
+  ansible.builtin.user:
+    name: juri
+    sate: present 
+
+- name: Create user roman
+  ansible.builtin.user:
+    name: roman
+    state: present
+
+- name: Set up authorized key for juri
+  ansible.builtin.authorized_key:
+    user: juri
+    key: |
+      ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC/PLdlvr9Z8PyzMNsG17kF8PuVFyD+M30RvBe6CBNu+DRjSeKzeougyTVDydsWA/trjDBWQ26nfJmqevJh6woZJudqRCQNfUsF4IuM4C94hzgtTwzyNRtHrI8Pv18pcjJipzPyl5AEW2sqV0ABPDuI8gxcRWfkiF8TLoz2Q65qJe0rag0b9c8XSHyLP0/V9nsH2fjd1GLcCqe2lmKYNJppwN/BYc/D1/yiwMSqTxgK/XCUwJDTloxepjTvlq1P5GGqH8V238AHL/y1khAbXclERC9ropOcUhdDgeWGXCzFyMGd5qUyOgwbnFgMameKSuYptclhwo7MzlygfgGoK6RCyy3xDsnvFOyadWsxXmdnwv851JYLnmeMjMkDlF/NDA3uVKnDVTsDcPyAq+YdSmpI3BDw2MHRFqnWCM2SkW+euQNuTxl7ykrxkKM/U80BXGd1oL4Is7QDNS0y+c1VyJ0Rts5M1StshJakhidUrlqUjyJ/UK8ZuyaTMKgLial2k/k=
+      ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGdFB7fgAaw0Mk76b1veUE7K6Bib9MNqLQXTev8kIZpi
+      ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDDxR26gZ5PBGIxYsB2UAkS+W0bc5uPZn9akB+5ystYbQRKUL/j7bezMDvDuIaeryDDY//1r0nAwAd765lMgQ7VWa2Muzp3ROpv0CNFBO6Ol4mQ/wy46ZEZYKeA7NY8xY4dyFf6Sur1QHhaN1KKSYhvnmas0vgO8327wNi3SV52771nwV0CgMOzn4PnenakMM+ScRGRnamGDzLrjlNGqeq90KfXRQpOW7TZW/pprDbYUrD8Y1gr3kz0SkjclB6ao6HvbtesGjwuslfIumIw+RkWIJbfAJpiUm7RDmrahpwdwNyRYDsu0av9KBqAM3iDlZ5YOG9YMV+IrRiPr1jA4XyZsf2zhkx/WIL1Cp1BBtPF6aY9N9QJMF67u2RnNNKUz7tsfm7Yl7VPClrW+q+CGfiHu4LyRjBvIp4c7yFIxIP+fs4HA2ob4cNIatYWistytvDAw13EV9LBX/bN0Elb02egNbqI1JDaiGwr+YFFg67Ja8BAQt63VWZh5Nog8NE6sJs=
+      
+- name: Set up authorized key for roman
+  ansible.builtin.authorized_key:
+    user: roman
+    key: |
+      ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDFligqCTgPl8lcKVsgHq9K9zEelCfTP+hcuG9tdhHgBoHwlZPilvTmi4veyORSGTuS9x8XwJuDAnAZsT75TFQVbOjp0XqqcpV/jF4ix6mS6kmdJzzruAaYSI6FWit4ZeRz8/XfNOmg2xaPn3A6hWAUAOhpeOiXtKcSZVOIitJOirjjYrK5Sq+cW8pFGjVWpweU46WwKYoPr1EyEN1PqUjDTOU4LvShEK1TF/kZOeRMysPf9lz1JQO6BKEr0oRWaROCMZwuTDlmh9i0LZEwje6e5ADxMyTHp9fgpCV9a4hDOE7EQdmePDtDO9PHjGQD3m060ydOiFbjSI98q0puzEKxpfzcyMEb/ztdiLWOBO5ANOMzADZ9f+D0S3bqHbSlq/pHXJ2aF2DfROKOrIg1ABFcgz4ugaGhQzYmxsKc2SXgzk/D7952k+FP5FxvW5FpX+xgkMGkt2XlLzjpvZO5eH/rHDppO1v+Pr876di5NbiXCC0GL3C80H2dl4QIrpeDtlFIO5spVtMqFBbUcXticNC9C6dXjOL5p5jhLq82tKHlc5Mnx0cyPRHeO8XCkA0MsipMOGy+tIiOPKaO/dDMT7kiYZKYvaNaUrmdB0MISydE8kTknHBVX9b/qOOysHglMJgmfIYP2YWXDVQFWq9hkWFVIS+yPiaEViphRKbTZMBbLQ==
+    state: present
