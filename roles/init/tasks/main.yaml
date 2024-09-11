@@ -4,12 +4,14 @@
 - name: Create user juri
   ansible.builtin.user:
     name: juri
-    sate: present 
+    sate: present
+    shell: /bin/bash
 
 - name: Create user roman
   ansible.builtin.user:
     name: roman
     state: present
+    shell: /bin/bash
 
 - name: Set up authorized key for juri
   ansible.builtin.authorized_key:
