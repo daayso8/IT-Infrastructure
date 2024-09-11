@@ -1,6 +1,6 @@
-te#- name: Ansible ping module
+#- name: Ansible ping module
 #  ansible.builtin.ping:
-
+---
 - name: Create user juri
   ansible.builtin.user:
     name: juri
