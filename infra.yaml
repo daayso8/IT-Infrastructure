@@ -1,8 +1,9 @@
 ---
 - name: Initial setup
-    hosts: all
-    roles:
-      - init
+  hosts: all
+  become: true
+  roles:
+    - init
 
 - name: Web server setup
   hosts: web_servers
