@@ -1,4 +1,1 @@
-- name: Install Nginx web server
-  ansible.builtin.apt:
-    name: nginx
-    state: present
+
