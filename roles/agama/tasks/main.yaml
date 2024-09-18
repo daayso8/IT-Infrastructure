@@ -1,3 +1,4 @@
+---
 - name: Create agama user
   ansible.builtin.user:
   name: agama
