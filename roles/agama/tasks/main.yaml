@@ -11,5 +11,15 @@
   owner: agama
 
 - name: Install agama dependencies
-  
+  ansible.builtin.apt:
+    name:
+      - python3 
+      - python3-venv
+      - sqlite3
+    state: present
+    update_cache: no
+
+- name: Install agama application
+  ansible.builtin.get_url:
+    url: 
   
