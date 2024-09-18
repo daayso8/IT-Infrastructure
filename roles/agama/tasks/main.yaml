@@ -17,9 +17,9 @@
       - python3 
       - python3-venv
       - sqlite3
-      - flask
+      - python3-flask
     state: present
-    update_cache: no
+    update_cache: yes
 
 - name: Install agama application
   ansible.builtin.get_url:
