@@ -2,6 +2,7 @@
   ansible.builtin.user:
     name: agama
     state: present
+    system: yes
 
 - name: Create /opt/agama directory
   ansible.builtin.file:
