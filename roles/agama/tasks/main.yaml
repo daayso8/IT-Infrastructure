@@ -23,6 +23,6 @@
 - name: Download AGAMA application
   ansible.builtin.get_url:
     url: "https://raw.githubusercontent.com/hudolejev/agama/master/agama.py"
-    dest: /opt/agama/agama.tar.gz
+    dest: /opt/agama
     owner: agama
     group: agama
