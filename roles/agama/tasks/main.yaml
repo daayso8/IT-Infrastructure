@@ -1,4 +1,15 @@
 - name: Create agama user
   ansible.builtin.user:
   name: agama
+  state: present
+  shell: /bin/bash
+
+- name: Create /opt/agama directory
+  ansible.builtin.file:
+  state: directory
+  path: /opt/agama
+  owner: agama
+
+- name: Install agama dependencies
+  
   
