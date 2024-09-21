@@ -10,4 +10,5 @@
   become: true
   roles:
     - agama
+    - uwsgi
     - nginx
