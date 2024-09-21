@@ -1,0 +1,15 @@
+[uwsgi]
+module = wsgi:application
+master = true
+processes = 5
+socket = 127.0.0.1:5000
+chdir = /opt/agama
+home = /opt/agama/venv  # If using a virtual environment
+virtualenv = /opt/agama/venv  # Adjust if needed
+user = agama
+chmod-socket = 660
+vacuum = true
+die-on-term = true
+
+# SQLite configuration
+database = /opt/agama/db.sqlite3
