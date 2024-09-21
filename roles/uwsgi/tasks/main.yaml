@@ -15,3 +15,8 @@
     mode: '0644'
   notify: Restart uwsgi
 
+- name: Ensure the uWSGI service is started
+  service:
+    name: uwsgi
+    state: started
+    enabled: true
