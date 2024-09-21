@@ -1,6 +1,0 @@
----
-- name: Restart uWSGI
-  ansible.builtin.service:
-    name: uwsgi
-    state: started
-    enabled: true
