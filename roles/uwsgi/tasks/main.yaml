@@ -6,3 +6,18 @@
       - uwsgi-plugin-python3
     state: present
     update_cache: yes
+
+- name: Configure host uwsgi
+  ansible.builtin.template:
+    src: agama.ini.j2
+    dest: /etc/uwsgi/apps-enabled/agama.ini
+    owner: agama
+    mode: '0644'
+  no_log: true
+  notify: Restart uwsgi
+
+
+- name: Restart uWSGI
+  service:
+    name: uwsgi
+    state: restarted
