@@ -15,9 +15,3 @@
     mode: '0644'
   notify: Restart uwsgi
 
-
-- name: Make sure uwsgi is running
-  ansible.builtin.service:
-    name: uwsgi
-    state: started
-    enabled: true
