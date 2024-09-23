@@ -24,7 +24,7 @@
       uid = agama
     owner: agama
     notify: 
-      - Restart uWSGI
+      - Restart uwsgi
 
 
 - name: Ensure the uWSGI service is started
