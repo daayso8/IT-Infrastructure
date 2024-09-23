@@ -23,7 +23,7 @@
       socket = 127.0.0.1:5000
       uid = agama
     owner: agama
-
+  notify: Restart uwsgi
 
 - name: Ensure the uWSGI service is started
   service:
