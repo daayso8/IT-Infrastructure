@@ -12,7 +12,8 @@
     src: agama.ini.j2
     dest: /etc/uwsgi/apps-enabled/agama.ini
     owner: agama
-    mode: '0644'
+    mode: '0600'
+    no-log: true
     notify: 
       - Restart uwsgi
 
