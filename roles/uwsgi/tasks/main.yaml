@@ -14,8 +14,8 @@
 - name: Configure host uwsgi for AGAMA
   ansible.builtin.copy:
     src: agama.ini
-    dest: /etc/uwsgi/apps-enabled/agama.ini |
-    mode: '0600'
+    dest: /etc/uwsgi/apps-enabled/agama.ini
+    mode: '0644'
     owner: agama
   notify: Restart uwsgi
 
