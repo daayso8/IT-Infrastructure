@@ -5,15 +5,24 @@
       - uwsgi
       - uwsgi-plugin-python3
     state: present
-    update_cache: yes
 
-- name: Configure host uwsgi
-  ansible.builtin.template:
-    src: agama.ini.j2
+- name: Ensure uWSGI apps-enabled directory exists
+  ansible.builtin.file:
+    path: /etc/uwsgi/apps-enabled
+    state: directory
+
+- name: Configure host uwsgi for AGAMA
+  ansible.builtin.copy:
     dest: /etc/uwsgi/apps-enabled/agama.ini
+    content: |
+      [uswgi]
+      chdir = /opt/agama
+      module = agama:aoo
+      env = AGAMA_DATABASE_URI=sqlite:////opt/agama/db.sqlite3
+      plugins = python 3
+      socket = 127.0.0.1:5000
+      uid = agama
     owner: agama
-    mode: '0600'
-    no-log: true
     notify: 
       - Restart uWSGI
 
