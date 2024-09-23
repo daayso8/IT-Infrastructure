@@ -2,3 +2,11 @@
   ansible.builtin.apt:
     name: nginx
     state: present
+
+- name: Replace default Nginx config
+  ansible.builtin.copy:
+    src: ~/ansible-venv/ica0002/roles/nginx/files/default
+    dest: /etc/uwsgi/apps-enabled/agama.ini
+    mode: '0644'
+  notify:
+    - Restart nginx
