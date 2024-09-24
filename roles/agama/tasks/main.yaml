@@ -4,6 +4,7 @@
     name: agama
     state: present
     shell: /bin/bash
+    create_home: yes
 
 - name: Create /opt/agama directory
   ansible.builtin.file:
@@ -18,8 +19,8 @@
       - python3-venv
       - sqlite3
       - python3-flask
+      - python3-flask-sqlalchemy
     state: present
-    update_cache: yes
 
 - name: Install agama application
   ansible.builtin.get_url:

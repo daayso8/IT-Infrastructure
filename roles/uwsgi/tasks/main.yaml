@@ -20,7 +20,7 @@
   notify: Restart uwsgi
 
 - name: Ensure the uWSGI service is started
-  service:
+  ansible.builtin.service:
     name: uwsgi
     state: started
     enabled: true

@@ -8,8 +8,7 @@
     src: default
     dest: /etc/nginx/sites-enabled/default
     mode: '0644'
-  notify:
-    - Restart nginx
+  notify: Restart nginx
 
 - name: Ensure Nginx service is started and enabled
   ansible.builtin.service:
