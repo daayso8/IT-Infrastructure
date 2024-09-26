@@ -1,4 +1,8 @@
 davidayson8-1 ansible_host=193.40.156.67 ansible_port=16622 ansible_user=ubuntu
+davidayson8-2 ansible_host=193.40.156.67 ansible_port=9422 ansible_user=ubuntu
+
+[db_servers]
+davidayson8-2
 
 [web_servers]
 davidayson8-1
