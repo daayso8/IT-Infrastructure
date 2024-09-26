@@ -8,8 +8,8 @@
 - name: Database server setup
   hosts: db_servers
   become: true
-    roles:
-      - mysql
+  roles:
+    - mysql
 
 - name: Web server setup
   hosts: web_servers
