@@ -3,6 +3,14 @@
     name: mysql-server
     state: present
 
+- name: Add MySQL bind address override
+  ansible.builtin.copy:
+    dest: /etc/mysql/mysql.conf.d/override.cnf
+    content: |
+      [mysqld]
+      bind-address = 0.0.0.0
+  notify: Restart MySQL
+
 - name: Ensure MySQL is running and enabled
   ansible.builtin.service:
     name: mysql
