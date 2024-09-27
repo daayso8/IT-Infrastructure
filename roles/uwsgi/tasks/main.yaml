@@ -1,4 +1,9 @@
 ---
+- name: Restart uwsgi
+  ansible.builtin.service:
+    name: uwsgi
+    state: restarted
+
 - name: Install uWSGI packages
   ansible.builtin.apt:
     name:
@@ -15,8 +20,9 @@
   ansible.builtin.template:
     src: agama.ini.j2
     dest: /etc/uwsgi/apps-enabled/agama.ini
-    mode: '0644'
+    mode: '0600'
     owner: agama
+  no_log: true
   notify: Restart uwsgi
 
 - name: Ensure the uWSGI service is started
