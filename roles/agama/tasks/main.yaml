@@ -21,6 +21,7 @@
       - python3-flask
       - python3-flask-sqlalchemy
       - python3-jinja2
+      - python3-pymysql
     state: present
 
 - name: Install agama application

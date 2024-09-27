@@ -12,8 +12,8 @@
     state: directory
 
 - name: Configure host uwsgi for AGAMA
-  ansible.builtin.copy:
-    src: agama.ini
+  ansible.builtin.template:
+    src: agama.ini.j2
     dest: /etc/uwsgi/apps-enabled/agama.ini
     mode: '0644'
     owner: agama

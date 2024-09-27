@@ -1,3 +1,8 @@
+- name: Restart MySQL
+  ansible.builtin.service:
+    name: mysql
+    state: restarted
+
 - name: Install MySQL server
   ansible.builtin.apt:
     name: mysql-server
