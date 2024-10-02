@@ -1,9 +1,4 @@
 ---
-- name: Restart uwsgi
-  ansible.builtin.service:
-    name: uwsgi
-    state: restarted
-
 - name: Install uWSGI packages
   ansible.builtin.apt:
     name:
@@ -24,6 +19,11 @@
     owner: agama
   no_log: true
   notify: Restart uwsgi
+
+- name: Restart uwsgi
+  ansible.builtin.service:
+    name: uwsgi
+    state: restarted
 
 - name: Ensure the uWSGI service is started
   ansible.builtin.service:
