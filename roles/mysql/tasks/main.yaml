@@ -1,8 +1,3 @@
-- name: Restart MySQL
-  ansible.builtin.service:
-    name: mysql
-    state: restarted
-
 - name: Install MySQL server
   ansible.builtin.apt:
     name: mysql-server
@@ -21,7 +16,12 @@
       [mysqld]
       bind-address = 0.0.0.0
   notify: Restart MySQL
-
+  
+- name: Restart MySQL
+  ansible.builtin.service:
+    name: mysql
+    state: restarted
+    
 - name: Ensure MySQL is running and enabled
   ansible.builtin.service:
     name: mysql
@@ -40,4 +40,5 @@
     login_unix_socket: /var/run/mysqld/mysqld.sock
     host: "%"
     priv: "{{ mysql_database }}.*:ALL"
+
 
