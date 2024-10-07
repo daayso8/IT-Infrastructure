@@ -5,6 +5,11 @@
   roles:
     - init
 
+- name: host DNS servers
+  hosts: dns_servers
+  roles:
+    - bind
+
 - name: Database server setup
   hosts: db_servers
   become: true

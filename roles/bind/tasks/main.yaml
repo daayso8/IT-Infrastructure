@@ -1,0 +1,20 @@
+- name: Install Bind9
+  ansible.builtin.apt:
+    name: bind9
+    state: present
+
+- name: Run Zone template
+  ansible.builtin.template:
+    src: zone.j2
+    dest: /var/cache/bind/db.daayso.da
+
+- name: Restart Bind9
+  ansible.builtin.service:
+    name: bind9
+    state: restarted
+
+- name: Ensure Bind9 service is started and running
+  ansible.builtin.service:
+    name: bind9
+    state: started
+    enabled: yes
