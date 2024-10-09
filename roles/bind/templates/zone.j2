@@ -1,4 +1,4 @@
-o$TTL    604800
+$TTL    604800
 {{ domain_name }}.   IN  SOA {{ domain_name }}.  root.{{ domain_name }}. (
               2       ; Serial
          604800       ; Refresh
@@ -6,10 +6,9 @@ o$TTL    604800
         2419200       ; Expire
          604800 )     ; Negative Cache TTL
 ;
-@ IN NS {{ domain_name }}. 
 
-{{ domain_name }}.	IN	NS	vm1
-davidayson8-1  	IN	A	192.168.42.116
-davidayson8-2  	IN	A	192.168.42.174
+{{ domain_name }}.	IN	NS	davidayson8-1
+davidayson8-1	IN	A	192.168.43.116
+davidayson8-2	IN	A	192.168.43.174 	
 
 

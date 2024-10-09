@@ -1,22 +1,25 @@
 - name: Install Nginx web server
   ansible.builtin.apt:
-    name: nginx
+    name: 
+      - nginx
+      - prometheus-nginx-exporter
     state: present
 
 - name: Replace default Nginx config
-  ansible.builtin.copy:
-    src: default
+  ansible.builtin.template:
+    src: default.j2
     dest: /etc/nginx/sites-enabled/default
     mode: '0644'
-  notify: Restart nginx
+  notify: 
+    - Restart nginx
+    - Restart nginx prometheus
 
 - name: Ensure Nginx service is started and enabled
   ansible.builtin.service:
-    name: nginx
+    name: "{{ item }}"
     state: started
     enabled: true
+  loop:
+    - nginx
+    - prometheus-nginx-exporter
 
-- name: Restart nginx
-  ansible.builtin.service:
-    name: nginx
-    state: restarted

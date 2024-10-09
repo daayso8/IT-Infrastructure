@@ -16,7 +16,7 @@
 - name: Run Zone template
   ansible.builtin.template:
     src: zone.j2
-    dest: /var/cache/bind/db.{domain_name}
+    dest: /var/cache/bind/db.{{ domain_name }}
   notify: Restart Bind9
 
 - name: Ensure Bind9 service is started and running
@@ -24,13 +24,3 @@
     name: bind9
     state: started
     enabled: yes
-
-- name: Reload Bind9  
-  ansible.builtin.service:
-    name: bind9
-    state: reloaded
-
-- name: Restart Bind9
-  ansible.builtin.service:
-    name: bind9
-    state: restarted

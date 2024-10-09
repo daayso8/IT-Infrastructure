@@ -15,6 +15,11 @@
   roles:
     - resolver
 
+- name: Install Prometheus
+  hosts: prometheus
+  roles: 
+    - prometheus
+
 - name: Database server setup
   hosts: db_servers
   become: true

@@ -8,9 +8,12 @@ davidayson8-2
 davidayson8-1
 
 [dns_servers]
-davidayson8-1
 davidayson8-2
 
 [resolv]
+davidayson8-1
+davidayson8-2
+
+[prometheus]
 davidayson8-2
 
