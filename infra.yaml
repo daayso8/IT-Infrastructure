@@ -19,6 +19,7 @@
   hosts: prometheus
   roles: 
     - prometheus
+    - nginx
 
 - name: Database server setup
   hosts: db_servers

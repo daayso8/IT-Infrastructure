@@ -13,5 +13,11 @@ server {
 	location /prometheus {
 		proxy_pass http://localhost:9090;
 	}
+	
+	location / {
+		return 404;
+	}
 	{% endif %}
+
+	
 }
