@@ -10,6 +10,11 @@
   roles:
     - bind
 
+- name: Setup custom DNS
+  hosts: resolv
+  roles:
+    - resolver
+
 - name: Database server setup
   hosts: db_servers
   become: true

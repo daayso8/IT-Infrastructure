@@ -16,12 +16,7 @@
       [mysqld]
       bind-address = 0.0.0.0
   notify: Restart MySQL
-  
-- name: Restart MySQL
-  ansible.builtin.service:
-    name: mysql
-    state: restarted
-    
+      
 - name: Ensure MySQL is running and enabled
   ansible.builtin.service:
     name: mysql
