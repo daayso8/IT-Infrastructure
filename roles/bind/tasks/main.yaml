@@ -11,6 +11,7 @@
   with_items:
     - options
     - local
+  notify: Reload Bind9
 
 - name: Run Zone template
   ansible.builtin.template:
