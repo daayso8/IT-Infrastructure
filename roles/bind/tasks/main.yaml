@@ -5,7 +5,7 @@
 
 - name: Configure named.conf files Template
   ansible.builtin.template:
-    src: named.conf.{{ item }}
+    src: named.conf.{{ item }}.j2
     dest: /etc/bind/named.conf.{{ item }}
     mode: '0644'
   with_items:
