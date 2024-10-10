@@ -18,8 +18,8 @@
 
 - name: Run Prometheus Web External Template
   ansible.builtin.template:
-    dest: /etc/default/prometheus
     src: metric.yaml.j2
+    dest: /etc/default/prometheus
     mode: '0755'
   notify: Restart Prometheus
 
