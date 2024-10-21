@@ -1,0 +1,167 @@
+{
+  "dashboard": {
+    "id": null,
+    "title": "Main Dashboard",
+    "timezone": "browser",
+    "panels": [
+      {
+        "type": "graph",
+        "title": "CPU Utilization",
+        "targets": [
+          {
+            "expr": "100 - (avg by(instance) (irate(node_cpu_seconds_total{mode='idle'}[5m])) * 100)",
+            "legendFormat": "{{instance}}",
+            "refId": "A"
+          }
+        ],
+        "xaxis": {
+          "mode": "time"
+        },
+        "yaxis": {
+          "label": "CPU Utilization (%)",
+          "format": "percent"
+        }
+      },
+      {
+        "type": "graph",
+        "title": "Memory Consumption",
+        "targets": [
+          {
+            "expr": "(node_memory_MemTotal_bytes - node_memory_MemAvailable_bytes) / node_memory_MemTotal_bytes * 100",
+            "legendFormat": "{{instance}}",
+            "refId": "B"
+          }
+        ],
+        "xaxis": {
+          "mode": "time"
+        },
+        "yaxis": {
+          "label": "Memory Usage (%)",
+          "format": "percent"
+        }
+      },
+      {
+        "type": "graph",
+        "title": "Bind9 DNS Queries",
+        "targets": [
+          {
+            "expr": "sum by (job) (rate(bind_resolver_queries_total[1m]))",
+            "legendFormat": "DNS Queries",
+            "refId": "C"
+          }
+        ],
+        "xaxis": {
+          "mode": "time"
+        },
+        "yaxis": {
+          "label": "Queries per Minute",
+          "format": "short"
+        }
+      },
+      {
+        "type": "stat",
+        "title": "Bind9 Status",
+        "targets": [
+          {
+            "expr": "up{job='bind'}",
+            "legendFormat": "Bind9",
+            "refId": "D"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                { "color": "red", "value": 0 },
+                { "color": "green", "value": 1 }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "type": "graph",
+        "title": "MySQL Select Queries",
+        "targets": [
+          {
+            "expr": "sum by (job) (rate(mysql_global_status_commands_total{command='select'}[1m]))",
+            "legendFormat": "Select Queries",
+            "refId": "E"
+          }
+        ],
+        "xaxis": {
+          "mode": "time"
+        },
+        "yaxis": {
+          "label": "Queries per Minute",
+          "format": "short"
+        }
+      },
+      {
+        "type": "stat",
+        "title": "MySQL Status",
+        "targets": [
+          {
+            "expr": "up{job='mysql'}",
+            "legendFormat": "MySQL",
+            "refId": "F"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                { "color": "red", "value": 0 },
+                { "color": "green", "value": 1 }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "type": "graph",
+        "title": "Nginx HTTP Requests",
+        "targets": [
+          {
+            "expr": "sum by (job) (rate(nginx_http_requests_total[1m]))",
+            "legendFormat": "HTTP Requests",
+            "refId": "G"
+          }
+        ],
+        "xaxis": {
+          "mode": "time"
+        },
+        "yaxis": {
+          "label": "Requests per Minute",
+          "format": "short"
+        }
+      },
+      {
+        "type": "stat",
+        "title": "Nginx Status",
+        "targets": [
+          {
+            "expr": "up{job='nginx'}",
+            "legendFormat": "Nginx",
+            "refId": "H"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                { "color": "red", "value": 0 },
+                { "color": "green", "value": 1 }
+              ]
+            }
+          }
+        }
+      }
+    ],
+    "schemaVersion": 30,
+    "version": 1
+  }
+}

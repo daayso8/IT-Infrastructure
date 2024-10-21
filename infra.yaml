@@ -21,6 +21,11 @@
     - prometheus
     - nginx
 
+- name: Install Grafana
+  hosts: grafana
+  roles: 
+    - grafana
+    
 - name: Database server setup
   hosts: db_servers
   become: true

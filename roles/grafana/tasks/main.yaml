@@ -1,0 +1,27 @@
+- name: Make directory for apt key
+  ansible.builtin.file:
+    path: /etc/apt/keyrings
+    state: directory
+    mode: '0755'
+
+- name: Add Grafana key
+  ansible.builtin.get_url:
+    url: 'https://packages.grafana.com/gpg.key'
+    dest: '/etc/apt/keyrings/grafana.asc'
+
+- name: Add Grafana repository
+  ansible.builtin.apt_repository:
+    repo: 'deb [signed-by=/etc/apt/keyrings/grafana.asc] https://packages.grafana.com/oss/deb stable main'
+    state: present
+
+- name: Install Grafana
+  ansible.builtin.apt:
+    name: grafana
+    state: present
+    update_cache: yes
+
+- name: Ensure Grafana service is started and enabled
+  ansible.builtin.service:
+    name: grafana-server
+    state: started
+    enabled: yes

@@ -5,7 +5,19 @@
       - prometheus-nginx-exporter
     state: present
 
-- name: Replace default Nginx config
+# Create the Prometheus Nginx config file in sites-available
+- name: Prometheus Nginx config
+  ansible.builtin.template:
+    src: prometheus_config.j2
+    dest: /etc/nginx/sites-available/prometheus
+    mode: '0644'
+    force: yes
+  notify:
+    - Restart nginx prometheus
+
+
+# Default Nginx config
+- name: default Nginx config
   ansible.builtin.template:
     src: default.j2
     dest: /etc/nginx/sites-enabled/default
@@ -13,9 +25,9 @@
     force: yes
   notify: 
     - Restart nginx
-    - Restart nginx prometheus
 
-- name: Ensure Nginx service is started and enabled
+# Ensure Nginx and Prometheus services are started and enabled
+- name: Ensure Nginx and Prometheus services are started and enabled
   ansible.builtin.service:
     name: "{{ item }}"
     state: started
@@ -23,4 +35,3 @@
   loop:
     - nginx
     - prometheus-nginx-exporter
-
