@@ -25,3 +25,36 @@
     name: grafana-server
     state: started
     enabled: yes
+
+- name: Run Grafana template
+  ansible.builtin.template:
+    src: grafana.ini.j2
+    dest: /etc/grafana/grafana.ini
+    mode: '0644'
+  notify: Restart grafana
+
+- name: Run Grafana dashboard template
+  ansible.builtin.template:
+    src: dashboards.yaml
+    dest: /etc/grafana/provisioning/dashboards/dashboards.yaml
+    mode: '0644'
+  notify: Restart grafana
+
+- name: Run Grafana datasource template
+  ansible.builtin.template:
+    src: datasources.yaml
+    dest: /etc/grafana/provisioning/datasources/datasources.yaml
+    mode: '0644'
+  notify: Restart grafana
+
+- name: Make directory for json file
+  ansible.builtin.file:
+    path: /var/lib/grafana/dashboards
+    state: directory
+    mode: '0755'
+
+- name: Copy main json file to dashboard
+  ansible.builtin.copy:
+    src: main.json
+    dest: /var/lib/grafana/dashboards/
+    mode: '0755'

@@ -17,7 +17,6 @@
     dest: /etc/uwsgi/apps-enabled/agama.ini
     mode: '0600'
     owner: agama
-  no_log: true
   notify: Restart uwsgi
 
 - name: Ensure the uWSGI service is started
