@@ -1,0 +1,11 @@
+[Unit]
+Description=InfluxDB Stats Exporter
+After=network.target
+
+[Service]
+User=prometheus
+ExecStart=/usr/local/bin/influxdb_stats_exporter -influxdb-url http://influxdb:8086
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

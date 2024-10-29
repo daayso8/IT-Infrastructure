@@ -21,3 +21,10 @@ datasources:
     uid: c9f82be0-4d2a-4d88-aef0-3bd255a043dc
     jsonData:
       dbName: telegraf
+  - name: InfluxDB:AgamaClient
+    type: influxdb
+    access: proxy
+    url: http://influxdb:8086
+    uid: 4b4e765f-c7a8-4ebf-b227-0c2f8b28d10e
+    jsonData:
+      dbName: daayso.da

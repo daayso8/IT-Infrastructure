@@ -1,0 +1,20 @@
+- name: Copy agama-client files
+  ansible.builtin.copy:
+    src: agama-client
+    dest: /usr/local/bin/agama-client
+    mode: '0755'
+  
+- name: Copy agama-client service
+  ansible.builtin.copy:
+    src: agama-client.service
+    dest: /etc/systemd/system/agama-client.service
+    mode: '0644'
+
+- name: Reload systemd 
+  ansible.builtin.command: systemctl daemon-reload
+
+- name: Start agama-client service
+  ansible.builtin.service:
+    name: agama-client
+    state: started
+    enabled: yes

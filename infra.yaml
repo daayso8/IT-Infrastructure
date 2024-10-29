@@ -32,6 +32,11 @@
   roles:
     - mysql
 
+- name: InfluxDB
+  hosts: influx
+  roles:
+    - influxdb
+
 - name: Web server setup
   hosts: web_servers
   become: true
