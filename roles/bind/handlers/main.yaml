@@ -9,6 +9,6 @@
     state: restarted
 
 - name: Restart Exporter
-  ansible.builtin.service:
+  ansible.builtin.systemd:
     name: prometheus-bind-exporter
     state: restarted

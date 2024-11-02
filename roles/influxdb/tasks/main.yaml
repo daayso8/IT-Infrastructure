@@ -1,15 +1,10 @@
-- name: Install influxdb
-  ansible.builtin.get_url:
-    url: https://dl.influxdata.com/influxdb/releases/influxdb_1.8.3_amd64.deb
-    dest: /home/ubuntu/influxdb 
-    checksum: sha256:393e8779c89ac8d958f81f942f9ad7fb82a25e133faddaf92e15b16e6ac9ce4c
-
-- name: Install InfluxDB deb file
+- name: Install InfluxDB
   ansible.builtin.apt:
-    deb: /home/ubuntu/influxdb
+    name: influxdb
     state: present
+    update_cache: yes
 
-- name: Run InfluxDB service
+- name: Ensure InfluxDB is started and enabled
   ansible.builtin.service:
     name: influxdb
     state: started

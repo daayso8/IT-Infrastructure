@@ -3,3 +3,9 @@
     name: rsyslog
     state: restarted
     enabled: true
+
+- name: Restart Bind9
+  ansible.builtin.service:
+    name: bind9
+    state: restarted
+    enabled: true

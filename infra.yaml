@@ -1,7 +1,6 @@
 ---
 - name: Initial setup
   hosts: all
-  become: true
   roles:
     - init
 
@@ -28,7 +27,6 @@
     
 - name: Database server setup
   hosts: db_servers
-  become: true
   roles:
     - mysql
 
@@ -39,8 +37,12 @@
 
 - name: Web server setup
   hosts: web_servers
-  become: true
   roles:
     - agama
     - uwsgi
     - nginx
+
+- name: Agama Client 
+  hosts: agama_client
+  roles: 
+    - agama_client

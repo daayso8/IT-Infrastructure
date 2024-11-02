@@ -40,3 +40,34 @@
     mode: '0644'
   notify: Restart Rsyslog
 
+- name: Add DNS record for backup server
+  ansible.builtin.lineinfile:
+    path: /etc/bind/zones/db.{{ domain_name }}
+    line: "backup IN A {{ backup_server }}"
+    create: yes
+  notify: Restart Bind9
+
+- name: Create backup user
+  ansible.builtin.user:
+    name: backup
+    state: present
+    home: /home/backup
+    shell: /bin/bash
+    generate_ssh_key: true
+    ssh_key_file: /home/backup/.ssh/id_rsa
+  
+- name: Ensure .ssh directory exists for backup user
+  ansible.builtin.file:
+    path: /home/backup/.ssh
+    state: directory
+    owner: backup
+    group: backup
+    mode: '0700'
+
+- name: Add backup server key to known_hosts for backup user
+  ansible.builtin.template:
+    src: known_hosts.j2
+    dest: /home/backup/.ssh/known_hosts
+    owner: backup
+    group: backup
+    mode: '0644'

@@ -2,7 +2,7 @@ server {
 	listen 80 default_server;
 	server_name _;
 
-	{% if inventory_hostname in groups['web_servers'] %}
+	{% if inventory_hostname in groups['db_servers'] %}
 	location / {
 		uwsgi_pass localhost:{{ agama_port }};
 		include uwsgi_params;
