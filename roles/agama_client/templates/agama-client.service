@@ -1,10 +1,10 @@
 [Unit]
-Description=<FIXME>
+Description=Agama Client
 Documentation=<FIXME>
 After=network-online.target
 
 [Service]
-User=<FIXME>
+User=agama-client
 ExecStart=/usr/local/bin/<FIXME>
 
 [Install]

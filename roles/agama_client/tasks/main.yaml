@@ -1,3 +1,9 @@
+- name: Install agama-client
+  ansible.builtin.apt:
+    name: 
+      - fping
+    state: present
+    
 - name: Copy agama-client files
   ansible.builtin.copy:
     src: agama-client

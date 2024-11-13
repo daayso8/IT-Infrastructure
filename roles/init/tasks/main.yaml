@@ -40,13 +40,6 @@
     mode: '0644'
   notify: Restart Rsyslog
 
-- name: Add DNS record for backup server
-  ansible.builtin.lineinfile:
-    path: /etc/bind/zones/db.{{ domain_name }}
-    line: "backup IN A {{ backup_server }}"
-    create: yes
-  notify: Restart Bind9
-
 - name: Create backup user
   ansible.builtin.user:
     name: backup

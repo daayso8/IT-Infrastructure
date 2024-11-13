@@ -35,14 +35,15 @@
   roles:
     - influxdb
 
-- name: Web server setup
-  hosts: web_servers
+- name: Agama setup
+  hosts: agama
   roles:
     - agama
     - uwsgi
+
+- name: Web server setup
+  hosts: web_servers
+  roles:
     - nginx
 
-- name: Agama Client 
-  hosts: agama_client
-  roles: 
-    - agama_client
+

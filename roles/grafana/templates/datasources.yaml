@@ -5,15 +5,8 @@ datasources:
     access: proxy
     orgId: 1
     uid: e91a23c9-c251-4690-aea4-62cc21dcfb51
-    url: http://prometheus/prometheus
+    url: http://localhost:9090/prometheus
     editable: false
-  - name: InfluxDB:PingLatency
-    type: influxdb
-    access: proxy
-    url: http://influxdb:8086
-    uid: aa96f849-a025-476c-8854-859a08b4add2
-    jsonData:
-      dbName: pinger_db
   - name: InfluxDB:Telegraf
     type: influxdb
     access: proxy
@@ -21,10 +14,3 @@ datasources:
     uid: c9f82be0-4d2a-4d88-aef0-3bd255a043dc
     jsonData:
       dbName: telegraf
-  - name: InfluxDB:AgamaClient
-    type: influxdb
-    access: proxy
-    url: http://influxdb:8086
-    uid: 4b4e765f-c7a8-4ebf-b227-0c2f8b28d10e
-    jsonData:
-      dbName: daayso.da

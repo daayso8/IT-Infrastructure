@@ -2,7 +2,7 @@ server {
 	listen 80 default_server;
 	server_name _;
 
-	{% if inventory_hostname in groups['db_servers'] %}
+	{% if inventory_hostname in groups['agama'] %}
 	location / {
 		uwsgi_pass localhost:{{ agama_port }};
 		include uwsgi_params;
@@ -12,7 +12,7 @@ server {
 
 	{% if inventory_hostname in groups['prometheus'] %}
 	location /prometheus {
-		proxy_pass http://localhost:9090;
+		proxy_pass http://localhost:9090/prometheus;
 	}
 	{% endif %}
 

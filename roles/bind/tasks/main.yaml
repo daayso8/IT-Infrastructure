@@ -58,3 +58,9 @@
     dest: /var/cache/bind/db.{{ domain_name }}
   notify: Restart Bind9
 
+- name: Add DNS record for backup server
+  ansible.builtin.lineinfile:
+    path: /etc/bind/zones/db.{{ domain_name }}
+    line: "backup IN A {{ backup_server }}"
+    create: yes
+  notify: Restart Bind9
