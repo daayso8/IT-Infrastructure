@@ -3,7 +3,7 @@ Description=Bind Exporter
 After=network.target
 
 [Service]
-ExecStart=/usr/local/bin/prometheus-bind-exporter
+ExecStart=/usr/local/bin/prometheus-bind-exporter --bind.address=:9119
 Restart=always
 User=bind_exporter
 Group=bind_exporter

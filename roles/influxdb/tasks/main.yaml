@@ -67,6 +67,14 @@
     mode: '0644'
   notify: Restart InfluxDB
 
+- name: Create /home/backup/influxdb directory
+  ansible.builtin.file:
+    path: /home/backup/influxdb
+    state: directory
+    owner: backup
+    group: backup
+    mode: '0755'
+    
 - name: Make sure stats exporter is enabled and running
   ansible.builtin.service:
     name: prometheus-influxdb-stats-exporter

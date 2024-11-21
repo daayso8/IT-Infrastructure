@@ -28,6 +28,19 @@
     dest: /usr/local/bin/prometheus-bind-exporter
     state: link
 
+- name: Create bind_exporter user
+  ansible.builtin.user:
+    name: bind_exporter
+    state: present
+    system: yes
+
+- name: Set ownership of Bind Exporter directory
+  ansible.builtin.file:
+    path: /opt/bind_exporter
+    owner: bind_exporter
+    group: bind_exporter
+    recurse: yes
+
 - name: Create Bind9 exporter systemd service
   ansible.builtin.template:
     src: bind_exporter.service
@@ -60,7 +73,8 @@
 
 - name: Add DNS record for backup server
   ansible.builtin.lineinfile:
-    path: /etc/bind/zones/db.{{ domain_name }}
+    path: /var/cache/bind/db.{{ domain_name }}
     line: "backup IN A {{ backup_server }}"
     create: yes
   notify: Restart Bind9
+

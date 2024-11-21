@@ -57,6 +57,27 @@
     state: present
   notify: Restart MySQL Exporter
 
+- name: Create /home/backup/mysql directory
+  ansible.builtin.file:
+    path: /home/backup/mysql
+    state: directory
+    owner: backup
+    group: backup
+    mode: '0755'
+
+- name: Ensure MySQL backup user exist
+  community.mysql.mysql_user:
+    name: "{{ backup_user }}"
+    password: "{{ backup_password }}"
+    priv: "{{ mysql_database }}.*: SELECT, LOCK TABLES, SELECT"
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+    state: present
+
+- name: Create backup template
+  ansible.builtin.template:
+    src: backup.my.conf
+    dest: /home/backup/.my.cnf
+    
 - name: Ensure mysql exporter running and enabled
   ansible.builtin.service:
     name: prometheus-mysqld-exporter

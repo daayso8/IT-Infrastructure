@@ -46,4 +46,9 @@
   roles:
     - nginx
 
+- name: Agama Client setup
+  hosts: agama_client
+  roles:
+    - agama_client
+
 
