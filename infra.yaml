@@ -18,7 +18,6 @@
   hosts: prometheus
   roles: 
     - prometheus
-    - nginx
 
 - name: Install Grafana
   hosts: grafana
@@ -45,10 +44,5 @@
   hosts: web_servers
   roles:
     - nginx
-
-- name: Agama Client setup
-  hosts: agama_client
-  roles:
-    - agama_client
 
 

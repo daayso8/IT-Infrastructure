@@ -10,4 +10,4 @@
 
 - name: Restart Systemctl
   ansible.builtin.systemd:
-    daemon_reload: true
+    daemon_reload: yes

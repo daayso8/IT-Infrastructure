@@ -33,6 +33,7 @@
     login_unix_socket: /var/run/mysqld/mysqld.sock
     host: "%"
     priv: "{{ mysql_database }}.*:ALL"
+    login_unix_socket: /var/run/mysqld/mysqld.sock
 
 - name: Create cnf template
   ansible.builtin.template:
@@ -40,6 +41,14 @@
     dest: /var/lib/prometheus/.my.cnf
     owner: prometheus
     group: prometheus
+    mode: '0600'
+  notify: Restart MySQL Exporter
+
+- name: Create Prometheus Exporter template
+  ansible.builtin.template:
+    src: mysql_metric.yaml.j2
+    dest: /etc/default/prometheus-mysqld-exporter
+    mode: '0755'
   notify: Restart MySQL Exporter
 
 - name: Install MySQL exporter
@@ -51,11 +60,16 @@
   community.mysql.mysql_user:
     name: "{{ exporter_user }}"
     password: "{{ exporter_password }}"
-    priv: "*.*:PROCESS,REPLICATION CLIENT, SELECT"
+    priv: "*.*:PROCESS,REPLICATION CLIENT,SELECT"
     login_unix_socket: /var/run/mysqld/mysqld.sock
-    host: "%"
     state: present
   notify: Restart MySQL Exporter
+
+- name: Ensure mysql exporter running and enabled
+  ansible.builtin.service:
+    name: prometheus-mysqld-exporter
+    state: started
+    enabled: true
 
 - name: Create /home/backup/mysql directory
   ansible.builtin.file:
@@ -78,8 +92,10 @@
     src: backup.my.conf
     dest: /home/backup/.my.cnf
     
-- name: Ensure mysql exporter running and enabled
-  ansible.builtin.service:
-    name: prometheus-mysqld-exporter
-    state: started
-    enabled: true
+- name: Create Cron Backup
+  ansible.builtin.template:
+    src: mysql.backup.cron.j2
+    dest: /etc/cron.d/mysql.backup
+    owner: backup 
+    
+

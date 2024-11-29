@@ -20,12 +20,6 @@
     state: present
     update_cache: yes
 
-- name: Ensure Grafana service is started and enabled
-  ansible.builtin.service:
-    name: grafana-server
-    state: started
-    enabled: yes
-
 - name: Run Grafana template
   ansible.builtin.template:
     src: grafana.ini.j2
@@ -52,9 +46,20 @@
     path: /var/lib/grafana/dashboards
     state: directory
     mode: '0755'
+  notify: Restart grafana
 
 - name: Copy main json file to dashboard
   ansible.builtin.copy:
     src: main.json
     dest: /var/lib/grafana/dashboards/
     mode: '0755'
+  notify: Restart grafana
+
+- name: Ensure Grafana service is started and enabled
+  ansible.builtin.service:
+    name: grafana-server
+    state: started
+    enabled: yes
+
+
+    

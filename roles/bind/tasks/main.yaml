@@ -4,8 +4,8 @@
       - bind9
     state: present
 
-- name: Install Bind9 exporter 
-  ansible.builtin.get_url: 
+- name: Download Bind9 exporter
+  ansible.builtin.get_url:
     url: https://github.com/prometheus-community/bind_exporter/releases/download/v0.7.0/bind_exporter-0.7.0.linux-amd64.tar.gz
     dest: /opt/bind_exporter.tar.gz
 
@@ -15,40 +15,36 @@
     state: directory
     mode: '0755'
 
-- name: Extract Bind Exporter
+- name: Extract Bind9 exporter
   ansible.builtin.unarchive:
     src: /opt/bind_exporter.tar.gz
     dest: /opt/bind_exporter
     extra_opts: [--strip-components=1]
     remote_src: yes
 
-- name: Create symlink for Bind Exporter
+- name: Create a symlink for the Bind Exporter executable
   ansible.builtin.file:
     src: /opt/bind_exporter/bind_exporter
     dest: /usr/local/bin/prometheus-bind-exporter
     state: link
-
-- name: Create bind_exporter user
-  ansible.builtin.user:
-    name: bind_exporter
-    state: present
-    system: yes
-
-- name: Set ownership of Bind Exporter directory
-  ansible.builtin.file:
-    path: /opt/bind_exporter
-    owner: bind_exporter
-    group: bind_exporter
-    recurse: yes
+    mode: '0755'
 
 - name: Create Bind9 exporter systemd service
   ansible.builtin.template:
     src: bind_exporter.service
     dest: /etc/systemd/system/prometheus-bind-exporter.service
-    mode: '0644'
-  
+  notify:
+    - Reload systemd
+    - Restart Exporter
+
+- name: Ensure Bind9 exporter service is started and running
+  ansible.builtin.systemd:
+    name: prometheus-bind-exporter
+    state: started
+    enabled: yes
+
 - name: Ensure Bind9 service is started and running
-  ansible.builtin.service:
+  ansible.builtin.systemd:
     name: bind9
     state: started
     enabled: yes
@@ -62,7 +58,8 @@
     - options
     - local
   notify: 
-    - Reload Bind9
+    - Restart Bind9
+    - Reload systemd
     - Restart Exporter
 
 - name: Run Zone template
@@ -77,4 +74,3 @@
     line: "backup IN A {{ backup_server }}"
     create: yes
   notify: Restart Bind9
-

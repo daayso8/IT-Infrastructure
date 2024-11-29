@@ -3,10 +3,11 @@ Description=Bind Exporter
 After=network.target
 
 [Service]
-ExecStart=/usr/local/bin/prometheus-bind-exporter --bind.address=:9119
-Restart=always
+Type=simple
+ExecStart=/usr/local/bin/prometheus-bind-exporter --web.listen-address=":9119"
 User=bind_exporter
 Group=bind_exporter
+Restart=always
 
 [Install]
 WantedBy=multi-user.target

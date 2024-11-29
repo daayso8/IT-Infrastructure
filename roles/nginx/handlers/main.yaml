@@ -7,3 +7,6 @@
   ansible.builtin.service:
     name: prometheus-nginx-exporter
     state: restarted
+
+- name: Restart systemd
+  ansible.builtin.command: systemctl daemon-reload

@@ -1,17 +1,23 @@
 acl corpnets {
-	192.168.42.0/23;
-	127.0.0.0/8;
+	{{ localnet }};
+	{{ localhost }};
 };
 options {
 	directory "/var/cache/bind";
 
 	forwarders { 
-		1.1.1.1;
-		8.8.8.8;
-		9.9.9.9;
+		{% for ip in dnsforwarders %}
+			{{ ip }};
+		{% endfor %}
 	};
 	
    	allow-query { corpnets; };
+	dnssec-validation no;
 	recursion yes;
 	empty-zones-enable yes;
+
+};
+
+statistics-channels {
+    inet 127.0.0.1 port 8053 allow { 127.0.0.1; };
 };

@@ -1,8 +1,11 @@
 - name: Install Nginx web server
   ansible.builtin.apt:
-    name: 
-      - nginx
-      - prometheus-nginx-exporter
+    name: nginx
+    state: present
+
+- name: Install Prometheus-Nginx-Exporter
+  ansible.builtin.apt:
+    name: prometheus-nginx-exporter
     state: present
 
 - name: default Nginx config
@@ -13,7 +16,7 @@
     force: yes
   notify: 
     - Restart nginx
-
+    - Restart nginx prometheus
 
 
 - name: Ensure Nginx and Prometheus services are started and enabled

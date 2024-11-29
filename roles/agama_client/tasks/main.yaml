@@ -10,7 +10,6 @@
     dest: /usr/local/bin/agama-client
     mode: '0755'
   
-
 - name: Copy agama-client config
   ansible.builtin.template:
     src: agama-client.conf
@@ -32,4 +31,3 @@
     name: agama-client
     state: started
     enabled: yes
-

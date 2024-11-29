@@ -6,23 +6,4 @@ datasources:
     orgId: 1
     uid: e91a23c9-c251-4690-aea4-62cc21dcfb51
     url: http://localhost:9090/prometheus
-    editable: false'
-    
-  - name: InfluxDB:daayso.da
-    type: influxdb
-    access: proxy
-    url: http://influxdb:5000
-    uid: c9f82be0-4d2a-4d88-aef0-3bd255a043dc
-    database: daayso.da
-    user: {{ grafana_user }}
-    password: {{ grafana_password }}
-
-  - name: InfluxDB:Telegraf
-    type: influxdb
-    access: proxy
-    url: http://influxdb:8086
-    uid: c9f82be0-4d2a-4d88-aef0-3bd255a043dc
-    jsonData:
-      timeInterval: '10s'
-      maxPoints: 1000
-    isDefault: false
+    editable: false
