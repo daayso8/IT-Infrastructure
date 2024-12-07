@@ -36,7 +36,7 @@
 - name: Run Rsyslog template
   ansible.builtin.template:
     src: rsyslog.conf
-    dest: /etc/rsyslog.d/prometheus.conf
+    dest: /etc/rsyslog.d/50-telegraf.conf
     mode: '0644'
   notify: Restart Rsyslog
 

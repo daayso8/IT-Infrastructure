@@ -46,10 +46,10 @@
     enabled: true
   notify: Restart Telegraf
 
-- name: Install InfluxDB stat exporter from git
+- name: Install InfluxDB Stat Exporter
   ansible.builtin.get_url:
     url: https://github.com/carlpett/influxdb_stats_exporter/releases/download/v0.1.1/influx_stats_exporter_linux_amd64
-    dest: /usr/local/bin/
+    dest: /usr/local/bin/influxdb_stats_exporter_linux_amd64
     mode: '0500'
     owner: prometheus
   notify: Restart Systemctl
@@ -75,11 +75,11 @@
     group: backup
     mode: '0755'
     
-- name: Make sure stats exporter is enabled and running
+- name: Ensure InfluxDB Exporter is started and running
   ansible.builtin.service:
     name: prometheus-influxdb-stats-exporter
     state: started
     enabled: true
-  notify: Restart Systemctl
+
 
 

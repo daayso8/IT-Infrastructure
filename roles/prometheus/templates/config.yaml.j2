@@ -41,7 +41,9 @@ scrape_configs:
   - job_name: 'influxdb'
     static_configs:
       - targets:
-        - influxdb:9424
+      {% for host in groups['influxdb'] %}
+        - {{ host }}:9424
+      {% endfor %}
 
   - job_name: 'backup'
     static_configs:

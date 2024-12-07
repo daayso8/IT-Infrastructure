@@ -4,6 +4,12 @@
       - bind9
     state: present
 
+- name: Create bind_exporter user
+  ansible.builtin.user:
+    name: bind_exporter
+    system: yes
+    shell: /usr/sbin/nologin
+
 - name: Download Bind9 exporter
   ansible.builtin.get_url:
     url: https://github.com/prometheus-community/bind_exporter/releases/download/v0.7.0/bind_exporter-0.7.0.linux-amd64.tar.gz

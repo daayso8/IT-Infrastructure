@@ -1,11 +1,11 @@
 [Unit]
 Description=Agama Client
-Documentation=<FIXME>
+Documentation=https://github.com/hudolejev/agama
 After=network-online.target
 
 [Service]
 User=agama-client
-ExecStart=/usr/local/bin/<FIXME>
+ExecStart=/usr/local/bin/agama-client
 
 [Install]
 WantedBy=multi-user.target

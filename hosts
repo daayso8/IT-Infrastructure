@@ -1,10 +1,11 @@
-davidayson8-1 ansible_host=193.40.156.67 ansible_port=6922 ansible_user=ubuntu
-davidayson8-2 ansible_host=193.40.156.67 ansible_port=19122 ansible_user=ubuntu
+davidayson8-1 ansible_host=193.40.156.67 ansible_port=38322 ansible_user=ubuntu
+davidayson8-2 ansible_host=193.40.156.67 ansible_port=37622 ansible_user=ubuntu
 
 [agama]
 davidayson8-1
 
 [db_servers]
+davidayson8-1
 davidayson8-2
 
 [web_servers]
@@ -24,7 +25,7 @@ davidayson8-2
 [grafana]
 davidayson8-2
 
-[influx]
+[influxdb]
 davidayson8-2
 
 [agama_client]

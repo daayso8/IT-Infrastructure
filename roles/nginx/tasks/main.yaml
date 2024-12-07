@@ -18,7 +18,6 @@
     - Restart nginx
     - Restart nginx prometheus
 
-
 - name: Ensure Nginx and Prometheus services are started and enabled
   ansible.builtin.service:
     name: "{{ item }}"
@@ -27,3 +26,7 @@
   loop:
     - nginx
     - prometheus-nginx-exporter
+  notify:
+    - Restart nginx
+    - Restart nginx prometheus
+    - Restart systemd

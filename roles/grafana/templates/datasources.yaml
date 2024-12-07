@@ -6,4 +6,19 @@ datasources:
     orgId: 1
     uid: e91a23c9-c251-4690-aea4-62cc21dcfb51
     url: http://localhost:9090/prometheus
-    editable: false
+    isDefault: true
+    editable: true
+  - name: InfluxDB:agamaDB
+    type: influxdb
+    access: proxy
+    orgID: 1
+    uid: 1e2f45c9-a123-4690-bca5-34dc1adcb254
+    url: http://localhost:8086
+    database: agamaDB
+  - name: InfluxDB:telegraf
+    type: influxdb
+    access: proxy
+    orgId: 1
+    uid: TIYeHqRgZ
+    url: http://localhost:8086
+    database: telegraf

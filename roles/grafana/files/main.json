@@ -88,7 +88,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.3.0",
+      "pluginVersion": "11.3.2",
       "targets": [
         {
           "datasource": {
@@ -208,7 +208,7 @@
         "xTickLabelRotation": 0,
         "xTickLabelSpacing": 100
       },
-      "pluginVersion": "11.3.0",
+      "pluginVersion": "11.3.2",
       "targets": [
         {
           "datasource": {
@@ -256,74 +256,7 @@
       "gridPos": {
         "h": 6,
         "w": 7,
-        "x": 10,
-        "y": 0
-      },
-      "id": 2,
-      "options": {
-        "minVizHeight": 75,
-        "minVizWidth": 75,
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showThresholdLabels": false,
-        "showThresholdMarkers": true,
-        "sizing": "auto"
-      },
-      "pluginVersion": "11.3.0",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "e91a23c9-c251-4690-aea4-62cc21dcfb51"
-          },
-          "editorMode": "code",
-          "expr": "(1 - rate(node_cpu_seconds_total{mode=\"idle\"}[1m])) * 100",
-          "instant": false,
-          "legendFormat": "__auto",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "CPU Usage",
-      "type": "gauge"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "e91a23c9-c251-4690-aea4-62cc21dcfb51"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 6,
-        "w": 7,
-        "x": 17,
+        "x": 12,
         "y": 0
       },
       "id": 12,
@@ -342,7 +275,7 @@
         "showThresholdMarkers": true,
         "sizing": "auto"
       },
-      "pluginVersion": "11.3.0",
+      "pluginVersion": "11.3.2",
       "targets": [
         {
           "datasource": {
@@ -427,7 +360,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.3.0",
+      "pluginVersion": "11.3.2",
       "targets": [
         {
           "datasource": {
@@ -525,7 +458,7 @@
         "xTickLabelRotation": 0,
         "xTickLabelSpacing": 100
       },
-      "pluginVersion": "11.3.0",
+      "pluginVersion": "11.3.2",
       "targets": [
         {
           "datasource": {
@@ -564,110 +497,6 @@
           "color": {
             "mode": "thresholds"
           },
-          "mappings": [
-            {
-              "options": {
-                "0": {
-                  "index": 1,
-                  "text": "DOWN"
-                },
-                "1": {
-                  "index": 0,
-                  "text": "UP"
-                }
-              },
-              "type": "value"
-            }
-          ],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 6,
-        "w": 3,
-        "x": 12,
-        "y": 6
-      },
-      "id": 8,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "area",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "percentChangeColorMode": "standard",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showPercentChange": false,
-        "textMode": "auto",
-        "wideLayout": true
-      },
-      "pluginVersion": "11.3.0",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "e91a23c9-c251-4690-aea4-62cc21dcfb51"
-          },
-          "editorMode": "code",
-          "expr": "nginx_up",
-          "instant": false,
-          "legendFormat": "__auto",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "Nginx Status",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "e91a23c9-c251-4690-aea4-62cc21dcfb51"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisBorderShow": false,
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "fillOpacity": 80,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineWidth": 1,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -687,33 +516,27 @@
       },
       "gridPos": {
         "h": 6,
-        "w": 9,
-        "x": 15,
+        "w": 7,
+        "x": 12,
         "y": 6
       },
-      "id": 5,
+      "id": 2,
       "options": {
-        "barRadius": 0,
-        "barWidth": 0.97,
-        "fullHighlight": false,
-        "groupWidth": 0.7,
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": true
-        },
+        "minVizHeight": 75,
+        "minVizWidth": 75,
         "orientation": "auto",
-        "showValue": "auto",
-        "stacking": "none",
-        "tooltip": {
-          "mode": "single",
-          "sort": "none"
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
         },
-        "xTickLabelRotation": 0,
-        "xTickLabelSpacing": 100
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true,
+        "sizing": "auto"
       },
-      "pluginVersion": "11.3.0",
+      "pluginVersion": "11.3.2",
       "targets": [
         {
           "datasource": {
@@ -721,15 +544,15 @@
             "uid": "e91a23c9-c251-4690-aea4-62cc21dcfb51"
           },
           "editorMode": "code",
-          "expr": "rate(nginx_http_requests_total[1m])",
+          "expr": "(1 - rate(node_cpu_seconds_total{mode=\"idle\"}[1m])) * 100",
           "instant": false,
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "Nginx Request Per Min",
-      "type": "barchart"
+      "title": "CPU Usage",
+      "type": "gauge"
     },
     {
       "datasource": {
@@ -798,7 +621,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.3.0",
+      "pluginVersion": "11.3.2",
       "targets": [
         {
           "datasource": {
@@ -892,7 +715,7 @@
         "xTickLabelRotation": 0,
         "xTickLabelSpacing": 100
       },
-      "pluginVersion": "11.3.0",
+      "pluginVersion": "11.3.2",
       "targets": [
         {
           "datasource": {
@@ -912,8 +735,91 @@
     },
     {
       "datasource": {
-        "type": "influxdb",
-        "uid": "c9f82be0-4d2a-4d88-aef0-3bd255a043dc"
+        "type": "prometheus",
+        "uid": "e91a23c9-c251-4690-aea4-62cc21dcfb51"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "options": {
+                "0": {
+                  "index": 1,
+                  "text": "DOWN"
+                },
+                "1": {
+                  "index": 0,
+                  "text": "UP"
+                }
+              },
+              "type": "value"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 3,
+        "x": 12,
+        "y": 12
+      },
+      "id": 8,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "11.3.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "e91a23c9-c251-4690-aea4-62cc21dcfb51"
+          },
+          "editorMode": "code",
+          "expr": "nginx_up",
+          "instant": false,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Nginx Status",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "e91a23c9-c251-4690-aea4-62cc21dcfb51"
       },
       "fieldConfig": {
         "defaults": {
@@ -926,28 +832,16 @@
             "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
-            "barAlignment": 0,
-            "barWidthFactor": 0.6,
-            "drawStyle": "line",
-            "fillOpacity": 0,
+            "fillOpacity": 80,
             "gradientMode": "none",
             "hideFrom": {
               "legend": false,
               "tooltip": false,
               "viz": false
             },
-            "insertNulls": false,
-            "lineInterpolation": "linear",
             "lineWidth": 1,
-            "pointSize": 5,
             "scaleDistribution": {
               "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
             },
             "thresholdsStyle": {
               "mode": "off"
@@ -972,62 +866,121 @@
       },
       "gridPos": {
         "h": 6,
-        "w": 12,
-        "x": 12,
+        "w": 9,
+        "x": 15,
         "y": 12
       },
-      "id": 14,
+      "id": 5,
       "options": {
+        "barRadius": 0,
+        "barWidth": 0.97,
+        "fullHighlight": false,
+        "groupWidth": 0.7,
         "legend": {
           "calcs": [],
           "displayMode": "list",
           "placement": "bottom",
           "showLegend": true
         },
+        "orientation": "auto",
+        "showValue": "auto",
+        "stacking": "none",
         "tooltip": {
           "mode": "single",
           "sort": "none"
-        }
+        },
+        "xTickLabelRotation": 0,
+        "xTickLabelSpacing": 100
       },
-      "pluginVersion": "11.3.0",
+      "pluginVersion": "11.3.2",
       "targets": [
         {
           "datasource": {
-            "type": "influxdb",
-            "uid": "c9f82be0-4d2a-4d88-aef0-3bd255a043dc"
+            "type": "prometheus",
+            "uid": "e91a23c9-c251-4690-aea4-62cc21dcfb51"
           },
-          "groupBy": [],
-          "measurement": "agama-stats",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "items"
-                ],
-                "type": "field"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "name::tag",
-              "operator": "=",
-              "value": "davidayson8-1"
-            }
-          ]
+          "editorMode": "code",
+          "expr": "rate(nginx_http_requests_total[1m])",
+          "instant": false,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
         }
       ],
-      "title": "Agama Current Items",
-      "type": "timeseries"
+      "title": "Nginx Request Per Min",
+      "type": "barchart"
     },
     {
       "datasource": {
         "type": "influxdb",
-        "uid": "c9f82be0-4d2a-4d88-aef0-3bd255a043dc"
+        "uid": "1e2f45c9-a123-4690-bca5-34dc1adcb254"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 18
+      },
+      "id": 13,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "11.3.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "1e2f45c9-a123-4690-bca5-34dc1adcb254"
+          },
+          "query": "SELECT last(\"items\") \nFROM \"agama-stats\" \nWHERE (\"name\"::tag = 'davidayson8-1') AND $timeFilter\n",
+          "rawQuery": true,
+          "refId": "A",
+          "resultFormat": "time_series"
+        }
+      ],
+      "title": "Agama Items",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "1e2f45c9-a123-4690-bca5-34dc1adcb254"
       },
       "fieldConfig": {
         "defaults": {
@@ -1040,28 +993,16 @@
             "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
-            "barAlignment": 0,
-            "barWidthFactor": 0.6,
-            "drawStyle": "line",
-            "fillOpacity": 0,
+            "fillOpacity": 80,
             "gradientMode": "none",
             "hideFrom": {
               "legend": false,
               "tooltip": false,
               "viz": false
             },
-            "insertNulls": false,
-            "lineInterpolation": "linear",
             "lineWidth": 1,
-            "pointSize": 5,
             "scaleDistribution": {
               "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
             },
             "thresholdsStyle": {
               "mode": "off"
@@ -1085,59 +1026,48 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 6,
+        "h": 8,
         "w": 12,
         "x": 12,
         "y": 18
       },
-      "id": 13,
+      "id": 14,
       "options": {
+        "barRadius": 0,
+        "barWidth": 0.97,
+        "fullHighlight": false,
+        "groupWidth": 0.7,
         "legend": {
           "calcs": [],
           "displayMode": "list",
           "placement": "bottom",
           "showLegend": true
         },
+        "orientation": "auto",
+        "showValue": "auto",
+        "stacking": "none",
         "tooltip": {
           "mode": "single",
           "sort": "none"
-        }
+        },
+        "xTickLabelRotation": 0,
+        "xTickLabelSpacing": 0
       },
-      "pluginVersion": "11.3.0",
+      "pluginVersion": "11.3.2",
       "targets": [
         {
           "datasource": {
             "type": "influxdb",
-            "uid": "c9f82be0-4d2a-4d88-aef0-3bd255a043dc"
+            "uid": "1e2f45c9-a123-4690-bca5-34dc1adcb254"
           },
-          "groupBy": [],
-          "hide": false,
-          "measurement": "agama-stats",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "query": "SELECT \"items\" FROM \"agama-stats\" WHERE $timeFilter GROUP BY \"name\"\n",
+          "query": "SELECT distinct(\"items\") \nFROM \"agama-stats\" \nWHERE $timeFilter \nGROUP BY \"name\"::tag\n",
           "rawQuery": true,
-          "refId": "C",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "items"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "sum"
-              }
-            ]
-          ],
-          "tags": []
+          "refId": "A",
+          "resultFormat": "time_series"
         }
       ],
-      "title": "Discovered Agama Item Count",
-      "type": "timeseries"
+      "title": "Item Counts for All Discovered Agamas",
+      "type": "barchart"
     }
   ],
   "preload": false,
@@ -1153,8 +1083,8 @@
   },
   "timepicker": {},
   "timezone": "",
-  "title": "Current",
-  "uid": "d8933b55-3586-4859-baf0-7736f27ae2b8",
-  "version": 5,
+  "title": "Main",
+  "uid": "e91a23c9-c251-4690-aea4-62cc21dcfb51",
+  "version": 8,
   "weekStart": ""
 }

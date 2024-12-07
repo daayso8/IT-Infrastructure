@@ -1,13 +1,10 @@
 - name: Install MySQL server
   ansible.builtin.apt:
-    name: mysql-server
+    name: 
+      - mysql-server
+      - python3-pymysql
+      - prometheus-mysqld-exporter
     state: present
-
-- name: Install Python MySQL client
-  ansible.builtin.apt:
-    name: python3-pymysql
-    state: present
-  become: true
 
 - name: Add MySQL bind address override
   ansible.builtin.template:
@@ -25,51 +22,37 @@
   community.mysql.mysql_db:
     name: "{{ mysql_database }}"
     login_unix_socket: /var/run/mysqld/mysqld.sock
+  notify: Restart MySQL
 
-- name: MySQL user
+- name: Create MySQL user
   community.mysql.mysql_user:
     name: "{{ mysql_user }}"
     password: "{{ mysql_password }}"
     login_unix_socket: /var/run/mysqld/mysqld.sock
     host: "%"
     priv: "{{ mysql_database }}.*:ALL"
-    login_unix_socket: /var/run/mysqld/mysqld.sock
+  no_log: true
 
-- name: Create cnf template
-  ansible.builtin.template:
-    src: .my.cnf.j2
-    dest: /var/lib/prometheus/.my.cnf
-    owner: prometheus
-    group: prometheus
-    mode: '0600'
-  notify: Restart MySQL Exporter
-
-- name: Create Prometheus Exporter template
-  ansible.builtin.template:
-    src: mysql_metric.yaml.j2
-    dest: /etc/default/prometheus-mysqld-exporter
-    mode: '0755'
-  notify: Restart MySQL Exporter
-
-- name: Install MySQL exporter
-  ansible.builtin.apt:
-    name: prometheus-mysqld-exporter
-    state: present
-
-- name: Ensure MySQL exporter user exists
+- name: Create MySQL Exporter user
   community.mysql.mysql_user:
     name: "{{ exporter_user }}"
     password: "{{ exporter_password }}"
-    priv: "*.*:PROCESS,REPLICATION CLIENT,SELECT"
     login_unix_socket: /var/run/mysqld/mysqld.sock
-    state: present
+    priv: "*.*:PROCESS,REPLICATION CLIENT,SELECT"
+  notify: Restart MySQL
+
+- name: Passing authentication data to MySQL Exporter
+  ansible.builtin.template:
+    src: .my.cnf.j2
+    dest: "/var/lib/prometheus/.my.cnf"
+    mode: '0600'
+    owner: prometheus
   notify: Restart MySQL Exporter
 
-- name: Ensure mysql exporter running and enabled
+- name: Ensure the MySQL Exporter service is started
   ansible.builtin.service:
     name: prometheus-mysqld-exporter
     state: started
-    enabled: true
 
 - name: Create /home/backup/mysql directory
   ansible.builtin.file:
@@ -89,13 +72,12 @@
 
 - name: Create backup template
   ansible.builtin.template:
-    src: backup.my.conf
+    src: backup.my.cnf
     dest: /home/backup/.my.cnf
     
 - name: Create Cron Backup
   ansible.builtin.template:
     src: mysql.backup.cron.j2
-    dest: /etc/cron.d/mysql.backup
+    dest: /etc/cron.d/mysql-backup
     owner: backup 
-    
 
