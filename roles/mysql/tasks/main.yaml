@@ -61,23 +61,26 @@
     owner: backup
     group: backup
     mode: '0755'
-
+  
 - name: Ensure MySQL backup user exist
   community.mysql.mysql_user:
     name: "{{ backup_user }}"
     password: "{{ backup_password }}"
+    host: "%"
     priv: "{{ mysql_database }}.*: SELECT, LOCK TABLES, SELECT"
     login_unix_socket: /var/run/mysqld/mysqld.sock
     state: present
 
 - name: Create backup template
   ansible.builtin.template:
-    src: backup.my.cnf
+    src: backup.my.cnf.j2
     dest: /home/backup/.my.cnf
+    owner: backup
+    group: backup
+    mode: '0600'
     
 - name: Create Cron Backup
   ansible.builtin.template:
     src: mysql.backup.cron.j2
     dest: /etc/cron.d/mysql-backup
-    owner: backup 
-
+  notify: Restart cron

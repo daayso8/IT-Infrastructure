@@ -62,6 +62,13 @@
     mode: '0755'
   notify: Restart grafana
 
+- name: Copy backups json file to dashboard
+  ansible.builtin.copy:
+    src: backups.json
+    dest: /var/lib/grafana/dashboards/
+    mode: '0755'
+  notify: Restart grafana
+
 - name: Ensure Grafana service is started and enabled
   ansible.builtin.service:
     name: grafana-server

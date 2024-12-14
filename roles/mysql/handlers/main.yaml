@@ -7,3 +7,8 @@
   ansible.builtin.service: 
     name: prometheus-mysqld-exporter
     state: restarted
+
+- name: Restart cron
+  ansible.builtin.service:
+    name: cron
+    state: restarted

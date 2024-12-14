@@ -66,6 +66,12 @@
     dest: /etc/influxdb/influxdb.conf
     mode: '0644'
   notify: Restart InfluxDB
+    
+- name: Ensure InfluxDB Exporter is started and running
+  ansible.builtin.service:
+    name: prometheus-influxdb-stats-exporter
+    state: started
+    enabled: true
 
 - name: Create /home/backup/influxdb directory
   ansible.builtin.file:
@@ -75,11 +81,8 @@
     group: backup
     mode: '0755'
     
-- name: Ensure InfluxDB Exporter is started and running
-  ansible.builtin.service:
-    name: prometheus-influxdb-stats-exporter
-    state: started
-    enabled: true
-
-
-
+- name: Create cron backup
+  ansible.builtin.template:
+    src: influxdb.backup.cron.j2
+    dest: /etc/cron.d/influxdb-backup
+  notify: Restart cron

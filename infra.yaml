@@ -2,51 +2,60 @@
   hosts: all
   roles:
     - init
+  tags: i
 
 - name: host DNS servers
   hosts: dns_servers
   roles:
     - bind
+  tags: b
 
 - name: Setup custom DNS
   hosts: resolv
   roles:
     - resolver
+  tags: r
 
 - name: Install Prometheus
   hosts: prometheus
   roles: 
     - prometheus
+  tags: p
 
 - name: Install Grafana
   hosts: grafana
   roles: 
     - grafana
-    
+  tags: g
+
 - name: Database server setup
   hosts: db_servers
   roles:
     - mysql
+  tags: m
 
 - name: InfluxDB
   hosts: influxdb
   roles:
     - influxdb
+  tags: f
 
 - name: Agama setup
   hosts: agama
   roles:
     - agama
     - uwsgi
+  tags: w
 
 - name: Agama-Client setup
   hosts: agama_client
   roles:
     - agama_client
+  tags: a
 
 - name: Web server setup
   hosts: web_servers
   roles:
     - nginx
-
+  tags: ng
 

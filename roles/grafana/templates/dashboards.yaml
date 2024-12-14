@@ -15,3 +15,9 @@ providers:
     type: file
     options:
       path: /var/lib/grafana/dashboards
+  - name: 'Backups'
+    orgID: 1
+    folder: ''
+    folderUid: ''
+    options:
+      path: /var/lib/grafana/dashboards
