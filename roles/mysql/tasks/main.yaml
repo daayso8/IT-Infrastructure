@@ -49,6 +49,13 @@
     owner: prometheus
   notify: Restart MySQL Exporter
 
+- name: Run prometheus exporter template
+  ansible.builtin.template:
+    src: mysql_metric.yaml.j2
+    dest: /etc/default/prometheus-mysqld-exporter
+    mode: '0755'
+  notify: Restart MySQL Exporter
+
 - name: Ensure the MySQL Exporter service is started
   ansible.builtin.service:
     name: prometheus-mysqld-exporter
@@ -84,3 +91,22 @@
     src: mysql.backup.cron.j2
     dest: /etc/cron.d/mysql-backup
   notify: Restart cron
+
+- name: Ensure MySQL replication user exist
+  community.mysql.mysql_user:
+    name: "{{ replication_user }}"
+    password: "{{replication_password }}"
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+    priv: "*.*: REPLICATION SLAVE"
+    host: "%"
+
+- name: Handles dynamic MySQL parameters
+  community.mysql.mysql_variables:
+    variable: read_only
+    value: "{{ 'OFF' if inventory_hostname == mysql_host else 'ON' }}"
+    mode: persist
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+  notify:
+    - Reset MySQL source
+    - Reset MySQL replica
+  

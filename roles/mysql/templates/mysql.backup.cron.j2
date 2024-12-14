@@ -1,4 +1,4 @@
-{% if inventory_hostname == groups["db_servers"][1] %}
+{% if inventory_hostname == mysql_backup_host %}
 38 21 * * * backup mysqldump agama > /home/backup/mysql/agama.sql
 38 21 * * *  backup  duplicity --no-encryption full /home/backup/mysql/ rsync://davidayson8@backup/mysql
 38 21 * * *  backup  duplicity --no-encryption incremental /home/backup/mysql/ rsync://davidayson8@backup/mysql
