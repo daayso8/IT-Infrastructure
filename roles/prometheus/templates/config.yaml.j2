@@ -28,21 +28,21 @@ scrape_configs:
     static_configs:
       - targets:
         {% for host in groups['dns_servers'] %}
-        - {{ host }}:9119
+        - ns{{ host | replace ('davidayson8','') }}:9119
         {% endfor %}
 
   - job_name: 'nginx'
     static_configs:
       - targets:
         {% for host in groups['web_servers'] %}
-        - {{ host }}:9113
+        - www{{ host | replace ('davidayson8','') }}:9113
         {% endfor %}
 
   - job_name: 'influxdb'
     static_configs:
       - targets:
       {% for host in groups['influxdb'] %}
-        - {{ host }}:9424
+        - influxdb:9424
       {% endfor %}
 
   - job_name: 'backup'
@@ -51,7 +51,7 @@ scrape_configs:
         - {{ backup_server }}:9111
   
   - job_name: 'keepalived'
-    static_configs
+    static_configs:
       - targets:
         {% for host in groups['keepalived'] %}
           - {{ host }}:9165
@@ -61,5 +61,5 @@ scrape_configs:
     static_configs:
       - targets:
         {% for host in groups['haproxy'] %}
-          - {{ host }}:9101
+          - lb{{ host | replace ('davidayson8','')  }}:9101
         {% endfor %}

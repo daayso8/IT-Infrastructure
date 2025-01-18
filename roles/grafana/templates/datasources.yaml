@@ -5,7 +5,7 @@ datasources:
     access: proxy
     orgId: 1
     uid: e91a23c9-c251-4690-aea4-62cc21dcfb51
-    url: http://davidayson8-2:9090/prometheus
+    url: http://prometheus:9090/prometheus
     isDefault: true
     editable: true
   - name: InfluxDB:agamaDB
@@ -13,12 +13,12 @@ datasources:
     access: proxy
     orgID: 1
     uid: 1e2f45c9-a123-4690-bca5-34dc1adcb254
-    url: http://davidayson8-2:8086
+    url: http://influxdb:8086
     database: agamaDB
   - name: InfluxDB:telegraf
     type: influxdb
     access: proxy
     orgId: 1
     uid: TIYeHqRgZ
-    url: http://davidayson8-2:8086
+    url: http://influxdb:8086
     database: telegraf

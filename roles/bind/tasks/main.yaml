@@ -4,31 +4,30 @@
       - bind9
     state: present
 
-- name: Configure named.conf files 
+- name: Configure named.conf files Template
   ansible.builtin.template:
-    src: named.conf.{{ item }}.j3
+    src: named.conf.{{ item }}.j2
     dest: /etc/bind/named.conf.{{ item }}
     mode: '0644'
   with_items:
-    - local
     - options
+    - local
   notify: 
-  - Restart Bind9
-  - Reload systemd
+    - Restart Bind9
+    - Reload systemd
+    - Restart Exporter
 
 - name: Run Zone template
   ansible.builtin.template:
     src: zone.j2
-    dest: /var/cache/bind/db.{{ domain_name}}
-    mode: '0644'
+    dest: /var/cache/bind/db.{{ domain_name }}
     force: no
   notify: Restart Bind9
 
 - name: Run Reverse Zone template
   ansible.builtin.template:
     src: zone.rev.j2
-    dest: /var/cache/bind/db.{{ reverse_zone }}
-    mode: '0644'
+    dest: /var/cache/bind/rev.db.{{ domain_name }}
     force: yes
   when: inventory_hostname in groups['dns_primary']
   notify: Restart Bind9
@@ -37,6 +36,29 @@
   ansible.builtin.apt:
     name: python3-dnspython
     state: present
+
+- name: Execute handlers
+  ansible.builtin.meta: flush_handlers
+
+- name: Add backup record on backup DNS servers
+  community.general.nsupdate:
+    key_algorithm: "hmac-sha256"
+    key_name: "nsupdatekey"
+    key_secret: "{{ nsupdatekey_password }}"
+    record: "{{ backup_user }}"
+    server: "{{ hostvars[groups['dns_primary'][0]]['ansible_default_ipv4']['address'] }}"
+    state: present
+    type: A
+    zone: "{{ domain_name }}"
+    value: "{{ backup_server }}"
+  run_once: True
+  when: inventory_hostname in groups['dns_primary']
+
+- name: Ensure Bind9 service is started and running
+  ansible.builtin.systemd:
+    name: bind9
+    state: started
+    enabled: yes
 
 - name: Create bind_exporter user
   ansible.builtin.user:
@@ -81,29 +103,6 @@
   ansible.builtin.systemd:
     name: prometheus-bind-exporter
     state: started
-    enabled: yes 
-
-- name: Execute handlers
-  ansible.builtin.meta: flush_handlers
-
-- name: Add backup record on backup DNS servers
-  community.general.nsupdate:
-    key_algorithm: "hmac-sha256"
-    key_name: "nsupdatekey"
-    key_secret: "{{ nsupdatekey_password }}"
-    record: "{{ backup_user }}"
-    server: "{{ hostvars[groups['dns_primary'][0]]['ansible_default_ipv4']['address'] }}"
-    state: present
-    type: A
-    zone: "{{ domain_name }}"
-    value: "{{ backup_server_ip }}"
-  run_once: True
-  when: "inventory_hostname in groups['dns_primary']"
-
-- name: Ensure Bind9 service is started and running
-  ansible.builtin.systemd:
-    name: bind9
-    state: started
     enabled: yes
 
 - name: Assign cnames
@@ -111,3 +110,5 @@
     name: "cname"
   vars:
     service: "ns{{inventory_hostname | replace('davidayson8','')}}"
+
+  

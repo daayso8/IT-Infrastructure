@@ -1,5 +1,6 @@
-davidayson8-1 ansible_host=193.40.156.67 ansible_port=19722 ansible_user=ubuntu
-davidayson8-2 ansible_host=193.40.156.67 ansible_port=14522 ansible_user=ubuntu
+davidayson8-1 ansible_host=193.40.156.67 ansible_port=11622 ansible_user=ubuntu
+davidayson8-2 ansible_host=193.40.156.67 ansible_port=14622 ansible_user=ubuntu
+davidayson8-3 ansible_host=193.40.156.67 ansible_port=17022 ansible_user=ubuntu
 
 [agama]
 davidayson8-1
@@ -12,37 +13,40 @@ davidayson8-2
 [web_servers]
 davidayson8-1
 davidayson8-2
+davidayson8-3
 
 [dns_servers:children]
 dns_primary
 dns_secondary
 
 [dns_primary]
-davidayson8-1
+davidayson8-3
 
 [dns_secondary]
+davidayson8-1
 davidayson8-2
-
 
 [resolv]
 davidayson8-1
 davidayson8-2
+davidayson8-3
 
 [prometheus]
-davidayson8-2
+davidayson8-3
 
 [grafana]
-davidayson8-2
+davidayson8-3
 
 [influxdb]
-davidayson8-2
+davidayson8-3
 
 [agama_client]
-davidayson8-2
+davidayson8-3
 
 [docker]
 davidayson8-1
 davidayson8-2
+davidayson8-3
 
 [keepalived]
 davidayson8-1
@@ -55,4 +59,4 @@ davidayson8-2
 [all]
 davidayson8-1
 davidayson8-2  
-
+davidayson8-3

@@ -22,7 +22,7 @@
     mode: '0644'
   notify: Restart Haproxy Exporter
 
-  - name: Assign cnames
+- name: Assign cnames
   include_role:
     name: "cname"
   vars:

@@ -19,6 +19,8 @@
     src: keepalived_script.sh
     dest: /home/keepalived_script/keepalived_script.sh
     mode: '0755'
+    owner: root
+    notify: Restart keepalived
 
 - name: Keepalived Config
   ansible.builtin.template:
@@ -34,21 +36,26 @@
     state: started
     enabled: true
 
-- name: Install Keepalived Exporter
-  ansible.builtin.apt:
-    deb: http://backup/keepalived-exporter_1.4.0_linux_amd64.deb
+- name: Download Keepalived exporter package
+  ansible.builtin.get_url:
+    url: https://github.com/mehdy/keepalived-exporter/releases/download/v1.4.0/keepalived-exporter_1.4.0_linux_amd64.tar.gz
+    dest: /home/keepalived_script/
+
+- name: Install Keepalived exporter package
+  ansible.builtin.unarchive:
+    src: /home/keepalived_script/keepalived-exporter_1.4.0_linux_amd64.tar.gz
+    dest: /usr/local/bin/
+    remote_src: true
 
 - name: Keepalived Exporter Service
   ansible.builtin.template:
     src: keepalived-exporter.service
     dest: /etc/systemd/system/
     mode: '0644'
+  notify: Restart keepalived-exporter
   
 - name: Ensure Keepalived is enabled and started 
   ansible.builtin.service:
     name: keepalived-exporter
     state: started
     enabled: true
-
-
-
