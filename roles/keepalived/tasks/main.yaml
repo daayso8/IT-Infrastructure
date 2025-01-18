@@ -1,0 +1,54 @@
+- name: Make Keepalived Directory
+  ansible.builtin.file:
+    path: /etc/keepalived/
+    state: directory
+    mode: '0755'
+
+- name: Install Keepalived
+  ansible.builtin.apt:
+    name: keepalived
+    state: present
+  
+- name: Create keepalived_script
+  ansible.builtin.user:
+    name: keepalived_script
+    state: present
+
+- name: Keepalived script
+  ansible.builtin.template:
+    src: keepalived_script.sh
+    dest: /home/keepalived_script/keepalived_script.sh
+    mode: '0755'
+
+- name: Keepalived Config
+  ansible.builtin.template:
+    src: keepalived.conf
+    dest: /etc/keepalived/keepalived.conf
+    mode: '0644'
+  #no_log: true
+  notify: Restart keepalived
+
+- name: Ensure Keepalived is enabled and started
+  ansible.builtin.service:
+    name: keepalived
+    state: started
+    enabled: true
+
+- name: Install Keepalived Exporter
+  ansible.builtin.apt:
+    deb: http://backup/keepalived-exporter_1.4.0_linux_amd64.deb
+
+- name: Keepalived Exporter Service
+  ansible.builtin.template:
+    src: keepalived-exporter.service
+    dest: /etc/systemd/system/
+    mode: '0644'
+  
+- name: Ensure Keepalived is enabled and started 
+  ansible.builtin.service:
+    name: keepalived-exporter
+    state: started
+    enabled: true
+
+
+

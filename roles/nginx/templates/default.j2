@@ -4,8 +4,8 @@ server {
 
     {% if inventory_hostname in groups['agama'] %}
     location / {
-        uwsgi_pass localhost:5000;
-        include uwsgi_params;
+        proxy_pass http://localhost:{{ agama_port }};
+        proxy_set_header Host $http_host;
     }
     {% endif %}
 
@@ -25,7 +25,6 @@ server {
 }
 server {
     listen 8080 default_server;
-    server_name _;
     
     location /stub_status {
         stub_status;

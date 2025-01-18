@@ -1,8 +1,9 @@
-davidayson8-1 ansible_host=193.40.156.67 ansible_port=10622 ansible_user=ubuntu
-davidayson8-2 ansible_host=193.40.156.67 ansible_port=9222 ansible_user=ubuntu
+davidayson8-1 ansible_host=193.40.156.67 ansible_port=19722 ansible_user=ubuntu
+davidayson8-2 ansible_host=193.40.156.67 ansible_port=14522 ansible_user=ubuntu
 
 [agama]
 davidayson8-1
+davidayson8-2
 
 [db_servers]
 davidayson8-1
@@ -13,6 +14,7 @@ davidayson8-1
 davidayson8-2
 
 [dns_servers]
+davidayson8-1
 davidayson8-2
 
 [resolv]
@@ -32,6 +34,14 @@ davidayson8-2
 davidayson8-2
 
 [docker]
+davidayson8-1
+davidayson8-2
+
+[keepalived]
+davidayson8-1
+davidayson8-2
+
+[haproxy]
 davidayson8-1
 davidayson8-2
 

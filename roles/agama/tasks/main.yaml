@@ -7,28 +7,47 @@
   ansible.builtin.get_url:
     url: https://raw.githubusercontent.com/hudolejev/agama/master/agama.py
     dest: /opt/agama/agama.py
+    mode: '0755'
   
 - name: Download docker agama
   ansible.builtin.get_url:
     url: https://raw.githubusercontent.com/hudolejev/agama/master/Dockerfile
     dest: /opt/agama/Dockerfile
+    mode: '0755'
 
 - name: Build Docker Image
   community.docker.docker_image:
-  name: agama
-  source: build
-  build:
-    path: /opt/agama
-
-- name: Create Data Container 
-  community.docker.docker_container:
     name: agama
+    source: build
+    build:
+      path: /opt/agama
+
+- name: Create Data Container for VM1
+  community.docker.docker_container:
+    name: agama-1-{{ item }}
     image: agama
     state: present
     volumes: /opt/agama:/opt/agama
     env: 
       AGAMA_DATABASE_URI=mysql+pymysql://{{ mysql_user }}:{{ mysql_password }}@{{ mysql_host }}/{{mysql_database}}
-    ports: "{{ agama_port }}:8000"
+    ports: "{{ item }}:8000"
     state: started
     restart_policy: always
-  no_log: true
+  with_items: "{{ agama_ports }}"
+  when: "inventory_hostname == 'davidayson8-1'"
+  #no_log: true
+
+- name: Create Data Container for VM2
+  community.docker.docker_container:
+    name: agama-2-{{ item }}
+    image: agama
+    state: present
+    volumes: /opt/agama:/opt/agama
+    env: 
+      AGAMA_DATABASE_URI=mysql+pymysql://{{ mysql_user }}:{{ mysql_password }}@{{ mysql_host }}/{{mysql_database}}
+    ports: "{{ item }}:8000"
+    state: started
+    restart_policy: always
+  with_items: "{{ agama_ports }}"
+  when: "inventory_hostname == 'davidayson8-2'"
+  #no_log: true

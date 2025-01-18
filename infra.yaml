@@ -2,7 +2,7 @@
   hosts: all
   roles:
     - init
-  tags: i
+  tags: init
 
 - name: host DNS servers
   hosts: dns_servers
@@ -22,10 +22,22 @@
     - prometheus
   tags: prometheus
 
+- name: Keepalived setup
+  hosts: keepalived
+  roles:
+    - keepalived
+  tags: keepalived
+
+- name: Haproxy Setup 
+  hosts: haproxy
+  roles:
+    - haproxy
+  tags: haproxy
+
 - name: Docker Setup
   hosts: docker
-    roles:
-      - docker
+  roles:
+    - docker
   tags: docker
 
 - name: Install Grafana

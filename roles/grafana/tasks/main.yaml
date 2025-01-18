@@ -1,11 +1,12 @@
 - name: Create Grafana directories
   ansible.builtin.file:
-    name: /opt/grafana/provisioning/{{ item }}
+    path: /opt/grafana/provisioning/{{ item }}
     state: directory
+    mode: '0755'
   loop:
     - dashboards
     - datasources
-    mode: '0755'
+
 
 - name: Copy main.json
   ansible.builtin.copy:
@@ -33,15 +34,21 @@
   
 - name: Dashboards template
   ansible.builtin.template:
-    src: dashboards.j2
+    src: dashboards.yaml
     dest: /opt/grafana/provisioning/dashboards/dashboards.json
     mode: '0644'
   
-  - name: Datasources template
+- name: Datasources template
   ansible.builtin.template:
-    src: dashboards.j2
+    src: dashboards.yaml
     dest: /opt/grafana/provisioning/datasources/datasources.json
     mode: '0644'
+
+- name: Grafana Template
+  ansible.builtin.template:
+    src: grafana.ini.j2
+    dest: /opt/grafana/grafana.ini
+  no_log: true
 
 - name: Create Grafana data container
   community.docker.docker_container:
@@ -51,4 +58,4 @@
     state: started
     restart_policy: always
     published_ports: "{{ grafana_port }}:3000"
-  notify: Restart container
+  #notify: Restart container
