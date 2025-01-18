@@ -7,41 +7,40 @@
     - dashboards
     - datasources
 
-
 - name: Copy main.json
   ansible.builtin.copy:
     src: main.json
-    dest: /opt/grafana/provisioning/dashboards/main.json
+    dest: /opt/grafana/provisioning/dashboards/
     mode: '0644'
 
 - name: Copy backups.json
   ansible.builtin.copy:
     src: backups.json
-    dest: /opt/grafana/provisioning/dashboards/backups.json
+    dest: /opt/grafana/provisioning/dashboards/
     mode: '0644'
     
 - name: Copy syslog.json
   ansible.builtin.copy:
     src: syslog.json
-    dest: /opt/grafana/provisioning/dashboards/syslog.json
+    dest: /opt/grafana/provisioning/dashboards/
     mode: '0644'
   
 - name: Copy mysql.json
   ansible.builtin.copy:
     src: mysql.json
-    dest: /opt/grafana/provisioning/dashboards/mysql.json
+    dest: /opt/grafana/provisioning/dashboards/
     mode: '0644'
   
 - name: Dashboards template
   ansible.builtin.template:
     src: dashboards.yaml
-    dest: /opt/grafana/provisioning/dashboards/dashboards.json
+    dest: /opt/grafana/provisioning/dashboards/default.yaml
     mode: '0644'
   
 - name: Datasources template
   ansible.builtin.template:
     src: dashboards.yaml
-    dest: /opt/grafana/provisioning/datasources/datasources.json
+    dest: /opt/grafana/provisioning/datasources/default.yaml
     mode: '0644'
 
 - name: Grafana Template
@@ -59,3 +58,9 @@
     restart_policy: always
     published_ports: "{{ grafana_port }}:3000"
   #notify: Restart container
+
+  - name: Assign cnames
+  include_role:
+    name: "cname"
+  vars:
+    service: "grafana"

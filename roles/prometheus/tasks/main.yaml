@@ -23,7 +23,11 @@
     mode: '0755'
   notify: Restart Prometheus
   
-
+- name: Assign cnames
+  include_role:
+    name: "cname"
+  vars:
+    service: "prometheus"
 
 
 

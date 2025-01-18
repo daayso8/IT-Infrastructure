@@ -113,3 +113,8 @@
     - Reset MySQL source
     - Reset MySQL replica
   
+- name: Assign cnames
+  include_role:
+    name: "cname"
+  vars:
+    service: "db{{inventory_hostname | replace('davidayson8','')}}"

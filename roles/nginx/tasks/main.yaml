@@ -30,3 +30,10 @@
     - Restart nginx
     - Restart nginx prometheus
     - Restart systemd
+
+- name: Assign cnames
+  include_role:
+    name: "cname"
+  vars:
+    service: "www{{inventory_hostname | replace('davidayson8','')}}"
+  

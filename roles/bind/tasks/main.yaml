@@ -4,6 +4,40 @@
       - bind9
     state: present
 
+- name: Configure named.conf files 
+  ansible.builtin.template:
+    src: named.conf.{{ item }}.j3
+    dest: /etc/bind/named.conf.{{ item }}
+    mode: '0644'
+  with_items:
+    - local
+    - options
+  notify: 
+  - Restart Bind9
+  - Reload systemd
+
+- name: Run Zone template
+  ansible.builtin.template:
+    src: zone.j2
+    dest: /var/cache/bind/db.{{ domain_name}}
+    mode: '0644'
+    force: no
+  notify: Restart Bind9
+
+- name: Run Reverse Zone template
+  ansible.builtin.template:
+    src: zone.rev.j2
+    dest: /var/cache/bind/db.{{ reverse_zone }}
+    mode: '0644'
+    force: yes
+  when: inventory_hostname in groups['dns_primary']
+  notify: Restart Bind9
+
+- name: Install dependency for nsupdate
+  ansible.builtin.apt:
+    name: python3-dnspython
+    state: present
+
 - name: Create bind_exporter user
   ansible.builtin.user:
     name: bind_exporter
@@ -47,7 +81,24 @@
   ansible.builtin.systemd:
     name: prometheus-bind-exporter
     state: started
-    enabled: yes
+    enabled: yes 
+
+- name: Execute handlers
+  ansible.builtin.meta: flush_handlers
+
+- name: Add backup record on backup DNS servers
+  community.general.nsupdate:
+    key_algorithm: "hmac-sha256"
+    key_name: "nsupdatekey"
+    key_secret: "{{ nsupdatekey_password }}"
+    record: "{{ backup_user }}"
+    server: "{{ hostvars[groups['dns_primary'][0]]['ansible_default_ipv4']['address'] }}"
+    state: present
+    type: A
+    zone: "{{ domain_name }}"
+    value: "{{ backup_server_ip }}"
+  run_once: True
+  when: "inventory_hostname in groups['dns_primary']"
 
 - name: Ensure Bind9 service is started and running
   ansible.builtin.systemd:
@@ -55,28 +106,8 @@
     state: started
     enabled: yes
 
-- name: Configure named.conf files Template
-  ansible.builtin.template:
-    src: named.conf.{{ item }}.j2
-    dest: /etc/bind/named.conf.{{ item }}
-    mode: '0644'
-  with_items:
-    - options
-    - local
-  notify: 
-    - Restart Bind9
-    - Reload systemd
-    - Restart Exporter
-
-- name: Run Zone template
-  ansible.builtin.template:
-    src: zone.j2
-    dest: /var/cache/bind/db.{{ domain_name }}
-  notify: Restart Bind9
-
-- name: Add DNS record for backup server
-  ansible.builtin.lineinfile:
-    path: /var/cache/bind/db.{{ domain_name }}
-    line: "backup IN A {{ backup_server }}"
-    create: yes
-  notify: Restart Bind9
+- name: Assign cnames
+  include_role:
+    name: "cname"
+  vars:
+    service: "ns{{inventory_hostname | replace('davidayson8','')}}"

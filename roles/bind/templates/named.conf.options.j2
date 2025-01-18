@@ -1,6 +1,7 @@
 acl corpnets {
 	{{ localnet }};
 	{{ localhost }};
+	{{ dockernet }};
 };
 options {
 	directory "/var/cache/bind";
@@ -20,4 +21,14 @@ options {
 
 statistics-channels {
     inet 127.0.0.1 port 8053 allow { 127.0.0.1; };
+};
+
+key "transferkey" {
+        algorithm hmac-sha256;
+        secret "{{ transferkey_password }}";
+};
+
+key "nsupdatekey" {
+        algorithm hmac-sha256;
+        secret "{{ nsupdatekey_password }}";
 };

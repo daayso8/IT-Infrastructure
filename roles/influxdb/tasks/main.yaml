@@ -87,3 +87,9 @@
     src: influxdb.backup.cron.j2
     dest: /etc/cron.d/influxdb-backup
   notify: Restart cron
+
+- name: Assign cnames
+  include_role:
+    name: "cname"
+  vars:
+    service: "influxdb"
