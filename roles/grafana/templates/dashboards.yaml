@@ -7,17 +7,24 @@ providers:
     folderUid: ''
     type: file
     options:
-      path: /var/lib/grafana/dashboards
+      path: /etc/grafana/provisioning/dashboards
+   - name: 'MySQL'
+    orgId: 1
+    folder: ''
+    folderUid: ''
+    type: file
+    options:
+      path: /etc/grafana/provisioning/dashboards
   - name: 'Syslog'
     orgId: 1
     folder: ''
     folderUid: ''
     type: file
     options:
-      path: /var/lib/grafana/dashboards
+      path: /etc/grafana/provisioning/dashboards
   - name: 'Backups'
     orgID: 1
     folder: ''
     folderUid: ''
     options:
-      path: /var/lib/grafana/dashboards
+      path: /etc/grafana/provisioning/dashboards

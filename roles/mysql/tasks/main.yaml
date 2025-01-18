@@ -40,6 +40,7 @@
     login_unix_socket: /var/run/mysqld/mysqld.sock
     priv: "*.*:PROCESS,REPLICATION CLIENT,SELECT"
   notify: Restart MySQL
+  no_log: true
 
 - name: Passing authentication data to MySQL Exporter
   ansible.builtin.template:
@@ -77,6 +78,7 @@
     priv: "{{ mysql_database }}.*: SELECT, LOCK TABLES, SELECT"
     login_unix_socket: /var/run/mysqld/mysqld.sock
     state: present
+  no_log: true
 
 - name: Create backup template
   ansible.builtin.template:
@@ -99,6 +101,7 @@
     login_unix_socket: /var/run/mysqld/mysqld.sock
     priv: "*.*: REPLICATION SLAVE"
     host: "%"
+  no_log: true
 
 - name: Handles dynamic MySQL parameters
   community.mysql.mysql_variables:

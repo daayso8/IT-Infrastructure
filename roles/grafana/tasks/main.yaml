@@ -1,86 +1,54 @@
-- name: Make directory for apt key
+- name: Create Grafana directories
   ansible.builtin.file:
-    path: /etc/apt/keyrings
+    name: /opt/grafana/provisioning/{{ item }}
     state: directory
+  loop:
+    - dashboards
+    - datasources
     mode: '0755'
 
-- name: Add Grafana key
-  ansible.builtin.get_url:
-    url: 'https://packages.grafana.com/gpg.key'
-    dest: '/etc/apt/keyrings/grafana.asc'
-
-- name: Add Grafana repository
-  ansible.builtin.apt_repository:
-    repo: 'deb [signed-by=/etc/apt/keyrings/grafana.asc] https://packages.grafana.com/oss/deb stable main'
-    state: present
-
-- name: Install Grafana
-  ansible.builtin.apt:
-    name: grafana
-    state: present
-    update_cache: yes
-
-- name: Run Grafana template
-  ansible.builtin.template:
-    src: grafana.ini.j2
-    dest: /etc/grafana/grafana.ini
-    mode: '0644'
-  notify: Restart grafana
-
-- name: Run Grafana dashboard template
-  ansible.builtin.template:
-    src: dashboards.yaml
-    dest: /etc/grafana/provisioning/dashboards/dashboards.yaml
-    mode: '0644'
-  notify: Restart grafana
-
-- name: Run Grafana datasource template
-  ansible.builtin.template:
-    src: datasources.yaml
-    dest: /etc/grafana/provisioning/datasources/datasources.yaml
-    mode: '0644'
-  notify: Restart grafana
-
-- name: Make directory for json file
-  ansible.builtin.file:
-    path: /var/lib/grafana/dashboards
-    state: directory
-    mode: '0755'
-  notify: Restart grafana
-
-- name: Copy main json file to dashboard
+- name: Copy main.json
   ansible.builtin.copy:
     src: main.json
-    dest: /var/lib/grafana/dashboards/
-    mode: '0755'
-  notify: Restart grafana
+    dest: /opt/grafana/provisioning/dashboards/main.json
+    mode: '0644'
 
-- name: Copy syslog json file to dashboard
-  ansible.builtin.copy:
-    src: syslog.json
-    dest: /var/lib/grafana/dashboards/
-    mode: '0755'
-  notify: Restart grafana
-
-- name: Copy backups json file to dashboard
+- name: Copy backups.json
   ansible.builtin.copy:
     src: backups.json
-    dest: /var/lib/grafana/dashboards/
-    mode: '0755'
-  notify: Restart grafana
-
-- name: Copy mysql json file to dashboard
+    dest: /opt/grafana/provisioning/dashboards/backups.json
+    mode: '0644'
+    
+- name: Copy syslog.json
+  ansible.builtin.copy:
+    src: syslog.json
+    dest: /opt/grafana/provisioning/dashboards/syslog.json
+    mode: '0644'
+  
+- name: Copy mysql.json
   ansible.builtin.copy:
     src: mysql.json
-    dest: /var/lib/grafana/dashboards/
-    mode: '0755'
-  notify: Restart grafana
+    dest: /opt/grafana/provisioning/dashboards/mysql.json
+    mode: '0644'
   
-- name: Ensure Grafana service is started and enabled
-  ansible.builtin.service:
-    name: grafana-server
-    state: started
-    enabled: yes
-  notify: Restart grafana
+- name: Dashboards template
+  ansible.builtin.template:
+    src: dashboards.j2
+    dest: /opt/grafana/provisioning/dashboards/dashboards.json
+    mode: '0644'
+  
+  - name: Datasources template
+  ansible.builtin.template:
+    src: dashboards.j2
+    dest: /opt/grafana/provisioning/datasources/datasources.json
+    mode: '0644'
 
-    
+- name: Create Grafana data container
+  community.docker.docker_container:
+    name: grafana
+    image: grafana/grafana
+    volumes: /opt/grafana:/etc/grafana
+    state: started
+    restart_policy: always
+    published_ports: "{{ grafana_port }}:3000"
+  notify: Restart container

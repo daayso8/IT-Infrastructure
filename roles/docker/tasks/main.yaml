@@ -1,0 +1,7 @@
+- name: Install docker and Resources
+  ansible.builtin.apt:
+    name: 
+      - docker.io
+      - python3-docker
+    state: present
+  

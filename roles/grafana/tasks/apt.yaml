@@ -1,0 +1,86 @@
+- name: Make directory for apt key
+  ansible.builtin.file:
+    path: /etc/apt/keyrings
+    state: directory
+    mode: '0755'
+
+- name: Add Grafana key
+  ansible.builtin.get_url:
+    url: 'https://packages.grafana.com/gpg.key'
+    dest: '/etc/apt/keyrings/grafana.asc'
+
+- name: Add Grafana repository
+  ansible.builtin.apt_repository:
+    repo: 'deb [signed-by=/etc/apt/keyrings/grafana.asc] https://packages.grafana.com/oss/deb stable main'
+    state: present
+
+- name: Install Grafana
+  ansible.builtin.apt:
+    name: grafana
+    state: present
+    update_cache: yes
+
+- name: Run Grafana template
+  ansible.builtin.template:
+    src: grafana.ini.j2
+    dest: /etc/grafana/grafana.ini
+    mode: '0644'
+  notify: Restart grafana
+
+- name: Run Grafana dashboard template
+  ansible.builtin.template:
+    src: dashboards.yaml
+    dest: /etc/grafana/provisioning/dashboards/dashboards.yaml
+    mode: '0644'
+  notify: Restart grafana
+
+- name: Run Grafana datasource template
+  ansible.builtin.template:
+    src: datasources.yaml
+    dest: /etc/grafana/provisioning/datasources/datasources.yaml
+    mode: '0644'
+  notify: Restart grafana
+
+- name: Make directory for json file
+  ansible.builtin.file:
+    path: /var/lib/grafana/dashboards
+    state: directory
+    mode: '0755'
+  notify: Restart grafana
+
+- name: Copy main json file to dashboard
+  ansible.builtin.copy:
+    src: main.json
+    dest: /var/lib/grafana/dashboards/
+    mode: '0755'
+  notify: Restart grafana
+
+- name: Copy syslog json file to dashboard
+  ansible.builtin.copy:
+    src: syslog.json
+    dest: /var/lib/grafana/dashboards/
+    mode: '0755'
+  notify: Restart grafana
+
+- name: Copy backups json file to dashboard
+  ansible.builtin.copy:
+    src: backups.json
+    dest: /var/lib/grafana/dashboards/
+    mode: '0755'
+  notify: Restart grafana
+
+- name: Copy mysql json file to dashboard
+  ansible.builtin.copy:
+    src: mysql.json
+    dest: /var/lib/grafana/dashboards/
+    mode: '0755'
+  notify: Restart grafana
+  
+- name: Ensure Grafana service is started and enabled
+  ansible.builtin.service:
+    name: grafana-server
+    state: started
+    enabled: yes
+  notify: Restart grafana
+
+    

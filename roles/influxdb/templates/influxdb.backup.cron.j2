@@ -1,3 +1,2 @@
 55 22 * * * backup rm -rf /home/backup/influxdb/* && influxd backup -portable -db telegraf /home/backup/influxdb
 00 23 * * * backup duplicity --no-encryption full /home/backup/influxdb/ rsync://davidayson8@backup/influxdb
-05 23 * * * backup duplicity --no-encryption incremental /home/backup/influxdb/ rsync://davidayson8@backup/influxdb
