@@ -93,3 +93,4 @@
     name: "cname"
   vars:
     service: "influxdb"
+  

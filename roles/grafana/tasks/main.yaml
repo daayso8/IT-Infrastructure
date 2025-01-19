@@ -36,10 +36,10 @@
     src: dashboards.yaml
     dest: /opt/grafana/provisioning/dashboards/default.yaml
     mode: '0644'
-  
+
 - name: Datasources template
   ansible.builtin.template:
-    src: dashboards.yaml
+    src: datasources.yaml
     dest: /opt/grafana/provisioning/datasources/default.yaml
     mode: '0644'
 
@@ -57,10 +57,11 @@
     state: started
     restart_policy: always
     published_ports: "{{ grafana_port }}:3000"
-  #notify: Restart container
+  notify: Restart container
 
 - name: Assign cnames
   include_role:
     name: "cname"
   vars:
     service: "grafana"
+  

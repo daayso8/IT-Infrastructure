@@ -38,10 +38,10 @@ listen my_ha_frontend
     default_backend my_ha_backend
 
 backend my_ha_backend
-    server docker-1-8001 davidayson8-1:8001 check
-    server docker-1-8002 davidayson8-1:8002 check
-    server docker-2-8001 davidayson8-2:8001 check
-    server docker-2-8002 davidayson8-2:8002 check
+    server docker-1-8001 lb-1:8001 check
+    server docker-1-8002 lb-1:8002 check
+    server docker-2-8001 lb-2:8001 check
+    server docker-2-8002 lb-2:8002 check
 
 listen stats
     bind :9188

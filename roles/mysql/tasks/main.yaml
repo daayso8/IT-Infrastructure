@@ -48,13 +48,14 @@
     dest: "/var/lib/prometheus/.my.cnf"
     mode: '0600'
     owner: prometheus
+  no_log: true
   notify: Restart MySQL Exporter
 
 - name: Run prometheus exporter template
   ansible.builtin.template:
     src: mysql_metric.yaml.j2
     dest: /etc/default/prometheus-mysqld-exporter
-    mode: '0755'
+    mode: '0644'
   notify: Restart MySQL Exporter
 
 - name: Ensure the MySQL Exporter service is started
@@ -87,12 +88,14 @@
     owner: backup
     group: backup
     mode: '0600'
+  no_log: true
     
 - name: Create Cron Backup
   ansible.builtin.template:
     src: mysql.backup.cron.j2
     dest: /etc/cron.d/mysql-backup
   notify: Restart cron
+  no_log: true
 
 - name: Ensure MySQL replication user exist
   community.mysql.mysql_user:

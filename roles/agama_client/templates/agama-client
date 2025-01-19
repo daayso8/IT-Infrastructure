@@ -68,3 +68,4 @@ while true; do
     logger "Waiting for the next cycle to start..."
     sleep 300
 done
+

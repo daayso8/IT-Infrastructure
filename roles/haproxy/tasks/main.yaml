@@ -27,3 +27,4 @@
     name: "cname"
   vars:
     service: "lb{{inventory_hostname | replace('davidayson8','')}}"
+    

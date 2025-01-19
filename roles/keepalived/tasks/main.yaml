@@ -20,15 +20,13 @@
     dest: /home/keepalived_script/keepalived_script.sh
     mode: '0755'
     owner: root
-    notify: Restart keepalived
 
 - name: Keepalived Config
   ansible.builtin.template:
     src: keepalived.conf
     dest: /etc/keepalived/keepalived.conf
     mode: '0644'
-  #no_log: true
-  notify: Restart keepalived
+  no_log: true
 
 - name: Ensure Keepalived is enabled and started
   ansible.builtin.service:

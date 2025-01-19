@@ -35,7 +35,7 @@
     restart_policy: always
   with_items: "{{ agama_ports }}"
   when: "inventory_hostname == 'davidayson8-1'"
-  #no_log: true
+  no_log: true
 
 - name: Create Data Container for VM2
   community.docker.docker_container:
@@ -50,4 +50,5 @@
     restart_policy: always
   with_items: "{{ agama_ports }}"
   when: "inventory_hostname == 'davidayson8-2'"
-  #no_log: true
+  no_log: true 
+  

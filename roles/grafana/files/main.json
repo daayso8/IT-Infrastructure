@@ -24,7 +24,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "ceaee0etbcao0f"
+        "uid": "e91a23c9-c251-4690-aea4-62cc21dcfb51"
       },
       "fieldConfig": {
         "defaults": {
@@ -78,9 +78,9 @@
             "uid": "e91a23c9-c251-4690-aea4-62cc21dcfb51"
           },
           "editorMode": "code",
-          "expr": "(node_memory_Buffers_bytes + node_memory_Cached_bytes + node_memory_MemFree_bytes) / node_memory_MemTotal_bytes",
+          "expr": "((node_memory_Buffers_bytes + node_memory_Cached_bytes + node_memory_MemFree_bytes) / node_memory_MemTotal_bytes ) * 100",
           "instant": false,
-          "legendFormat": "__auto",
+          "legendFormat": "{{instance}}",
           "range": true,
           "refId": "A"
         }
@@ -91,7 +91,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "ceaee0etbcao0f"
+        "uid": "e91a23c9-c251-4690-aea4-62cc21dcfb51"
       },
       "fieldConfig": {
         "defaults": {
@@ -147,7 +147,7 @@
           "editorMode": "code",
           "expr": "(1 - rate(node_cpu_seconds_total{mode=\"idle\"}[1m])) * 100",
           "instant": false,
-          "legendFormat": "__auto",
+          "legendFormat": "{{instance}}",
           "range": true,
           "refId": "A"
         }
@@ -158,7 +158,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "ceaee0etbcao0f"
+        "uid": "e91a23c9-c251-4690-aea4-62cc21dcfb51"
       },
       "fieldConfig": {
         "defaults": {
@@ -244,7 +244,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "ceaee0etbcao0f"
+        "uid": "e91a23c9-c251-4690-aea4-62cc21dcfb51"
       },
       "fieldConfig": {
         "defaults": {
@@ -368,28 +368,7 @@
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisBorderShow": false,
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "fillOpacity": 80,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineWidth": 1,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
+            "mode": "thresholds"
           },
           "mappings": [],
           "thresholds": {
@@ -416,25 +395,21 @@
       },
       "id": 14,
       "options": {
-        "barRadius": 0,
-        "barWidth": 0.97,
-        "fullHighlight": false,
-        "groupWidth": 0.7,
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": true
-        },
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
         "orientation": "auto",
-        "showValue": "auto",
-        "stacking": "none",
-        "tooltip": {
-          "mode": "single",
-          "sort": "none"
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
         },
-        "xTickLabelRotation": 0,
-        "xTickLabelSpacing": 0
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
       },
       "pluginVersion": "11.4.0",
       "targets": [
@@ -443,19 +418,19 @@
             "type": "influxdb",
             "uid": "1e2f45c9-a123-4690-bca5-34dc1adcb254"
           },
-          "query": "SELECT distinct(\"items\") \nFROM \"agama-stats\" \nWHERE $timeFilter \nGROUP BY \"name\"::tag\n",
+          "query": "SELECT sum(\"items\") FROM \"autogen\".\"agama-stats\" WHERE $timeFilter GROUP BY time(1m) fill(null)\n",
           "rawQuery": true,
           "refId": "A",
           "resultFormat": "time_series"
         }
       ],
       "title": "Item Counts for All Discovered Agamas",
-      "type": "barchart"
+      "type": "stat"
     },
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "ceaee0etbcao0f"
+        "uid": "e91a23c9-c251-4690-aea4-62cc21dcfb51"
       },
       "fieldConfig": {
         "defaults": {
@@ -544,7 +519,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "ceaee0etbcao0f"
+        "uid": "e91a23c9-c251-4690-aea4-62cc21dcfb51"
       },
       "fieldConfig": {
         "defaults": {
@@ -649,7 +624,7 @@
     {
       "datasource": {
         "type": "influxdb",
-        "uid": "eeaeeaoy76xvkd"
+        "uid": "1e2f45c9-a123-4690-bca5-34dc1adcb254"
       },
       "fieldConfig": {
         "defaults": {
@@ -702,9 +677,9 @@
         {
           "datasource": {
             "type": "influxdb",
-            "uid": "eeaeeaoy76xvkd"
+            "uid": "1e2f45c9-a123-4690-bca5-34dc1adcb254"
           },
-          "query": "SELECT mean(\"value\") FROM \"measurement\" WHERE $timeFilter GROUP BY time($__interval) fill(null)",
+          "query": "SELECT distinct(\"items\") FROM \"agama-stats\" WHERE $timeFilter GROUP BY \"name::'davidayson8-1.agamadb'\"",
           "rawQuery": true,
           "refId": "A",
           "resultFormat": "time_series"
@@ -716,7 +691,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "ceaee0etbcao0f"
+        "uid": "e91a23c9-c251-4690-aea4-62cc21dcfb51"
       },
       "fieldConfig": {
         "defaults": {
@@ -801,7 +776,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "ceaee0etbcao0f"
+        "uid": "e91a23c9-c251-4690-aea4-62cc21dcfb51"
       },
       "fieldConfig": {
         "defaults": {
@@ -895,7 +870,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "ceaee0etbcao0f"
+        "uid": "e91a23c9-c251-4690-aea4-62cc21dcfb51"
       },
       "fieldConfig": {
         "defaults": {
@@ -978,7 +953,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "ceaee0etbcao0f"
+        "uid": "e91a23c9-c251-4690-aea4-62cc21dcfb51"
       },
       "fieldConfig": {
         "defaults": {
@@ -1072,7 +1047,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "ceaee0etbcao0f"
+        "uid": "e91a23c9-c251-4690-aea4-62cc21dcfb51"
       },
       "fieldConfig": {
         "defaults": {
@@ -1146,7 +1121,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "ceaee0etbcao0f"
+        "uid": "e91a23c9-c251-4690-aea4-62cc21dcfb51"
       },
       "fieldConfig": {
         "defaults": {
@@ -1224,7 +1199,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "ceaee0etbcao0f"
+        "uid": "e91a23c9-c251-4690-aea4-62cc21dcfb51"
       },
       "fieldConfig": {
         "defaults": {
@@ -1298,7 +1273,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "ceaee0etbcao0f"
+        "uid": "e91a23c9-c251-4690-aea4-62cc21dcfb51"
       },
       "fieldConfig": {
         "defaults": {

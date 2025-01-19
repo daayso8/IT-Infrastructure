@@ -15,22 +15,23 @@
   notify: 
     - Restart Bind9
     - Reload systemd
-    - Restart Exporter
 
 - name: Run Zone template
   ansible.builtin.template:
     src: zone.j2
     dest: /var/cache/bind/db.{{ domain_name }}
+    mode: '0644'
     force: no
-  notify: Restart Bind9
+  notify: Reload Bind9
 
 - name: Run Reverse Zone template
   ansible.builtin.template:
-    src: zone.rev.j2
+    src: rev.zone.j2
     dest: /var/cache/bind/rev.db.{{ domain_name }}
     force: yes
+    mode: '0644'
   when: inventory_hostname in groups['dns_primary']
-  notify: Restart Bind9
+  notify: Reload Bind9
 
 - name: Install dependency for nsupdate
   ansible.builtin.apt:

@@ -22,3 +22,4 @@ datasources:
     uid: TIYeHqRgZ
     url: http://influxdb:8086
     database: telegraf
+
