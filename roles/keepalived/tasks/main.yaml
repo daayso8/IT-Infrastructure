@@ -39,11 +39,12 @@
     url: https://github.com/mehdy/keepalived-exporter/releases/download/v1.4.0/keepalived-exporter_1.4.0_linux_amd64.tar.gz
     dest: /home/keepalived_script/
 
-- name: Install Keepalived exporter package
+- name: Unarchive Keepalived exporter package
   ansible.builtin.unarchive:
     src: /home/keepalived_script/keepalived-exporter_1.4.0_linux_amd64.tar.gz
     dest: /usr/local/bin/
     remote_src: true
+    creates: /usr/local/bin/keepalived-exporter
 
 - name: Keepalived Exporter Service
   ansible.builtin.template:

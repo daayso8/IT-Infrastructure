@@ -15,6 +15,7 @@
   notify: 
     - Restart Bind9
     - Reload systemd
+  no_log: true
 
 - name: Run Zone template
   ansible.builtin.template:
@@ -22,6 +23,7 @@
     dest: /var/cache/bind/db.{{ domain_name }}
     mode: '0644'
     force: no
+  no_log: true
   notify: Reload Bind9
 
 - name: Run Reverse Zone template
@@ -31,6 +33,7 @@
     force: yes
     mode: '0644'
   when: inventory_hostname in groups['dns_primary']
+  no_log: true
   notify: Reload Bind9
 
 - name: Install dependency for nsupdate
@@ -54,6 +57,7 @@
     value: "{{ backup_server }}"
   run_once: True
   when: inventory_hostname in groups['dns_primary']
+  no_log: true
 
 - name: Ensure Bind9 service is started and running
   ansible.builtin.systemd:
