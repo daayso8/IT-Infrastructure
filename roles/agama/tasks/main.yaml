@@ -26,12 +26,11 @@
   community.docker.docker_container:
     name: agama-1-{{ item }}
     image: agama
-    state: present
+    state: started
     volumes: /opt/agama:/opt/agama
     env: 
       AGAMA_DATABASE_URI=mysql+pymysql://{{ mysql_user }}:{{ mysql_password }}@{{ mysql_host }}/{{mysql_database}}
     ports: "{{ item }}:8000"
-    state: started
     restart_policy: always
   with_items: "{{ agama_ports }}"
   when: "inventory_hostname == 'davidayson8-1'"
@@ -41,12 +40,11 @@
   community.docker.docker_container:
     name: agama-2-{{ item }}
     image: agama
-    state: present
+    state: started
     volumes: /opt/agama:/opt/agama
     env: 
       AGAMA_DATABASE_URI=mysql+pymysql://{{ mysql_user }}:{{ mysql_password }}@{{ mysql_host }}/{{mysql_database}}
     ports: "{{ item }}:8000"
-    state: started
     restart_policy: always
   with_items: "{{ agama_ports }}"
   when: "inventory_hostname == 'davidayson8-2'"

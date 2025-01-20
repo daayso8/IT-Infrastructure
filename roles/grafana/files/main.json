@@ -18,7 +18,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 2,
+  "id": 3,
   "links": [],
   "panels": [
     {
@@ -1351,7 +1351,7 @@
         {
           "editorMode": "code",
           "expr": "haproxy_server_up",
-          "legendFormat": "{{instance}}",
+          "legendFormat": "{{ server }}",
           "range": true,
           "refId": "A"
         }
