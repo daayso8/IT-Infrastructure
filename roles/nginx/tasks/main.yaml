@@ -32,9 +32,3 @@
     state: started
     enabled: true
 
-- name: Assign cnames
-  include_role:
-    name: "cname"
-  vars:
-    service: "www{{inventory_hostname | replace('davidayson8','')}}"
-  

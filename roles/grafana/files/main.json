@@ -18,7 +18,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 2,
+  "id": 4,
   "links": [],
   "panels": [
     {
@@ -1057,9 +1057,13 @@
           "mappings": [
             {
               "options": {
+                "0": {
+                  "index": 1,
+                  "text": "DOWN"
+                },
                 "1": {
                   "index": 0,
-                  "text": "Up"
+                  "text": "UP"
                 }
               },
               "type": "value"
@@ -1209,9 +1213,13 @@
           "mappings": [
             {
               "options": {
+                "0": {
+                  "index": 1,
+                  "text": "DOWN"
+                },
                 "1": {
                   "index": 0,
-                  "text": "Up"
+                  "text": "UP"
                 }
               },
               "type": "value"
@@ -1283,9 +1291,13 @@
           "mappings": [
             {
               "options": {
+                "0": {
+                  "index": 1,
+                  "text": "DOWN"
+                },
                 "1": {
                   "index": 0,
-                  "text": "Up"
+                  "text": "UP"
                 }
               },
               "type": "value"

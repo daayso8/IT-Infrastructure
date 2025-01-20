@@ -52,3 +52,10 @@
   when: "inventory_hostname == 'davidayson8-2'"
   no_log: true 
   
+- name: Assign cnames
+  include_role:
+    name: "cname"
+  vars:
+    service: "www{{inventory_hostname | replace('davidayson8','')}}"
+  
+  

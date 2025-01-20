@@ -18,7 +18,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 4,
+  "id": 1,
   "links": [],
   "panels": [
     {
@@ -31,7 +31,17 @@
           "color": {
             "mode": "thresholds"
           },
-          "mappings": [],
+          "mappings": [
+            {
+              "options": {
+                "1": {
+                  "index": 0,
+                  "text": "UP"
+                }
+              },
+              "type": "value"
+            }
+          ],
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -81,7 +91,7 @@
           },
           "editorMode": "code",
           "expr": "mysql_up",
-          "legendFormat": "__auto",
+          "legendFormat": "{{instance}}",
           "range": true,
           "refId": "A"
         }
@@ -170,7 +180,7 @@
         {
           "editorMode": "code",
           "expr": "rate(mysql_global_status_commands_total{command=\"select\"}[1m])",
-          "legendFormat": "__auto",
+          "legendFormat": "{{instance}}",
           "range": true,
           "refId": "A"
         }
@@ -234,7 +244,7 @@
         {
           "editorMode": "code",
           "expr": "mysql_global_variables_server_id",
-          "legendFormat": "__auto",
+          "legendFormat": "{{instance}}",
           "range": true,
           "refId": "A"
         }
@@ -298,7 +308,7 @@
         {
           "editorMode": "code",
           "expr": "mysql_global_variables_read_only",
-          "legendFormat": "__auto",
+          "legendFormat": "{{instance}}",
           "range": true,
           "refId": "A"
         }
@@ -314,40 +324,7 @@
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisBorderShow": false,
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "barWidthFactor": 0.6,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "insertNulls": false,
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
+            "mode": "thresholds"
           },
           "mappings": [],
           "thresholds": {
@@ -374,29 +351,34 @@
       },
       "id": 6,
       "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": true
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
         },
-        "tooltip": {
-          "mode": "single",
-          "sort": "none"
-        }
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
       },
       "pluginVersion": "11.4.0",
       "targets": [
         {
           "editorMode": "code",
           "expr": "mysql_slave_status_slave_sql_running",
-          "legendFormat": "__auto",
+          "legendFormat": "{{instance}}",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "MySQL Replication Status (SQL)",
-      "type": "timeseries"
+      "title": "MySQL Slave Status SQL ",
+      "type": "stat"
     },
     {
       "datasource": {
@@ -406,40 +388,7 @@
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisBorderShow": false,
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "barWidthFactor": 0.6,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "insertNulls": false,
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
+            "mode": "thresholds"
           },
           "mappings": [],
           "thresholds": {
@@ -466,29 +415,34 @@
       },
       "id": 5,
       "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": true
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
         },
-        "tooltip": {
-          "mode": "single",
-          "sort": "none"
-        }
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
       },
       "pluginVersion": "11.4.0",
       "targets": [
         {
           "editorMode": "code",
           "expr": "mysql_slave_status_slave_io_running",
-          "legendFormat": "__auto",
+          "legendFormat": "{{instance}}",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "MySQL Replication Threads (IO)",
-      "type": "timeseries"
+      "title": "MySQL Slave Status Slave IO",
+      "type": "stat"
     }
   ],
   "preload": false,
@@ -505,6 +459,6 @@
   "timezone": "browser",
   "title": "MySQL",
   "uid": "fe6vdzsuc5f5sf",
-  "version": 14,
+  "version": 4,
   "weekStart": ""
 }
