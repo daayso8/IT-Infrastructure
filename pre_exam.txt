@@ -8002,7 +8002,7 @@ found a duplicate dict key (state). Using last defined value only.
 found a duplicate dict key (state). Using last defined value only.
  ______________________
 < PLAY [Initial setup] >
- ----------------------
+----------------------
         \   ^__^
          \  (oo)\_______
             (__)\       )\/\
