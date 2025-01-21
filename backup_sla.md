@@ -29,7 +29,7 @@ Backup RPO (recovery point objective) is:
 
 ## Storage
 
-MySQL and InfluxDB backups are uploaded to the backup server at rsync://<username>@backup/<backup>.
+MySQL and InfluxDB backups are uploaded to the backup server at `rsync://<username>@backup/<backup>`.
 
 
 Backup data from both servers will be synchronized to encrypted AWS S3 bucket in future (work in progress).
@@ -50,8 +50,8 @@ InfluxDB backups are verified every weekly by manually restoring and checking in
 
 Service is recovered from the backup in case of an incident, and when service cannot be restored in any other way.
 
-mysql -u <username> -p agama < /home/backup/mysql/agama.sql
-influxd restore -portable -db telegraf /home/backup/influxdb
+`mysql -u <username> -p agama < /home/backup/mysql/agama.sql`
+`influxd restore -portable -db telegraf /home/backup/influxdb`
 
 RTO (recovery time objective) is:
 
