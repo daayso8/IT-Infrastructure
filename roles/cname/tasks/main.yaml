@@ -14,4 +14,4 @@
     type: CNAME
     zone: "{{ domain_name }}"
     value: "{{ inventory_hostname }}"
-    
+  no_log: true
