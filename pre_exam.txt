@@ -1,4 +1,4 @@
-Mon Jan 20 22:14:01 CET 2025
+Tue Jan 21 12:13:00 CET 2025
 + hostname
 Drew
 + ansible-playbook infra.yaml --diff
@@ -20,12 +20,12 @@ Drew
                 ||----w |
                 ||     ||
 
-[WARNING]: Platform linux on host davidayson8-3 is using the discovered Python
+[WARNING]: Platform linux on host davidayson8-1 is using the discovered Python
 interpreter at /usr/bin/python3.10, but future installation of another Python
 interpreter could change the meaning of that path. See
 https://docs.ansible.com/ansible-
 core/2.17/reference_appendices/interpreter_discovery.html for more information.
-[WARNING]: Platform linux on host davidayson8-1 is using the discovered Python
+[WARNING]: Platform linux on host davidayson8-3 is using the discovered Python
 interpreter at /usr/bin/python3.10, but future installation of another Python
 interpreter could change the meaning of that path. See
 https://docs.ansible.com/ansible-
@@ -35,8 +35,8 @@ interpreter at /usr/bin/python3.10, but future installation of another Python
 interpreter could change the meaning of that path. See
 https://docs.ansible.com/ansible-
 core/2.17/reference_appendices/interpreter_discovery.html for more information.
-ok: [davidayson8-3]
 ok: [davidayson8-1]
+ok: [davidayson8-3]
 ok: [davidayson8-2]
  ________________________________
 < TASK [init : Update APT cache] >
@@ -47,8 +47,8 @@ ok: [davidayson8-2]
                 ||----w |
                 ||     ||
 
-changed: [davidayson8-2]
 changed: [davidayson8-3]
+changed: [davidayson8-2]
 changed: [davidayson8-1]
  _______________________________________
 < TASK [init : Install Prometheus node] >
@@ -102,8 +102,8 @@ changed: [davidayson8-2]
                 ||     ||
 
 --- before
-+++ after: /home/daayso/.ansible/tmp/ansible-local-1594hrpr_bqo/tmpq_vs3qss/rsyslog.conf
-@@ -0,0 +1,8 @@
++++ after: /home/daayso/.ansible/tmp/ansible-local-1187aq6zs4un/tmp_tg_5fz0/rsyslog.conf
+@@ -0,0 +1,9 @@
 +$ActionQueueType LinkedList # use asynchronous processing
 +$ActionQueueFileName srvrfwd # set file name, also enables disk mode
 +$ActionResumeRetryCount -1 # infinite retries on insert failure
@@ -111,12 +111,14 @@ changed: [davidayson8-2]
 +$ModLoad imudp #loads the udp module  
 +$UDPServerAddress localhost 
 +$UDPServerRun 514 
-+*.* @davidayson8-3:6514;RSYSLOG_SyslogProtocol23Format
++*.* @influxdb:6514;RSYSLOG_SyslogProtocol23Format
++ 
+\ No newline at end of file
 
 changed: [davidayson8-3]
 --- before
-+++ after: /home/daayso/.ansible/tmp/ansible-local-1594hrpr_bqo/tmpfxkv7tdt/rsyslog.conf
-@@ -0,0 +1,8 @@
++++ after: /home/daayso/.ansible/tmp/ansible-local-1187aq6zs4un/tmpdl57mxez/rsyslog.conf
+@@ -0,0 +1,9 @@
 +$ActionQueueType LinkedList # use asynchronous processing
 +$ActionQueueFileName srvrfwd # set file name, also enables disk mode
 +$ActionResumeRetryCount -1 # infinite retries on insert failure
@@ -124,22 +126,26 @@ changed: [davidayson8-3]
 +$ModLoad imudp #loads the udp module  
 +$UDPServerAddress localhost 
 +$UDPServerRun 514 
-+*.* @davidayson8-3:6514;RSYSLOG_SyslogProtocol23Format
-
-changed: [davidayson8-1]
---- before
-+++ after: /home/daayso/.ansible/tmp/ansible-local-1594hrpr_bqo/tmp6azmeu04/rsyslog.conf
-@@ -0,0 +1,8 @@
-+$ActionQueueType LinkedList # use asynchronous processing
-+$ActionQueueFileName srvrfwd # set file name, also enables disk mode
-+$ActionResumeRetryCount -1 # infinite retries on insert failure
-+$ActionQueueSaveOnShutdown on # save in-memory data if rsyslog shuts down
-+$ModLoad imudp #loads the udp module  
-+$UDPServerAddress localhost 
-+$UDPServerRun 514 
-+*.* @davidayson8-3:6514;RSYSLOG_SyslogProtocol23Format
++*.* @influxdb:6514;RSYSLOG_SyslogProtocol23Format
++ 
+\ No newline at end of file
 
 changed: [davidayson8-2]
+--- before
++++ after: /home/daayso/.ansible/tmp/ansible-local-1187aq6zs4un/tmpbtyyvbst/rsyslog.conf
+@@ -0,0 +1,9 @@
++$ActionQueueType LinkedList # use asynchronous processing
++$ActionQueueFileName srvrfwd # set file name, also enables disk mode
++$ActionResumeRetryCount -1 # infinite retries on insert failure
++$ActionQueueSaveOnShutdown on # save in-memory data if rsyslog shuts down
++$ModLoad imudp #loads the udp module  
++$UDPServerAddress localhost 
++$UDPServerRun 514 
++*.* @influxdb:6514;RSYSLOG_SyslogProtocol23Format
++ 
+\ No newline at end of file
+
+changed: [davidayson8-1]
  __________________________________
 < TASK [init : Create backup user] >
  ----------------------------------
@@ -149,9 +155,9 @@ changed: [davidayson8-2]
                 ||----w |
                 ||     ||
 
-changed: [davidayson8-3]
-changed: [davidayson8-1]
 changed: [davidayson8-2]
+changed: [davidayson8-1]
+changed: [davidayson8-3]
  ____________________________________
 < TASK [init : Generate SSH keypair] >
  ------------------------------------
@@ -161,9 +167,9 @@ changed: [davidayson8-2]
                 ||----w |
                 ||     ||
 
-changed: [davidayson8-1]
 changed: [davidayson8-2]
 changed: [davidayson8-3]
+changed: [davidayson8-1]
  ____________________________________________________________
 < TASK [init : Ensure .ssh directory exists for backup user] >
  ------------------------------------------------------------
@@ -173,8 +179,8 @@ changed: [davidayson8-3]
                 ||----w |
                 ||     ||
 
-ok: [davidayson8-3]
 ok: [davidayson8-1]
+ok: [davidayson8-3]
 ok: [davidayson8-2]
  _______________________________________________________
 / TASK [init : Add backup server key to known_hosts for \
@@ -187,16 +193,7 @@ ok: [davidayson8-2]
                 ||     ||
 
 --- before
-+++ after: /home/daayso/.ansible/tmp/ansible-local-1594hrpr_bqo/tmpbujyymyq/known_hosts.j2
-@@ -0,0 +1,4 @@
-+192.168.42.132 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEu6pFFWyuRrl4WGFPQGElYN9txwTGm2wSntcpVAaN90
-+backup ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEu6pFFWyuRrl4WGFPQGElYN9txwTGm2wSntcpVAaN90
-+backup.daayso.da ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEu6pFFWyuRrl4WGFPQGElYN9txwTGm2wSntcpVAaN90
-+
-
-changed: [davidayson8-3]
---- before
-+++ after: /home/daayso/.ansible/tmp/ansible-local-1594hrpr_bqo/tmpspbtftl5/known_hosts.j2
++++ after: /home/daayso/.ansible/tmp/ansible-local-1187aq6zs4un/tmpm03w5wim/known_hosts.j2
 @@ -0,0 +1,4 @@
 +192.168.42.132 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEu6pFFWyuRrl4WGFPQGElYN9txwTGm2wSntcpVAaN90
 +backup ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEu6pFFWyuRrl4WGFPQGElYN9txwTGm2wSntcpVAaN90
@@ -205,7 +202,16 @@ changed: [davidayson8-3]
 
 changed: [davidayson8-1]
 --- before
-+++ after: /home/daayso/.ansible/tmp/ansible-local-1594hrpr_bqo/tmpyos26j5h/known_hosts.j2
++++ after: /home/daayso/.ansible/tmp/ansible-local-1187aq6zs4un/tmpk8xwj9im/known_hosts.j2
+@@ -0,0 +1,4 @@
++192.168.42.132 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEu6pFFWyuRrl4WGFPQGElYN9txwTGm2wSntcpVAaN90
++backup ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEu6pFFWyuRrl4WGFPQGElYN9txwTGm2wSntcpVAaN90
++backup.daayso.da ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEu6pFFWyuRrl4WGFPQGElYN9txwTGm2wSntcpVAaN90
++
+
+changed: [davidayson8-3]
+--- before
++++ after: /home/daayso/.ansible/tmp/ansible-local-1187aq6zs4un/tmppcf_viud/known_hosts.j2
 @@ -0,0 +1,4 @@
 +192.168.42.132 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEu6pFFWyuRrl4WGFPQGElYN9txwTGm2wSntcpVAaN90
 +backup ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEu6pFFWyuRrl4WGFPQGElYN9txwTGm2wSntcpVAaN90
@@ -253,7 +259,7 @@ changed: [davidayson8-1]
 +    "state": "directory"
  }
 
-changed: [davidayson8-3]
+changed: [davidayson8-2]
 --- before
 +++ after
 @@ -1,7 +1,7 @@
@@ -269,7 +275,7 @@ changed: [davidayson8-3]
 +    "state": "directory"
  }
 
-changed: [davidayson8-2]
+changed: [davidayson8-3]
  _________________________________
 < TASK [init : Install Duplicity] >
  ---------------------------------
@@ -290,7 +296,7 @@ The following NEW packages will be installed:
   duplicity librsync2 python3-fasteners python3-future python3-lockfile
   python3-monotonic python3-nacl python3-paramiko
 0 upgraded, 8 newly installed, 0 to remove and 134 not upgraded.
-changed: [davidayson8-2]
+changed: [davidayson8-1]
 The following additional packages will be installed:
   librsync2 python3-fasteners python3-future python3-lockfile
   python3-monotonic python3-nacl python3-paramiko
@@ -302,7 +308,7 @@ The following NEW packages will be installed:
   duplicity librsync2 python3-fasteners python3-future python3-lockfile
   python3-monotonic python3-nacl python3-paramiko
 0 upgraded, 8 newly installed, 0 to remove and 134 not upgraded.
-changed: [davidayson8-1]
+changed: [davidayson8-2]
 The following additional packages will be installed:
   librsync2 python3-fasteners python3-future python3-lockfile
   python3-monotonic python3-nacl python3-paramiko
@@ -324,9 +330,9 @@ changed: [davidayson8-3]
                 ||----w |
                 ||     ||
 
-changed: [davidayson8-3]
 changed: [davidayson8-1]
 changed: [davidayson8-2]
+changed: [davidayson8-3]
  _________________________
 < PLAY [host DNS servers] >
  -------------------------
@@ -345,9 +351,9 @@ changed: [davidayson8-2]
                 ||----w |
                 ||     ||
 
-ok: [davidayson8-2]
 ok: [davidayson8-1]
 ok: [davidayson8-3]
+ok: [davidayson8-2]
  _____________________________
 < TASK [bind : Install Bind9] >
  -----------------------------
@@ -366,7 +372,7 @@ The following NEW packages will be installed:
 The following packages will be upgraded:
   bind9-dnsutils bind9-host bind9-libs
 3 upgraded, 3 newly installed, 0 to remove and 131 not upgraded.
-changed: [davidayson8-3]
+changed: [davidayson8-2]
 The following additional packages will be installed:
   bind9-dnsutils bind9-host bind9-libs bind9-utils dns-root-data
 Suggested packages:
@@ -386,7 +392,7 @@ The following NEW packages will be installed:
 The following packages will be upgraded:
   bind9-dnsutils bind9-host bind9-libs
 3 upgraded, 3 newly installed, 0 to remove and 131 not upgraded.
-changed: [davidayson8-2]
+changed: [davidayson8-3]
  ___________________________________________________
 < TASK [bind : Configure named.conf files Template] >
  ---------------------------------------------------
@@ -396,13 +402,13 @@ changed: [davidayson8-2]
                 ||----w |
                 ||     ||
 
-changed: [davidayson8-3] => (item=None)
 changed: [davidayson8-1] => (item=None)
-changed: [davidayson8-2] => (item=None)
 changed: [davidayson8-3] => (item=None)
-changed: [davidayson8-3]
+changed: [davidayson8-2] => (item=None)
 changed: [davidayson8-1] => (item=None)
 changed: [davidayson8-1]
+changed: [davidayson8-3] => (item=None)
+changed: [davidayson8-3]
 changed: [davidayson8-2] => (item=None)
 changed: [davidayson8-2]
  _________________________________
@@ -414,8 +420,8 @@ changed: [davidayson8-2]
                 ||----w |
                 ||     ||
 
-changed: [davidayson8-3]
 changed: [davidayson8-1]
+changed: [davidayson8-3]
 changed: [davidayson8-2]
  _________________________________________
 < TASK [bind : Run Reverse Zone template] >
@@ -445,7 +451,7 @@ Suggested packages:
 The following NEW packages will be installed:
   python3-dnspython python3-requests-toolbelt
 0 upgraded, 2 newly installed, 0 to remove and 131 not upgraded.
-changed: [davidayson8-1]
+changed: [davidayson8-2]
 The following additional packages will be installed:
   python3-requests-toolbelt
 Suggested packages:
@@ -461,7 +467,7 @@ Suggested packages:
 The following NEW packages will be installed:
   python3-dnspython python3-requests-toolbelt
 0 upgraded, 2 newly installed, 0 to remove and 131 not upgraded.
-changed: [davidayson8-2]
+changed: [davidayson8-1]
  ________________________________
 < TASK [bind : Execute handlers] >
  --------------------------------
@@ -498,9 +504,9 @@ changed: [davidayson8-2]
                 ||----w |
                 ||     ||
 
-changed: [davidayson8-2]
 changed: [davidayson8-3]
 changed: [davidayson8-1]
+changed: [davidayson8-2]
  ________________________________________
 < RUNNING HANDLER [bind : Restart Bind9] >
  ----------------------------------------
@@ -510,8 +516,8 @@ changed: [davidayson8-1]
                 ||----w |
                 ||     ||
 
-changed: [davidayson8-1]
 changed: [davidayson8-3]
+changed: [davidayson8-1]
 changed: [davidayson8-2]
  _________________________________________
 < RUNNING HANDLER [bind : Reload systemd] >
@@ -556,9 +562,9 @@ ok: [davidayson8-2]
                 ||----w |
                 ||     ||
 
-changed: [davidayson8-1]
-changed: [davidayson8-2]
 changed: [davidayson8-3]
+changed: [davidayson8-2]
+changed: [davidayson8-1]
  _______________________________________
 < TASK [bind : Download Bind9 exporter] >
  ---------------------------------------
@@ -619,9 +625,9 @@ changed: [davidayson8-2]
                 ||----w |
                 ||     ||
 
-changed: [davidayson8-2]
 changed: [davidayson8-1]
 changed: [davidayson8-3]
+changed: [davidayson8-2]
  _____________________________________________________
 / TASK [bind : Create a symlink for the Bind Exporter \
 \ executable]                                         /
@@ -672,7 +678,7 @@ changed: [davidayson8-2]
                 ||     ||
 
 --- before
-+++ after: /home/daayso/.ansible/tmp/ansible-local-1594hrpr_bqo/tmpqtwi5q1f/bind_exporter.service
++++ after: /home/daayso/.ansible/tmp/ansible-local-1187aq6zs4un/tmplm4hnip4/bind_exporter.service
 @@ -0,0 +1,13 @@
 +[Unit]
 +Description=Bind Exporter
@@ -690,7 +696,7 @@ changed: [davidayson8-2]
 
 changed: [davidayson8-1]
 --- before
-+++ after: /home/daayso/.ansible/tmp/ansible-local-1594hrpr_bqo/tmpblc7aku2/bind_exporter.service
++++ after: /home/daayso/.ansible/tmp/ansible-local-1187aq6zs4un/tmp8fx39kjm/bind_exporter.service
 @@ -0,0 +1,13 @@
 +[Unit]
 +Description=Bind Exporter
@@ -708,7 +714,7 @@ changed: [davidayson8-1]
 
 changed: [davidayson8-3]
 --- before
-+++ after: /home/daayso/.ansible/tmp/ansible-local-1594hrpr_bqo/tmp9n7v_p1h/bind_exporter.service
++++ after: /home/daayso/.ansible/tmp/ansible-local-1187aq6zs4un/tmpwbe20uiz/bind_exporter.service
 @@ -0,0 +1,13 @@
 +[Unit]
 +Description=Bind Exporter
@@ -757,9 +763,9 @@ included: cname for davidayson8-3, davidayson8-1, davidayson8-2
                 ||----w |
                 ||     ||
 
-ok: [davidayson8-2]
 ok: [davidayson8-1]
 ok: [davidayson8-3]
+ok: [davidayson8-2]
  _________________________________________________
 < TASK [cname : Add cname record for DNS servers] >
  -------------------------------------------------
@@ -782,8 +788,8 @@ changed: [davidayson8-1]
                 ||     ||
 
 changed: [davidayson8-1]
-changed: [davidayson8-3]
 changed: [davidayson8-2]
+changed: [davidayson8-3]
  _________________________________________
 < RUNNING HANDLER [bind : Reload systemd] >
  -----------------------------------------
@@ -794,8 +800,8 @@ changed: [davidayson8-2]
                 ||     ||
 
 ok: [davidayson8-1]
-ok: [davidayson8-2]
 ok: [davidayson8-3]
+ok: [davidayson8-2]
  _________________________
 < PLAY [Setup custom DNS] >
  -------------------------
@@ -814,9 +820,9 @@ ok: [davidayson8-3]
                 ||----w |
                 ||     ||
 
-ok: [davidayson8-2]
 ok: [davidayson8-1]
 ok: [davidayson8-3]
+ok: [davidayson8-2]
  ______________________________________
 < TASK [resolver : Update resolv.conf] >
  --------------------------------------
@@ -827,7 +833,7 @@ ok: [davidayson8-3]
                 ||     ||
 
 --- before: /etc/resolv.conf
-+++ after: /home/daayso/.ansible/tmp/ansible-local-1594hrpr_bqo/tmprtj2r93z/resolv.conf.j2
++++ after: /home/daayso/.ansible/tmp/ansible-local-1187aq6zs4un/tmpiks6u09d/resolv.conf.j2
 @@ -1,23 +1,4 @@
 -# This is /run/systemd/resolve/stub-resolv.conf managed by man:systemd-resolved(8).
 -# Do not edit.
@@ -852,14 +858,14 @@ ok: [davidayson8-3]
 -nameserver 127.0.0.53
 -options edns0 trust-ad
 -search openstacklocal
-+nameserver 192.168.42.112
-+nameserver 192.168.42.74
-+nameserver 192.168.42.137
++nameserver 192.168.43.37
++nameserver 192.168.43.129
++nameserver 192.168.43.170
 +search daayso.da
 
 changed: [davidayson8-1]
 --- before: /etc/resolv.conf
-+++ after: /home/daayso/.ansible/tmp/ansible-local-1594hrpr_bqo/tmpvhh4v117/resolv.conf.j2
++++ after: /home/daayso/.ansible/tmp/ansible-local-1187aq6zs4un/tmp418k649d/resolv.conf.j2
 @@ -1,23 +1,4 @@
 -# This is /run/systemd/resolve/stub-resolv.conf managed by man:systemd-resolved(8).
 -# Do not edit.
@@ -884,14 +890,14 @@ changed: [davidayson8-1]
 -nameserver 127.0.0.53
 -options edns0 trust-ad
 -search openstacklocal
-+nameserver 192.168.42.112
-+nameserver 192.168.42.74
-+nameserver 192.168.42.137
++nameserver 192.168.43.37
++nameserver 192.168.43.129
++nameserver 192.168.43.170
 +search daayso.da
 
 changed: [davidayson8-3]
 --- before: /etc/resolv.conf
-+++ after: /home/daayso/.ansible/tmp/ansible-local-1594hrpr_bqo/tmp_c68kqfm/resolv.conf.j2
++++ after: /home/daayso/.ansible/tmp/ansible-local-1187aq6zs4un/tmp4tgi99gy/resolv.conf.j2
 @@ -1,23 +1,4 @@
 -# This is /run/systemd/resolve/stub-resolv.conf managed by man:systemd-resolved(8).
 -# Do not edit.
@@ -916,9 +922,9 @@ changed: [davidayson8-3]
 -nameserver 127.0.0.53
 -options edns0 trust-ad
 -search openstacklocal
-+nameserver 192.168.42.112
-+nameserver 192.168.42.74
-+nameserver 192.168.42.137
++nameserver 192.168.43.37
++nameserver 192.168.43.129
++nameserver 192.168.43.170
 +search daayso.da
 
 changed: [davidayson8-2]
@@ -932,8 +938,8 @@ changed: [davidayson8-2]
                 ||     ||
 
 changed: [davidayson8-1]
-changed: [davidayson8-2]
 changed: [davidayson8-3]
+changed: [davidayson8-2]
  ___________________________
 < PLAY [Install Prometheus] >
  ---------------------------
@@ -998,7 +1004,7 @@ ok: [davidayson8-3]
                 ||     ||
 
 --- before: /etc/prometheus/prometheus.yml
-+++ after: /home/daayso/.ansible/tmp/ansible-local-1594hrpr_bqo/tmpxbetu1vp/config.yaml.j2
++++ after: /home/daayso/.ansible/tmp/ansible-local-1187aq6zs4un/tmp__yiua7y/config.yaml.j2
 @@ -1,44 +1,61 @@
 -# Sample config for Prometheus.
 +global:
@@ -1108,7 +1114,7 @@ changed: [davidayson8-3]
                 ||     ||
 
 --- before: /etc/default/prometheus
-+++ after: /home/daayso/.ansible/tmp/ansible-local-1594hrpr_bqo/tmp0zmwxue9/metric.yaml.j2
++++ after: /home/daayso/.ansible/tmp/ansible-local-1187aq6zs4un/tmp3sg3lko_/metric.yaml.j2
 @@ -1,110 +1 @@
 -# Set the command-line arguments to pass to the server.
 -# Due to shell escaping, to pass backslashes for regexes, you need to double
@@ -1328,7 +1334,7 @@ Suggested packages:
 The following NEW packages will be installed:
   ipvsadm keepalived libsensors-config libsensors5 libsnmp-base libsnmp40
 0 upgraded, 6 newly installed, 0 to remove and 131 not upgraded.
-changed: [davidayson8-1]
+changed: [davidayson8-2]
 The following additional packages will be installed:
   ipvsadm libsensors-config libsensors5 libsnmp-base libsnmp40
 Suggested packages:
@@ -1336,7 +1342,7 @@ Suggested packages:
 The following NEW packages will be installed:
   ipvsadm keepalived libsensors-config libsensors5 libsnmp-base libsnmp40
 0 upgraded, 6 newly installed, 0 to remove and 131 not upgraded.
-changed: [davidayson8-2]
+changed: [davidayson8-1]
  ______________________________________________
 < TASK [keepalived : Create keepalived_script] >
  ----------------------------------------------
@@ -1346,8 +1352,8 @@ changed: [davidayson8-2]
                 ||----w |
                 ||     ||
 
-changed: [davidayson8-2]
 changed: [davidayson8-1]
+changed: [davidayson8-2]
  _______________________________________
 < TASK [keepalived : Keepalived script] >
  ---------------------------------------
@@ -1358,14 +1364,14 @@ changed: [davidayson8-1]
                 ||     ||
 
 --- before
-+++ after: /home/daayso/.ansible/tmp/ansible-local-1594hrpr_bqo/tmpaknumbb1/keepalived_script.sh
++++ after: /home/daayso/.ansible/tmp/ansible-local-1187aq6zs4un/tmp2qcr380g/keepalived_script.sh
 @@ -0,0 +1,2 @@
 +#!/bin/bash
 +ss -ntl | grep -q ':88 '
 
 changed: [davidayson8-1]
 --- before
-+++ after: /home/daayso/.ansible/tmp/ansible-local-1594hrpr_bqo/tmpt8kyrago/keepalived_script.sh
++++ after: /home/daayso/.ansible/tmp/ansible-local-1187aq6zs4un/tmpofxnlxk0/keepalived_script.sh
 @@ -0,0 +1,2 @@
 +#!/bin/bash
 +ss -ntl | grep -q ':88 '
@@ -1426,7 +1432,7 @@ changed: [davidayson8-2]
                 ||     ||
 
 --- before
-+++ after: /home/daayso/.ansible/tmp/ansible-local-1594hrpr_bqo/tmp6iw2u8e4/keepalived-exporter.service
++++ after: /home/daayso/.ansible/tmp/ansible-local-1187aq6zs4un/tmpoicbj911/keepalived-exporter.service
 @@ -0,0 +1,11 @@
 +[Unit]
 +Description=Keepalived Exporter
@@ -1442,7 +1448,7 @@ changed: [davidayson8-2]
 
 changed: [davidayson8-1]
 --- before
-+++ after: /home/daayso/.ansible/tmp/ansible-local-1594hrpr_bqo/tmp54q1c1ce/keepalived-exporter.service
++++ after: /home/daayso/.ansible/tmp/ansible-local-1187aq6zs4un/tmp1uwtv46t/keepalived-exporter.service
 @@ -0,0 +1,11 @@
 +[Unit]
 +Description=Keepalived Exporter
@@ -1461,6 +1467,17 @@ changed: [davidayson8-2]
 / TASK [keepalived : Ensure Keepalived is enabled and \
 \ started]                                            /
  -----------------------------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+changed: [davidayson8-1]
+changed: [davidayson8-2]
+ ___________________________________________________
+< RUNNING HANDLER [keepalived : Restart keepalived] >
+ ---------------------------------------------------
         \   ^__^
          \  (oo)\_______
             (__)\       )\/\
@@ -1535,8 +1552,8 @@ changed: [davidayson8-2]
                 ||     ||
 
 --- before: /etc/haproxy/haproxy.cfg
-+++ after: /home/daayso/.ansible/tmp/ansible-local-1594hrpr_bqo/tmpnc9hfg5g/haproxy.cnf.j2
-@@ -1,34 +1,53 @@
++++ after: /home/daayso/.ansible/tmp/ansible-local-1187aq6zs4un/tmpvzzdp8rk/haproxy.cnf.j2
+@@ -1,34 +1,54 @@
  global
 -	log /dev/log	local0
 -	log /dev/log	local1 notice
@@ -1602,12 +1619,13 @@ changed: [davidayson8-2]
 +    default_backend my_ha_backend
 +
 +backend my_ha_backend
-+    server docker-1-8001 lb-1:8001 check
-+    server docker-1-8002 lb-1:8002 check
-+    server docker-1-8003 lb-1:8003 check
-+    server docker-2-8001 lb-2:8001 check
-+    server docker-2-8002 lb-2:8002 check
-+    server docker-2-8003 lb-2:8003 check
++        server docker-1-0 lb-1:8001 check
++    server docker-2-0 lb-2:8001 check
++        server docker-1-1 lb-1:8002 check
++    server docker-2-1 lb-2:8002 check
++        server docker-1-2 lb-1:8003 check
++    server docker-2-2 lb-2:8003 check
++    
 +
 +listen stats
 +    bind :9188
@@ -1618,8 +1636,8 @@ changed: [davidayson8-2]
 
 changed: [davidayson8-1]
 --- before: /etc/haproxy/haproxy.cfg
-+++ after: /home/daayso/.ansible/tmp/ansible-local-1594hrpr_bqo/tmpixzrkfzz/haproxy.cnf.j2
-@@ -1,34 +1,53 @@
++++ after: /home/daayso/.ansible/tmp/ansible-local-1187aq6zs4un/tmpa08xyytg/haproxy.cnf.j2
+@@ -1,34 +1,54 @@
  global
 -	log /dev/log	local0
 -	log /dev/log	local1 notice
@@ -1685,12 +1703,13 @@ changed: [davidayson8-1]
 +    default_backend my_ha_backend
 +
 +backend my_ha_backend
-+    server docker-1-8001 lb-1:8001 check
-+    server docker-1-8002 lb-1:8002 check
-+    server docker-1-8003 lb-1:8003 check
-+    server docker-2-8001 lb-2:8001 check
-+    server docker-2-8002 lb-2:8002 check
-+    server docker-2-8003 lb-2:8003 check
++        server docker-1-0 lb-1:8001 check
++    server docker-2-0 lb-2:8001 check
++        server docker-1-1 lb-1:8002 check
++    server docker-2-1 lb-2:8002 check
++        server docker-1-2 lb-1:8003 check
++    server docker-2-2 lb-2:8003 check
++    
 +
 +listen stats
 +    bind :9188
@@ -1712,11 +1731,11 @@ changed: [davidayson8-2]
 The following NEW packages will be installed:
   prometheus-haproxy-exporter
 0 upgraded, 1 newly installed, 0 to remove and 131 not upgraded.
-changed: [davidayson8-1]
+changed: [davidayson8-2]
 The following NEW packages will be installed:
   prometheus-haproxy-exporter
 0 upgraded, 1 newly installed, 0 to remove and 131 not upgraded.
-changed: [davidayson8-2]
+changed: [davidayson8-1]
  __________________________________________
 < TASK [haproxy : Haproxy Exporter config] >
  ------------------------------------------
@@ -1727,7 +1746,7 @@ changed: [davidayson8-2]
                 ||     ||
 
 --- before: /etc/default/prometheus-haproxy-exporter
-+++ after: /home/daayso/.ansible/tmp/ansible-local-1594hrpr_bqo/tmphmzl1pr4/haproxy_exporter.j2
++++ after: /home/daayso/.ansible/tmp/ansible-local-1187aq6zs4un/tmpprbgcdhl/haproxy_exporter.j2
 @@ -1,35 +1 @@
 -# Set the command-line arguments to pass to the server.
 -# Due to shell scaping, to pass backslashes for regexes, you need to double
@@ -1768,7 +1787,7 @@ changed: [davidayson8-2]
 
 changed: [davidayson8-1]
 --- before: /etc/default/prometheus-haproxy-exporter
-+++ after: /home/daayso/.ansible/tmp/ansible-local-1594hrpr_bqo/tmp0ok01pri/haproxy_exporter.j2
++++ after: /home/daayso/.ansible/tmp/ansible-local-1187aq6zs4un/tmp0lmfw4de/haproxy_exporter.j2
 @@ -1,35 +1 @@
 -# Set the command-line arguments to pass to the server.
 -# Due to shell scaping, to pass backslashes for regexes, you need to double
@@ -1881,8 +1900,8 @@ changed: [davidayson8-2]
                 ||     ||
 
 ok: [davidayson8-1]
-ok: [davidayson8-3]
 ok: [davidayson8-2]
+ok: [davidayson8-3]
  ______________________________________________
 < TASK [docker : Install docker and Resources] >
  ----------------------------------------------
@@ -1901,7 +1920,7 @@ The following NEW packages will be installed:
   bridge-utils containerd dnsmasq-base docker.io pigz python3-docker
   python3-websocket runc ubuntu-fan
 0 upgraded, 9 newly installed, 0 to remove and 131 not upgraded.
-changed: [davidayson8-3]
+changed: [davidayson8-1]
 The following additional packages will be installed:
   bridge-utils containerd dnsmasq-base pigz python3-websocket runc ubuntu-fan
 Suggested packages:
@@ -1921,7 +1940,7 @@ The following NEW packages will be installed:
   bridge-utils containerd dnsmasq-base docker.io pigz python3-docker
   python3-websocket runc ubuntu-fan
 0 upgraded, 9 newly installed, 0 to remove and 131 not upgraded.
-changed: [davidayson8-1]
+changed: [davidayson8-3]
  ________________________
 < PLAY [Install Grafana] >
  ------------------------
@@ -5308,7 +5327,7 @@ changed: [davidayson8-3]
                 ||     ||
 
 --- before
-+++ after: /home/daayso/.ansible/tmp/ansible-local-1594hrpr_bqo/tmp5c354bn6/dashboards.yaml
++++ after: /home/daayso/.ansible/tmp/ansible-local-1187aq6zs4un/tmp4bxi2bap/dashboards.yaml
 @@ -0,0 +1,31 @@
 +apiVersion: 1
 +
@@ -5353,7 +5372,7 @@ changed: [davidayson8-3]
                 ||     ||
 
 --- before
-+++ after: /home/daayso/.ansible/tmp/ansible-local-1594hrpr_bqo/tmpd277s8uo/datasources.yaml
++++ after: /home/daayso/.ansible/tmp/ansible-local-1187aq6zs4un/tmpscbn638z/datasources.yaml
 @@ -0,0 +1,25 @@
 +apiVersion: 1
 +datasources:
@@ -5479,8 +5498,8 @@ changed: [davidayson8-3]
                 ||----w |
                 ||     ||
 
-ok: [davidayson8-2]
 ok: [davidayson8-1]
+ok: [davidayson8-2]
  _____________________________________
 < TASK [mysql : Install MySQL server] >
  -------------------------------------
@@ -5511,7 +5530,7 @@ The following NEW packages will be installed:
   mysql-common mysql-server mysql-server-8.0 mysql-server-core-8.0
   prometheus-mysqld-exporter python3-pymysql
 0 upgraded, 29 newly installed, 0 to remove and 131 not upgraded.
-changed: [davidayson8-1]
+changed: [davidayson8-2]
 The following additional packages will be installed:
   libcgi-fast-perl libcgi-pm-perl libclone-perl libencode-locale-perl
   libevent-pthreads-2.1-7 libfcgi-bin libfcgi-perl libfcgi0ldbl
@@ -5533,7 +5552,7 @@ The following NEW packages will be installed:
   mysql-common mysql-server mysql-server-8.0 mysql-server-core-8.0
   prometheus-mysqld-exporter python3-pymysql
 0 upgraded, 29 newly installed, 0 to remove and 131 not upgraded.
-changed: [davidayson8-2]
+changed: [davidayson8-1]
  ________________________________________________
 < TASK [mysql : Add MySQL bind address override] >
  ------------------------------------------------
@@ -5544,27 +5563,27 @@ changed: [davidayson8-2]
                 ||     ||
 
 --- before
-+++ after: /home/daayso/.ansible/tmp/ansible-local-1594hrpr_bqo/tmpo31f4d_w/override.cnf.j2
++++ after: /home/daayso/.ansible/tmp/ansible-local-1187aq6zs4un/tmpanh8yokt/override.cnf.j2
 @@ -0,0 +1,6 @@
 +[mysqld]
 +bind-address = 0.0.0.0
 +log-bin = /var/log/mysql/mysql-bin.log
 +relay-log = /var/log/mysql/mysql-relay.log
 +replicate-do-db = agama
-+server-id = 137
-
-changed: [davidayson8-2]
---- before
-+++ after: /home/daayso/.ansible/tmp/ansible-local-1594hrpr_bqo/tmpwj0lhndv/override.cnf.j2
-@@ -0,0 +1,6 @@
-+[mysqld]
-+bind-address = 0.0.0.0
-+log-bin = /var/log/mysql/mysql-bin.log
-+relay-log = /var/log/mysql/mysql-relay.log
-+replicate-do-db = agama
-+server-id = 74
++server-id = 385
 
 changed: [davidayson8-1]
+--- before
++++ after: /home/daayso/.ansible/tmp/ansible-local-1187aq6zs4un/tmpj3604yxx/override.cnf.j2
+@@ -0,0 +1,6 @@
++[mysqld]
++bind-address = 0.0.0.0
++log-bin = /var/log/mysql/mysql-bin.log
++relay-log = /var/log/mysql/mysql-relay.log
++replicate-do-db = agama
++server-id = 426
+
+changed: [davidayson8-2]
  ____________________________________________________
 < TASK [mysql : Ensure MySQL is running and enabled] >
  ----------------------------------------------------
@@ -5596,8 +5615,8 @@ changed: [davidayson8-1]
                 ||----w |
                 ||     ||
 
-changed: [davidayson8-2]
 changed: [davidayson8-1]
+changed: [davidayson8-2]
  ___________________________________________
 < TASK [mysql : Create MySQL Exporter user] >
  -------------------------------------------
@@ -5619,8 +5638,8 @@ changed: [davidayson8-2]
                 ||----w |
                 ||     ||
 
-changed: [davidayson8-2]
 changed: [davidayson8-1]
+changed: [davidayson8-2]
  _________________________________________________
 < TASK [mysql : Run prometheus exporter template] >
  -------------------------------------------------
@@ -5631,205 +5650,7 @@ changed: [davidayson8-1]
                 ||     ||
 
 --- before: /etc/default/prometheus-mysqld-exporter
-+++ after: /home/daayso/.ansible/tmp/ansible-local-1594hrpr_bqo/tmp_eta4z4n/mysql_metric.yaml.j2
-@@ -1,192 +1 @@
--### Set the command-line arguments to pass to the server.
--#
--# See below for a full list of available arguments.
--#
--# Due to shell scaping, to pass backslashes for regexes, you need to double
--# them (\\d for \d). If running under systemd, you need to double them again
--# (\\\\d to mean \d), and escape newlines too.
--ARGS=""
--
--
--### Database authentication
--#
--# By default the DATABASE connection string will be read from
--# the file specified with the -config.my-cnf parameter.  For example:
--# ARGS='--config.my-cnf /etc/mysql/debian.cnf'
--#
--# Note that SSL options can only be set using a cnf file.
--
--# To set a connection string from the environment instead, set the
--# DATA_SOURCE_NAME variable.
--
--# To use UNIX domain sockets authentication with or without password:
--# DATA_SOURCE_NAME="prometheus:nopassword@unix(/run/mysqld/mysqld.sock)/"
--# DATA_SOURCE_NAME="prometheus@unix(/run/mysqld/mysqld.sock)/"
--
--# To use a TCP connection and password authentication:
--# DATA_SOURCE_NAME="prometheus:password@(hostname:port)/dbname"
--
--### Monitoring user creation.
--#
--# You need a user with enough privileges for the exporter to run.
--#
--# Example to create a user to connect (only) via UNIX socket:
--#   CREATE USER IF NOT EXISTS 'prometheus'@'localhost' IDENTIFIED WITH auth_socket;
--#
--# To create a user with a password, that can log in via UNIX or TCP sockets:
--#   CREATE USER IF NOT EXISTS 'prometheus'@'localhost' IDENTIFIED BY 'password';
--#
--# Finally, to grant the necessary privileges:
--#   GRANT PROCESS, REPLICATION CLIENT, SELECT ON *.* TO 'prometheus'@'localhost';
--
--### Availabe command-line arguments to pass to the exporter.
--#
--# General options:
--
--#  --config.my-cnf="${HOME}/.my.cnf"
--#      Path to .my.cnf file to read MySQL credentials from.
--#  --exporter.lock_wait_timeout=2
--#      Set a lock_wait_timeout on the connection to avoid long metadata
--#      locking.
--#  --exporter.log_slow_filter
--#      Add a log_slow_filter to avoid slow query logging of scrapes.
--#      NOTE: Not supported by Oracle MySQL.
--#  --log.level="info"
--#      Only log messages with the given severity or above.
--#      Valid levels: [debug, info, warn, error, fatal].
--#  --log.format="logger:stderr"
--#      Set the log target and format.
--#      Example: "logger:syslog?appname=bob&local=7" or
--#      "logger:stdout?json=true"
--#  --timeout-offset=0.25
--#      Offset to subtract from timeout in seconds.
--#  --web.listen-address=":9104"
--#      Address to listen on for web interface and telemetry.
--#  --web.telemetry-path="/metrics"
--#      Path under which to expose metrics.
--
--# Collectior options:
--
--#  --collect.auto_increment.columns
--#      Collect auto_increment columns and max values from information_schema.
--#  --collect.binlog_size
--#      Collect the current size of all registered binlog files.
--
--#  --collect.engine_innodb_status
--#      Collect from SHOW ENGINE INNODB STATUS.
--
--#  --collect.engine_tokudb_status
--#      Collect from SHOW ENGINE TOKUDB STATUS.
--
--#  --collect.global_status
--#      Collect from SHOW GLOBAL STATUS.
--
--#  --collect.global_variables
--#      Collect from SHOW GLOBAL VARIABLES.
--
--#  --collect.heartbeat
--#      Collect from heartbeat.
--#  --collect.heartbeat.database="heartbeat"
--#      Database from where to collect heartbeat data.
--#  --collect.heartbeat.table="heartbeat"
--#      Table from where to collect heartbeat data.
--
--#  --collect.info_schema.clientstats
--#      If running with userstat=1, set to true to collect client statistics.
--
--#  --collect.info_schema.innodb_cmp
--#      Collect metrics from information_schema.innodb_cmp.
--
--#  --collect.info_schema.innodb_cmpmem
--#      Collect metrics from information_schema.innodb_cmpmem.
--
--#  --collect.info_schema.innodb_metrics
--#      Collect metrics from information_schema.innodb_metrics.
--
--#  --collect.info_schema.innodb_tablespaces
--#      Collect metrics from information_schema.innodb_sys_tablespaces.
--
--#  --collect.info_schema.processlist
--#      Collect current thread state counts from the
--#      information_schema.processlist.
--#  --collect.info_schema.processlist.min_time=0
--#      Minimum time a thread must be in each state to be counted.
--#  --collect.info_schema.processlist.processes_by_host
--#      Enable collecting the number of processes by host.
--#  --collect.info_schema.processlist.processes_by_user
--#      Enable collecting the number of processes by user.
--
--#  --collect.info_schema.query_response_time
--#      Collect query response time distribution if query_response_time_stats is
--#      ON..
--
--#  --collect.info_schema.schemastats
--#      If running with userstat=1, set to true to collect schema statistics.
--
--#  --collect.info_schema.tables
--#      Collect metrics from information_schema.tables.
--#  --collect.info_schema.tables.databases="*"
--#      The list of databases to collect table stats for, or '*' for all.
--
--#  --collect.info_schema.tablestats
--#      If running with userstat=1, set to true to collect table statistics.
--
--#  --collect.info_schema.userstats
--#      If running with userstat=1, set to true to collect user statistics.
--
--#  --collect.mysql.user
--#      Collect data from mysql.user
--#  --collect.mysql.user.privileges
--#      Enable collecting user privileges from mysql.user.
--
--#  --collect.perf_schema.eventsstatements
--#      Collect metrics from
--#      performance_schema.events_statements_summary_by_digest.
--#  --collect.perf_schema.eventsstatements.digest_text_limit=120
--#      Maximum length of the normalized statement text.
--#  --collect.perf_schema.eventsstatements.limit=250
--#      Limit the number of events statements digests by response time.
--#  --collect.perf_schema.eventsstatements.timelimit=86400
--#      Limit how old the 'last_seen' events statements can be, in seconds.
--
--#  --collect.perf_schema.eventsstatementssum
--#      Collect metrics of grand sums from
--#      performance_schema.events_statements_summary_by_digest.
--
--#  --collect.perf_schema.eventswaits
--#      Collect metrics from
--#      performance_schema.events_waits_summary_global_by_event_name.
--
--#  --collect.perf_schema.file_events
--#      Collect metrics from performance_schema.file_summary_by_event_name.
--
--#  --collect.perf_schema.file_instances
--#      Collect metrics from performance_schema.file_summary_by_instance.
--#  --collect.perf_schema.file_instances.filter=".*"
--#      RegEx file_name filter for performance_schema.file_summary_by_instance.
--#  --collect.perf_schema.file_instances.remove_prefix="/var/lib/mysql/"
--#      Remove path prefix in performance_schema.file_summary_by_instance.
--
--#  --collect.perf_schema.indexiowaits
--#      Collect metrics from
--#      performance_schema.table_io_waits_summary_by_index_usage.
--
--#  --collect.perf_schema.replication_applier_status_by_worker
--#      Collect metrics from
--#      performance_schema.replication_applier_status_by_worker.
--
--#  --collect.perf_schema.replication_group_member_stats
--#      Collect metrics from performance_schema.replication_group_member_stats.
--
--#  --collect.perf_schema.tableiowaits
--#      Collect metrics from performance_schema.table_io_waits_summary_by_table.
--
--#  --collect.perf_schema.tablelocks
--#      Collect metrics from
--#      performance_schema.table_lock_waits_summary_by_table.
--
--#  --collect.slave_hosts
--#      Scrape information from 'SHOW SLAVE HOSTS'.
--
--#  --collect.slave_status
--#      Collect from SHOW SLAVE STATUS.
-+ARGS="--collect.slave_status"
-
-changed: [davidayson8-2]
---- before: /etc/default/prometheus-mysqld-exporter
-+++ after: /home/daayso/.ansible/tmp/ansible-local-1594hrpr_bqo/tmp4uu2ekvm/mysql_metric.yaml.j2
++++ after: /home/daayso/.ansible/tmp/ansible-local-1187aq6zs4un/tmp9mif307m/mysql_metric.yaml.j2
 @@ -1,192 +1 @@
 -### Set the command-line arguments to pass to the server.
 -#
@@ -6026,6 +5847,204 @@ changed: [davidayson8-2]
 +ARGS="--collect.slave_status"
 
 changed: [davidayson8-1]
+--- before: /etc/default/prometheus-mysqld-exporter
++++ after: /home/daayso/.ansible/tmp/ansible-local-1187aq6zs4un/tmpzh4lf6_g/mysql_metric.yaml.j2
+@@ -1,192 +1 @@
+-### Set the command-line arguments to pass to the server.
+-#
+-# See below for a full list of available arguments.
+-#
+-# Due to shell scaping, to pass backslashes for regexes, you need to double
+-# them (\\d for \d). If running under systemd, you need to double them again
+-# (\\\\d to mean \d), and escape newlines too.
+-ARGS=""
+-
+-
+-### Database authentication
+-#
+-# By default the DATABASE connection string will be read from
+-# the file specified with the -config.my-cnf parameter.  For example:
+-# ARGS='--config.my-cnf /etc/mysql/debian.cnf'
+-#
+-# Note that SSL options can only be set using a cnf file.
+-
+-# To set a connection string from the environment instead, set the
+-# DATA_SOURCE_NAME variable.
+-
+-# To use UNIX domain sockets authentication with or without password:
+-# DATA_SOURCE_NAME="prometheus:nopassword@unix(/run/mysqld/mysqld.sock)/"
+-# DATA_SOURCE_NAME="prometheus@unix(/run/mysqld/mysqld.sock)/"
+-
+-# To use a TCP connection and password authentication:
+-# DATA_SOURCE_NAME="prometheus:password@(hostname:port)/dbname"
+-
+-### Monitoring user creation.
+-#
+-# You need a user with enough privileges for the exporter to run.
+-#
+-# Example to create a user to connect (only) via UNIX socket:
+-#   CREATE USER IF NOT EXISTS 'prometheus'@'localhost' IDENTIFIED WITH auth_socket;
+-#
+-# To create a user with a password, that can log in via UNIX or TCP sockets:
+-#   CREATE USER IF NOT EXISTS 'prometheus'@'localhost' IDENTIFIED BY 'password';
+-#
+-# Finally, to grant the necessary privileges:
+-#   GRANT PROCESS, REPLICATION CLIENT, SELECT ON *.* TO 'prometheus'@'localhost';
+-
+-### Availabe command-line arguments to pass to the exporter.
+-#
+-# General options:
+-
+-#  --config.my-cnf="${HOME}/.my.cnf"
+-#      Path to .my.cnf file to read MySQL credentials from.
+-#  --exporter.lock_wait_timeout=2
+-#      Set a lock_wait_timeout on the connection to avoid long metadata
+-#      locking.
+-#  --exporter.log_slow_filter
+-#      Add a log_slow_filter to avoid slow query logging of scrapes.
+-#      NOTE: Not supported by Oracle MySQL.
+-#  --log.level="info"
+-#      Only log messages with the given severity or above.
+-#      Valid levels: [debug, info, warn, error, fatal].
+-#  --log.format="logger:stderr"
+-#      Set the log target and format.
+-#      Example: "logger:syslog?appname=bob&local=7" or
+-#      "logger:stdout?json=true"
+-#  --timeout-offset=0.25
+-#      Offset to subtract from timeout in seconds.
+-#  --web.listen-address=":9104"
+-#      Address to listen on for web interface and telemetry.
+-#  --web.telemetry-path="/metrics"
+-#      Path under which to expose metrics.
+-
+-# Collectior options:
+-
+-#  --collect.auto_increment.columns
+-#      Collect auto_increment columns and max values from information_schema.
+-#  --collect.binlog_size
+-#      Collect the current size of all registered binlog files.
+-
+-#  --collect.engine_innodb_status
+-#      Collect from SHOW ENGINE INNODB STATUS.
+-
+-#  --collect.engine_tokudb_status
+-#      Collect from SHOW ENGINE TOKUDB STATUS.
+-
+-#  --collect.global_status
+-#      Collect from SHOW GLOBAL STATUS.
+-
+-#  --collect.global_variables
+-#      Collect from SHOW GLOBAL VARIABLES.
+-
+-#  --collect.heartbeat
+-#      Collect from heartbeat.
+-#  --collect.heartbeat.database="heartbeat"
+-#      Database from where to collect heartbeat data.
+-#  --collect.heartbeat.table="heartbeat"
+-#      Table from where to collect heartbeat data.
+-
+-#  --collect.info_schema.clientstats
+-#      If running with userstat=1, set to true to collect client statistics.
+-
+-#  --collect.info_schema.innodb_cmp
+-#      Collect metrics from information_schema.innodb_cmp.
+-
+-#  --collect.info_schema.innodb_cmpmem
+-#      Collect metrics from information_schema.innodb_cmpmem.
+-
+-#  --collect.info_schema.innodb_metrics
+-#      Collect metrics from information_schema.innodb_metrics.
+-
+-#  --collect.info_schema.innodb_tablespaces
+-#      Collect metrics from information_schema.innodb_sys_tablespaces.
+-
+-#  --collect.info_schema.processlist
+-#      Collect current thread state counts from the
+-#      information_schema.processlist.
+-#  --collect.info_schema.processlist.min_time=0
+-#      Minimum time a thread must be in each state to be counted.
+-#  --collect.info_schema.processlist.processes_by_host
+-#      Enable collecting the number of processes by host.
+-#  --collect.info_schema.processlist.processes_by_user
+-#      Enable collecting the number of processes by user.
+-
+-#  --collect.info_schema.query_response_time
+-#      Collect query response time distribution if query_response_time_stats is
+-#      ON..
+-
+-#  --collect.info_schema.schemastats
+-#      If running with userstat=1, set to true to collect schema statistics.
+-
+-#  --collect.info_schema.tables
+-#      Collect metrics from information_schema.tables.
+-#  --collect.info_schema.tables.databases="*"
+-#      The list of databases to collect table stats for, or '*' for all.
+-
+-#  --collect.info_schema.tablestats
+-#      If running with userstat=1, set to true to collect table statistics.
+-
+-#  --collect.info_schema.userstats
+-#      If running with userstat=1, set to true to collect user statistics.
+-
+-#  --collect.mysql.user
+-#      Collect data from mysql.user
+-#  --collect.mysql.user.privileges
+-#      Enable collecting user privileges from mysql.user.
+-
+-#  --collect.perf_schema.eventsstatements
+-#      Collect metrics from
+-#      performance_schema.events_statements_summary_by_digest.
+-#  --collect.perf_schema.eventsstatements.digest_text_limit=120
+-#      Maximum length of the normalized statement text.
+-#  --collect.perf_schema.eventsstatements.limit=250
+-#      Limit the number of events statements digests by response time.
+-#  --collect.perf_schema.eventsstatements.timelimit=86400
+-#      Limit how old the 'last_seen' events statements can be, in seconds.
+-
+-#  --collect.perf_schema.eventsstatementssum
+-#      Collect metrics of grand sums from
+-#      performance_schema.events_statements_summary_by_digest.
+-
+-#  --collect.perf_schema.eventswaits
+-#      Collect metrics from
+-#      performance_schema.events_waits_summary_global_by_event_name.
+-
+-#  --collect.perf_schema.file_events
+-#      Collect metrics from performance_schema.file_summary_by_event_name.
+-
+-#  --collect.perf_schema.file_instances
+-#      Collect metrics from performance_schema.file_summary_by_instance.
+-#  --collect.perf_schema.file_instances.filter=".*"
+-#      RegEx file_name filter for performance_schema.file_summary_by_instance.
+-#  --collect.perf_schema.file_instances.remove_prefix="/var/lib/mysql/"
+-#      Remove path prefix in performance_schema.file_summary_by_instance.
+-
+-#  --collect.perf_schema.indexiowaits
+-#      Collect metrics from
+-#      performance_schema.table_io_waits_summary_by_index_usage.
+-
+-#  --collect.perf_schema.replication_applier_status_by_worker
+-#      Collect metrics from
+-#      performance_schema.replication_applier_status_by_worker.
+-
+-#  --collect.perf_schema.replication_group_member_stats
+-#      Collect metrics from performance_schema.replication_group_member_stats.
+-
+-#  --collect.perf_schema.tableiowaits
+-#      Collect metrics from performance_schema.table_io_waits_summary_by_table.
+-
+-#  --collect.perf_schema.tablelocks
+-#      Collect metrics from
+-#      performance_schema.table_lock_waits_summary_by_table.
+-
+-#  --collect.slave_hosts
+-#      Scrape information from 'SHOW SLAVE HOSTS'.
+-
+-#  --collect.slave_status
+-#      Collect from SHOW SLAVE STATUS.
++ARGS="--collect.slave_status"
+
+changed: [davidayson8-2]
  _____________________________________________________________
 < TASK [mysql : Ensure the MySQL Exporter service is started] >
  -------------------------------------------------------------
@@ -6035,8 +6054,8 @@ changed: [davidayson8-1]
                 ||----w |
                 ||     ||
 
-changed: [davidayson8-2]
 changed: [davidayson8-1]
+changed: [davidayson8-2]
  ____________________________________________________
 < TASK [mysql : Create /home/backup/mysql directory] >
  ----------------------------------------------------
@@ -6059,7 +6078,7 @@ changed: [davidayson8-1]
 +    "state": "directory"
  }
 
-changed: [davidayson8-2]
+changed: [davidayson8-1]
 --- before
 +++ after
 @@ -1,6 +1,6 @@
@@ -6073,7 +6092,7 @@ changed: [davidayson8-2]
 +    "state": "directory"
  }
 
-changed: [davidayson8-1]
+changed: [davidayson8-2]
  _______________________________________________
 < TASK [mysql : Ensure MySQL backup user exist] >
  -----------------------------------------------
@@ -6083,8 +6102,8 @@ changed: [davidayson8-1]
                 ||----w |
                 ||     ||
 
-changed: [davidayson8-2]
 changed: [davidayson8-1]
+changed: [davidayson8-2]
  _______________________________________
 < TASK [mysql : Create backup template] >
  ---------------------------------------
@@ -6094,8 +6113,8 @@ changed: [davidayson8-1]
                 ||----w |
                 ||     ||
 
-changed: [davidayson8-2]
 changed: [davidayson8-1]
+changed: [davidayson8-2]
  ___________________________________
 < TASK [mysql : Create Cron Backup] >
  -----------------------------------
@@ -6105,8 +6124,8 @@ changed: [davidayson8-1]
                 ||----w |
                 ||     ||
 
-changed: [davidayson8-2]
 changed: [davidayson8-1]
+changed: [davidayson8-2]
  ____________________________________________________
 < TASK [mysql : Ensure MySQL replication user exist] >
  ----------------------------------------------------
@@ -6170,8 +6189,8 @@ changed: [davidayson8-2]
                 ||----w |
                 ||     ||
 
-changed: [davidayson8-2]
 changed: [davidayson8-1]
+changed: [davidayson8-2]
  __________________________________________________
 < RUNNING HANDLER [mysql : Restart MySQL Exporter] >
  --------------------------------------------------
@@ -6192,8 +6211,8 @@ changed: [davidayson8-2]
                 ||----w |
                 ||     ||
 
-changed: [davidayson8-2]
 changed: [davidayson8-1]
+changed: [davidayson8-2]
  ______________________________________________
 < RUNNING HANDLER [mysql : Reset MySQL source] >
  ----------------------------------------------
@@ -6358,7 +6377,7 @@ changed: [davidayson8-3]
                 ||     ||
 
 --- before
-+++ after: /home/daayso/.ansible/tmp/ansible-local-1594hrpr_bqo/tmpy_idgyxg/influx_stat_expo.service
++++ after: /home/daayso/.ansible/tmp/ansible-local-1187aq6zs4un/tmpuf3c5itl/influx_stat_expo.service
 @@ -0,0 +1,11 @@
 +[Unit]
 +Description=Prometheus InfluxDB Statistic Exporter
@@ -6383,7 +6402,7 @@ changed: [davidayson8-3]
                 ||     ||
 
 --- before: /etc/influxdb/influxdb.conf
-+++ after: /home/daayso/.ansible/tmp/ansible-local-1594hrpr_bqo/tmpa_dm13e9/influxdb.conf
++++ after: /home/daayso/.ansible/tmp/ansible-local-1187aq6zs4un/tmplis1lwqv/influxdb.conf
 @@ -1,556 +1,11 @@
 -### Welcome to the InfluxDB configuration file.
 -
@@ -6993,7 +7012,7 @@ changed: [davidayson8-3]
                 ||     ||
 
 --- before
-+++ after: /home/daayso/.ansible/tmp/ansible-local-1594hrpr_bqo/tmp6gvnkmih/influxdb.backup.cron.j2
++++ after: /home/daayso/.ansible/tmp/ansible-local-1187aq6zs4un/tmpdipcqjo6/influxdb.backup.cron.j2
 @@ -0,0 +1,2 @@
 +10 22 * * * backup rm -rf /home/backup/influxdb/* && influxd backup -portable -database telegraf /home/backup/influxdb
 +15 22 * * * backup duplicity --no-encryption full /home/backup/influxdb/ rsync://davidayson8@backup/influxdb
@@ -7087,8 +7106,8 @@ changed: [davidayson8-3]
                 ||----w |
                 ||     ||
 
-ok: [davidayson8-1]
 ok: [davidayson8-2]
+ok: [davidayson8-1]
  _____________________________________
 < TASK [agama : Make Agama Directory] >
  -------------------------------------
@@ -7149,40 +7168,23 @@ changed: [davidayson8-2]
                 ||----w |
                 ||     ||
 
-changed: [davidayson8-1]
 changed: [davidayson8-2]
- ______________________________________________
-< TASK [agama : Create Data Container for VM1] >
- ----------------------------------------------
+changed: [davidayson8-1]
+ ________________________________________
+< TASK [agama : Create a data container] >
+ ----------------------------------------
         \   ^__^
          \  (oo)\_______
             (__)\       )\/\
                 ||----w |
                 ||     ||
 
-skipping: [davidayson8-2] => (item=None) 
-skipping: [davidayson8-2] => (item=None) 
-skipping: [davidayson8-2] => (item=None) 
-skipping: [davidayson8-2]
 changed: [davidayson8-1] => (item=None)
+changed: [davidayson8-2] => (item=None)
 changed: [davidayson8-1] => (item=None)
+changed: [davidayson8-2] => (item=None)
 changed: [davidayson8-1] => (item=None)
 changed: [davidayson8-1]
- ______________________________________________
-< TASK [agama : Create Data Container for VM2] >
- ----------------------------------------------
-        \   ^__^
-         \  (oo)\_______
-            (__)\       )\/\
-                ||----w |
-                ||     ||
-
-skipping: [davidayson8-1] => (item=None) 
-skipping: [davidayson8-1] => (item=None) 
-skipping: [davidayson8-1] => (item=None) 
-skipping: [davidayson8-1]
-changed: [davidayson8-2] => (item=None)
-changed: [davidayson8-2] => (item=None)
 changed: [davidayson8-2] => (item=None)
 changed: [davidayson8-2]
  ______________________
@@ -7204,8 +7206,8 @@ included: cname for davidayson8-1, davidayson8-2
                 ||----w |
                 ||     ||
 
-ok: [davidayson8-1]
 ok: [davidayson8-2]
+ok: [davidayson8-1]
  _________________________________________________
 < TASK [cname : Add cname record for DNS servers] >
  -------------------------------------------------
@@ -7215,8 +7217,8 @@ ok: [davidayson8-2]
                 ||----w |
                 ||     ||
 
-changed: [davidayson8-2]
 changed: [davidayson8-1]
+changed: [davidayson8-2]
  _________________________
 < PLAY [Web server setup] >
  -------------------------
@@ -7261,6 +7263,22 @@ The following NEW packages will be installed:
   libnginx-mod-http-image-filter libnginx-mod-http-xslt-filter
   libnginx-mod-mail libnginx-mod-stream libnginx-mod-stream-geoip2 libtiff5
   libwebp7 libxpm4 nginx nginx-common nginx-core
+0 upgraded, 20 newly installed, 0 to remove and 133 not upgraded.
+changed: [davidayson8-3]
+The following additional packages will be installed:
+  fontconfig-config fonts-dejavu-core libdeflate0 libfontconfig1 libgd3
+  libjbig0 libjpeg-turbo8 libjpeg8 libnginx-mod-http-geoip2
+  libnginx-mod-http-image-filter libnginx-mod-http-xslt-filter
+  libnginx-mod-mail libnginx-mod-stream libnginx-mod-stream-geoip2 libtiff5
+  libwebp7 libxpm4 nginx-common nginx-core
+Suggested packages:
+  libgd-tools fcgiwrap nginx-doc ssl-cert
+The following NEW packages will be installed:
+  fontconfig-config fonts-dejavu-core libdeflate0 libfontconfig1 libgd3
+  libjbig0 libjpeg-turbo8 libjpeg8 libnginx-mod-http-geoip2
+  libnginx-mod-http-image-filter libnginx-mod-http-xslt-filter
+  libnginx-mod-mail libnginx-mod-stream libnginx-mod-stream-geoip2 libtiff5
+  libwebp7 libxpm4 nginx nginx-common nginx-core
 0 upgraded, 20 newly installed, 0 to remove and 131 not upgraded.
 changed: [davidayson8-1]
 The following additional packages will be installed:
@@ -7279,22 +7297,6 @@ The following NEW packages will be installed:
   libwebp7 libxpm4 nginx nginx-common nginx-core
 0 upgraded, 20 newly installed, 0 to remove and 131 not upgraded.
 changed: [davidayson8-2]
-The following additional packages will be installed:
-  fontconfig-config fonts-dejavu-core libdeflate0 libfontconfig1 libgd3
-  libjbig0 libjpeg-turbo8 libjpeg8 libnginx-mod-http-geoip2
-  libnginx-mod-http-image-filter libnginx-mod-http-xslt-filter
-  libnginx-mod-mail libnginx-mod-stream libnginx-mod-stream-geoip2 libtiff5
-  libwebp7 libxpm4 nginx-common nginx-core
-Suggested packages:
-  libgd-tools fcgiwrap nginx-doc ssl-cert
-The following NEW packages will be installed:
-  fontconfig-config fonts-dejavu-core libdeflate0 libfontconfig1 libgd3
-  libjbig0 libjpeg-turbo8 libjpeg8 libnginx-mod-http-geoip2
-  libnginx-mod-http-image-filter libnginx-mod-http-xslt-filter
-  libnginx-mod-mail libnginx-mod-stream libnginx-mod-stream-geoip2 libtiff5
-  libwebp7 libxpm4 nginx nginx-common nginx-core
-0 upgraded, 20 newly installed, 0 to remove and 133 not upgraded.
-changed: [davidayson8-3]
  _____________________________________
 < TASK [nginx : default Nginx config] >
  -------------------------------------
@@ -7305,7 +7307,120 @@ changed: [davidayson8-3]
                 ||     ||
 
 --- before: /etc/nginx/sites-enabled/default
-+++ after: /home/daayso/.ansible/tmp/ansible-local-1594hrpr_bqo/tmppyrjkc9r/default.j2
++++ after: /home/daayso/.ansible/tmp/ansible-local-1187aq6zs4un/tmpb6db9pjb/default.j2
+@@ -1,91 +1,21 @@
+-##
+-# You should look at the following URL's in order to grasp a solid understanding
+-# of Nginx configuration files in order to fully unleash the power of Nginx.
+-# https://www.nginx.com/resources/wiki/start/
+-# https://www.nginx.com/resources/wiki/start/topics/tutorials/config_pitfalls/
+-# https://wiki.debian.org/Nginx/DirectoryStructure
+-#
+-# In most cases, administrators will remove this file from sites-enabled/ and
+-# leave it as reference inside of sites-available where it will continue to be
+-# updated by the nginx packaging team.
+-#
+-# This file will automatically load configuration files provided by other
+-# applications, such as Drupal or Wordpress. These applications will be made
+-# available underneath a path with that package name, such as /drupal8.
+-#
+-# Please see /usr/share/doc/nginx-doc/examples/ for more detailed examples.
+-##
++server {
++    listen 80 default_server;
++    server_name _;
+ 
+-# Default server configuration
+-#
++        location / {
++        proxy_pass http://localhost:8001;
++        proxy_set_header Host $http_host;
++    }
++    
++    
++    }
+ server {
+-	listen 80 default_server;
+-	listen [::]:80 default_server;
+-
+-	# SSL configuration
+-	#
+-	# listen 443 ssl default_server;
+-	# listen [::]:443 ssl default_server;
+-	#
+-	# Note: You should disable gzip for SSL traffic.
+-	# See: https://bugs.debian.org/773332
+-	#
+-	# Read up on ssl_ciphers to ensure a secure configuration.
+-	# See: https://bugs.debian.org/765782
+-	#
+-	# Self signed certs generated by the ssl-cert package
+-	# Don't use them in a production server!
+-	#
+-	# include snippets/snakeoil.conf;
+-
+-	root /var/www/html;
+-
+-	# Add index.php to the list if you are using PHP
+-	index index.html index.htm index.nginx-debian.html;
+-
+-	server_name _;
+-
+-	location / {
+-		# First attempt to serve request as file, then
+-		# as directory, then fall back to displaying a 404.
+-		try_files $uri $uri/ =404;
+-	}
+-
+-	# pass PHP scripts to FastCGI server
+-	#
+-	#location ~ \.php$ {
+-	#	include snippets/fastcgi-php.conf;
+-	#
+-	#	# With php-fpm (or other unix sockets):
+-	#	fastcgi_pass unix:/run/php/php7.4-fpm.sock;
+-	#	# With php-cgi (or other tcp sockets):
+-	#	fastcgi_pass 127.0.0.1:9000;
+-	#}
+-
+-	# deny access to .htaccess files, if Apache's document root
+-	# concurs with nginx's one
+-	#
+-	#location ~ /\.ht {
+-	#	deny all;
+-	#}
++    listen 8080 default_server;
++    
++    location /stub_status {
++        stub_status;
++        allow 127.0.0.1;
++        deny all;
++    }
+ }
+ 
+-
+-# Virtual Host configuration for example.com
+-#
+-# You can move that to a different file under sites-available/ and symlink that
+-# to sites-enabled/ to enable it.
+-#
+-#server {
+-#	listen 80;
+-#	listen [::]:80;
+-#
+-#	server_name example.com;
+-#
+-#	root /var/www/example.com;
+-#	index index.html;
+-#
+-#	location / {
+-#		try_files $uri $uri/ =404;
+-#	}
+-#}
+
+changed: [davidayson8-1]
+--- before: /etc/nginx/sites-enabled/default
++++ after: /home/daayso/.ansible/tmp/ansible-local-1187aq6zs4un/tmpqy303uxq/default.j2
 @@ -1,91 +1,25 @@
 -##
 -# You should look at the following URL's in order to grasp a solid understanding
@@ -7422,120 +7537,7 @@ changed: [davidayson8-3]
 
 changed: [davidayson8-3]
 --- before: /etc/nginx/sites-enabled/default
-+++ after: /home/daayso/.ansible/tmp/ansible-local-1594hrpr_bqo/tmpu3gzs85p/default.j2
-@@ -1,91 +1,21 @@
--##
--# You should look at the following URL's in order to grasp a solid understanding
--# of Nginx configuration files in order to fully unleash the power of Nginx.
--# https://www.nginx.com/resources/wiki/start/
--# https://www.nginx.com/resources/wiki/start/topics/tutorials/config_pitfalls/
--# https://wiki.debian.org/Nginx/DirectoryStructure
--#
--# In most cases, administrators will remove this file from sites-enabled/ and
--# leave it as reference inside of sites-available where it will continue to be
--# updated by the nginx packaging team.
--#
--# This file will automatically load configuration files provided by other
--# applications, such as Drupal or Wordpress. These applications will be made
--# available underneath a path with that package name, such as /drupal8.
--#
--# Please see /usr/share/doc/nginx-doc/examples/ for more detailed examples.
--##
-+server {
-+    listen 80 default_server;
-+    server_name _;
- 
--# Default server configuration
--#
-+        location / {
-+        proxy_pass http://localhost:8001;
-+        proxy_set_header Host $http_host;
-+    }
-+    
-+    
-+    }
- server {
--	listen 80 default_server;
--	listen [::]:80 default_server;
--
--	# SSL configuration
--	#
--	# listen 443 ssl default_server;
--	# listen [::]:443 ssl default_server;
--	#
--	# Note: You should disable gzip for SSL traffic.
--	# See: https://bugs.debian.org/773332
--	#
--	# Read up on ssl_ciphers to ensure a secure configuration.
--	# See: https://bugs.debian.org/765782
--	#
--	# Self signed certs generated by the ssl-cert package
--	# Don't use them in a production server!
--	#
--	# include snippets/snakeoil.conf;
--
--	root /var/www/html;
--
--	# Add index.php to the list if you are using PHP
--	index index.html index.htm index.nginx-debian.html;
--
--	server_name _;
--
--	location / {
--		# First attempt to serve request as file, then
--		# as directory, then fall back to displaying a 404.
--		try_files $uri $uri/ =404;
--	}
--
--	# pass PHP scripts to FastCGI server
--	#
--	#location ~ \.php$ {
--	#	include snippets/fastcgi-php.conf;
--	#
--	#	# With php-fpm (or other unix sockets):
--	#	fastcgi_pass unix:/run/php/php7.4-fpm.sock;
--	#	# With php-cgi (or other tcp sockets):
--	#	fastcgi_pass 127.0.0.1:9000;
--	#}
--
--	# deny access to .htaccess files, if Apache's document root
--	# concurs with nginx's one
--	#
--	#location ~ /\.ht {
--	#	deny all;
--	#}
-+    listen 8080 default_server;
-+    
-+    location /stub_status {
-+        stub_status;
-+        allow 127.0.0.1;
-+        deny all;
-+    }
- }
- 
--
--# Virtual Host configuration for example.com
--#
--# You can move that to a different file under sites-available/ and symlink that
--# to sites-enabled/ to enable it.
--#
--#server {
--#	listen 80;
--#	listen [::]:80;
--#
--#	server_name example.com;
--#
--#	root /var/www/example.com;
--#	index index.html;
--#
--#	location / {
--#		try_files $uri $uri/ =404;
--#	}
--#}
-
-changed: [davidayson8-1]
---- before: /etc/nginx/sites-enabled/default
-+++ after: /home/daayso/.ansible/tmp/ansible-local-1594hrpr_bqo/tmpj99vyy_w/default.j2
++++ after: /home/daayso/.ansible/tmp/ansible-local-1187aq6zs4un/tmpyp19dpqu/default.j2
 @@ -1,91 +1,21 @@
 -##
 -# You should look at the following URL's in order to grasp a solid understanding
@@ -7683,8 +7685,8 @@ changed: [davidayson8-2]
                 ||----w |
                 ||     ||
 
-changed: [davidayson8-1]
 changed: [davidayson8-2]
+changed: [davidayson8-1]
 changed: [davidayson8-3]
  _____________________________________________________
 / TASK [nginx : Ensure Nginx services are started and \
@@ -7696,9 +7698,9 @@ changed: [davidayson8-3]
                 ||----w |
                 ||     ||
 
-ok: [davidayson8-3]
-ok: [davidayson8-2]
 ok: [davidayson8-1]
+ok: [davidayson8-2]
+ok: [davidayson8-3]
  _______________________________________
 < TASK [nginx : Install Nginx Exporter] >
  ---------------------------------------
@@ -7730,9 +7732,9 @@ changed: [davidayson8-1]
                 ||----w |
                 ||     ||
 
-ok: [davidayson8-1]
 ok: [davidayson8-3]
 ok: [davidayson8-2]
+ok: [davidayson8-1]
  ___________________________
 < PLAY [Agama-Client setup] >
  ---------------------------
@@ -7806,7 +7808,7 @@ changed: [davidayson8-3]
                 ||     ||
 
 --- before
-+++ after: /home/daayso/.ansible/tmp/ansible-local-1594hrpr_bqo/tmp6tbocg7f/agama-client
++++ after: /home/daayso/.ansible/tmp/ansible-local-1187aq6zs4un/tmpth9_o4ke/agama-client
 @@ -0,0 +1,71 @@
 +#!/bin/bash -eu
 +
@@ -7891,7 +7893,7 @@ changed: [davidayson8-3]
                 ||     ||
 
 --- before
-+++ after: /home/daayso/.ansible/tmp/ansible-local-1594hrpr_bqo/tmpr_o4i08c/agama-client.service
++++ after: /home/daayso/.ansible/tmp/ansible-local-1187aq6zs4un/tmp9qurzh69/agama-client.service
 @@ -0,0 +1,11 @@
 +[Unit]
 +Description=Agama Client
@@ -7916,7 +7918,7 @@ changed: [davidayson8-3]
                 ||     ||
 
 --- before
-+++ after: /home/daayso/.ansible/tmp/ansible-local-1594hrpr_bqo/tmpja7xv950/agama-client.conf
++++ after: /home/daayso/.ansible/tmp/ansible-local-1187aq6zs4un/tmpun5iwboy/agama-client.conf
 @@ -0,0 +1,3 @@
 +database_url=http://influxdb:8086
 +database_name=agamaDB
@@ -7953,8 +7955,8 @@ ok: [davidayson8-3]
                 ||----w |
                 ||     ||
 
-davidayson8-1              : ok=98   changed=74   unreachable=0    failed=0    skipped=3    rescued=0    ignored=0   
-davidayson8-2              : ok=98   changed=74   unreachable=0    failed=0    skipped=3    rescued=0    ignored=0   
+davidayson8-1              : ok=99   changed=75   unreachable=0    failed=0    skipped=2    rescued=0    ignored=0   
+davidayson8-2              : ok=99   changed=75   unreachable=0    failed=0    skipped=2    rescued=0    ignored=0   
 davidayson8-3              : ok=100  changed=72   unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
 
 + ansible-playbook infra.yaml --diff
@@ -7981,19 +7983,19 @@ interpreter at /usr/bin/python3.10, but future installation of another Python
 interpreter could change the meaning of that path. See
 https://docs.ansible.com/ansible-
 core/2.17/reference_appendices/interpreter_discovery.html for more information.
-[WARNING]: Platform linux on host davidayson8-2 is using the discovered Python
-interpreter at /usr/bin/python3.10, but future installation of another Python
-interpreter could change the meaning of that path. See
-https://docs.ansible.com/ansible-
-core/2.17/reference_appendices/interpreter_discovery.html for more information.
 [WARNING]: Platform linux on host davidayson8-1 is using the discovered Python
 interpreter at /usr/bin/python3.10, but future installation of another Python
 interpreter could change the meaning of that path. See
 https://docs.ansible.com/ansible-
 core/2.17/reference_appendices/interpreter_discovery.html for more information.
+[WARNING]: Platform linux on host davidayson8-2 is using the discovered Python
+interpreter at /usr/bin/python3.10, but future installation of another Python
+interpreter could change the meaning of that path. See
+https://docs.ansible.com/ansible-
+core/2.17/reference_appendices/interpreter_discovery.html for more information.
 ok: [davidayson8-3]
-ok: [davidayson8-2]
 ok: [davidayson8-1]
+ok: [davidayson8-2]
  ________________________________
 < TASK [init : Update APT cache] >
  --------------------------------
@@ -8004,8 +8006,8 @@ ok: [davidayson8-1]
                 ||     ||
 
 ok: [davidayson8-3]
-ok: [davidayson8-1]
 ok: [davidayson8-2]
+ok: [davidayson8-1]
  _______________________________________
 < TASK [init : Install Prometheus node] >
  ---------------------------------------
@@ -8015,8 +8017,8 @@ ok: [davidayson8-2]
                 ||----w |
                 ||     ||
 
-ok: [davidayson8-1]
 ok: [davidayson8-3]
+ok: [davidayson8-1]
 ok: [davidayson8-2]
  ____________________________________
 < TASK [init : Run Rsyslog template] >
@@ -8027,9 +8029,9 @@ ok: [davidayson8-2]
                 ||----w |
                 ||     ||
 
-ok: [davidayson8-3]
 ok: [davidayson8-1]
 ok: [davidayson8-2]
+ok: [davidayson8-3]
  __________________________________
 < TASK [init : Create backup user] >
  ----------------------------------
@@ -8039,8 +8041,8 @@ ok: [davidayson8-2]
                 ||----w |
                 ||     ||
 
-ok: [davidayson8-1]
 ok: [davidayson8-3]
+ok: [davidayson8-1]
 ok: [davidayson8-2]
  ____________________________________
 < TASK [init : Generate SSH keypair] >
@@ -8064,8 +8066,8 @@ ok: [davidayson8-3]
                 ||     ||
 
 ok: [davidayson8-1]
-ok: [davidayson8-2]
 ok: [davidayson8-3]
+ok: [davidayson8-2]
  _______________________________________________________
 / TASK [init : Add backup server key to known_hosts for \
 \ backup user]                                          /
@@ -8089,8 +8091,8 @@ ok: [davidayson8-3]
                 ||     ||
 
 ok: [davidayson8-1]
-ok: [davidayson8-2]
 ok: [davidayson8-3]
+ok: [davidayson8-2]
  _________________________________
 < TASK [init : Install Duplicity] >
  ---------------------------------
@@ -8101,8 +8103,8 @@ ok: [davidayson8-3]
                 ||     ||
 
 ok: [davidayson8-1]
-ok: [davidayson8-2]
 ok: [davidayson8-3]
+ok: [davidayson8-2]
  _________________________
 < PLAY [host DNS servers] >
  -------------------------
@@ -8121,9 +8123,9 @@ ok: [davidayson8-3]
                 ||----w |
                 ||     ||
 
+ok: [davidayson8-3]
 ok: [davidayson8-1]
 ok: [davidayson8-2]
-ok: [davidayson8-3]
  _____________________________
 < TASK [bind : Install Bind9] >
  -----------------------------
@@ -8133,9 +8135,9 @@ ok: [davidayson8-3]
                 ||----w |
                 ||     ||
 
-ok: [davidayson8-1]
 ok: [davidayson8-3]
 ok: [davidayson8-2]
+ok: [davidayson8-1]
  ___________________________________________________
 < TASK [bind : Configure named.conf files Template] >
  ---------------------------------------------------
@@ -8146,8 +8148,8 @@ ok: [davidayson8-2]
                 ||     ||
 
 ok: [davidayson8-1] => (item=None)
-ok: [davidayson8-2] => (item=None)
 ok: [davidayson8-3] => (item=None)
+ok: [davidayson8-2] => (item=None)
 ok: [davidayson8-1] => (item=None)
 ok: [davidayson8-1]
 ok: [davidayson8-3] => (item=None)
@@ -8236,8 +8238,8 @@ ok: [davidayson8-3]
                 ||----w |
                 ||     ||
 
-ok: [davidayson8-1]
 ok: [davidayson8-3]
+ok: [davidayson8-1]
 ok: [davidayson8-2]
  _________________________________________
 < TASK [bind : Create bind_exporter user] >
@@ -8248,8 +8250,8 @@ ok: [davidayson8-2]
                 ||----w |
                 ||     ||
 
-ok: [davidayson8-1]
 ok: [davidayson8-3]
+ok: [davidayson8-1]
 ok: [davidayson8-2]
  _______________________________________
 < TASK [bind : Download Bind9 exporter] >
@@ -8261,8 +8263,8 @@ ok: [davidayson8-2]
                 ||     ||
 
 ok: [davidayson8-1]
-ok: [davidayson8-3]
 ok: [davidayson8-2]
+ok: [davidayson8-3]
  __________________________________________________
 < TASK [bind : Create directory for Bind Exporter] >
  --------------------------------------------------
@@ -8272,9 +8274,9 @@ ok: [davidayson8-2]
                 ||----w |
                 ||     ||
 
-ok: [davidayson8-3]
-ok: [davidayson8-1]
 ok: [davidayson8-2]
+ok: [davidayson8-1]
+ok: [davidayson8-3]
  ______________________________________
 < TASK [bind : Extract Bind9 exporter] >
  --------------------------------------
@@ -8285,8 +8287,8 @@ ok: [davidayson8-2]
                 ||     ||
 
 ok: [davidayson8-1]
-ok: [davidayson8-3]
 ok: [davidayson8-2]
+ok: [davidayson8-3]
  _____________________________________________________
 / TASK [bind : Create a symlink for the Bind Exporter \
 \ executable]                                         /
@@ -8297,8 +8299,8 @@ ok: [davidayson8-2]
                 ||----w |
                 ||     ||
 
-ok: [davidayson8-1]
 ok: [davidayson8-3]
+ok: [davidayson8-1]
 ok: [davidayson8-2]
  _____________________________________________________
 < TASK [bind : Create Bind9 exporter systemd service] >
@@ -8356,9 +8358,9 @@ ok: [davidayson8-1]
                 ||----w |
                 ||     ||
 
-ok: [davidayson8-3]
 ok: [davidayson8-1]
 ok: [davidayson8-2]
+ok: [davidayson8-3]
  _________________________
 < PLAY [Setup custom DNS] >
  -------------------------
@@ -8377,8 +8379,8 @@ ok: [davidayson8-2]
                 ||----w |
                 ||     ||
 
-ok: [davidayson8-1]
 ok: [davidayson8-3]
+ok: [davidayson8-1]
 ok: [davidayson8-2]
  ______________________________________
 < TASK [resolver : Update resolv.conf] >
@@ -8402,8 +8404,8 @@ ok: [davidayson8-2]
                 ||     ||
 
 ok: [davidayson8-1]
-ok: [davidayson8-3]
 ok: [davidayson8-2]
+ok: [davidayson8-3]
  ___________________________
 < PLAY [Install Prometheus] >
  ---------------------------
@@ -8567,8 +8569,8 @@ ok: [davidayson8-2]
                 ||----w |
                 ||     ||
 
-ok: [davidayson8-1]
 ok: [davidayson8-2]
+ok: [davidayson8-1]
  _____________________________________________________
 / TASK [keepalived : Ensure Keepalived is enabled and \
 \ started]                                            /
@@ -8590,8 +8592,8 @@ ok: [davidayson8-2]
                 ||----w |
                 ||     ||
 
-ok: [davidayson8-1]
 ok: [davidayson8-2]
+ok: [davidayson8-1]
  ___________________________________________________________
 < TASK [keepalived : Unarchive Keepalived exporter package] >
  -----------------------------------------------------------
@@ -8688,8 +8690,8 @@ ok: [davidayson8-2]
                 ||----w |
                 ||     ||
 
-ok: [davidayson8-1]
 ok: [davidayson8-2]
+ok: [davidayson8-1]
  ______________________
 < TASK [Assign cnames] >
  ----------------------
@@ -8741,8 +8743,8 @@ ok: [davidayson8-2]
                 ||     ||
 
 ok: [davidayson8-1]
-ok: [davidayson8-3]
 ok: [davidayson8-2]
+ok: [davidayson8-3]
  ______________________________________________
 < TASK [docker : Install docker and Resources] >
  ----------------------------------------------
@@ -8946,8 +8948,8 @@ ok: [davidayson8-2]
                 ||----w |
                 ||     ||
 
-ok: [davidayson8-2]
 ok: [davidayson8-1]
+ok: [davidayson8-2]
  _______________________________
 < TASK [mysql : MySQL database] >
  -------------------------------
@@ -8968,8 +8970,8 @@ ok: [davidayson8-2]
                 ||----w |
                 ||     ||
 
-ok: [davidayson8-2]
 ok: [davidayson8-1]
+ok: [davidayson8-2]
  ___________________________________________
 < TASK [mysql : Create MySQL Exporter user] >
  -------------------------------------------
@@ -9035,8 +9037,8 @@ ok: [davidayson8-2]
                 ||----w |
                 ||     ||
 
-ok: [davidayson8-1]
 ok: [davidayson8-2]
+ok: [davidayson8-1]
  _______________________________________
 < TASK [mysql : Create backup template] >
  ---------------------------------------
@@ -9057,8 +9059,8 @@ ok: [davidayson8-2]
                 ||----w |
                 ||     ||
 
-ok: [davidayson8-2]
 ok: [davidayson8-1]
+ok: [davidayson8-2]
  ____________________________________________________
 < TASK [mysql : Ensure MySQL replication user exist] >
  ----------------------------------------------------
@@ -9068,8 +9070,8 @@ ok: [davidayson8-1]
                 ||----w |
                 ||     ||
 
-ok: [davidayson8-1]
 ok: [davidayson8-2]
+ok: [davidayson8-1]
  _________________________________________________
 < TASK [mysql : Handles dynamic MySQL parameters] >
  -------------------------------------------------
@@ -9100,8 +9102,8 @@ included: cname for davidayson8-1, davidayson8-2
                 ||----w |
                 ||     ||
 
-ok: [davidayson8-2]
 ok: [davidayson8-1]
+ok: [davidayson8-2]
  _________________________________________________
 < TASK [cname : Add cname record for DNS servers] >
  -------------------------------------------------
@@ -9111,8 +9113,8 @@ ok: [davidayson8-1]
                 ||----w |
                 ||     ||
 
-ok: [davidayson8-1]
 ok: [davidayson8-2]
+ok: [davidayson8-1]
  _________________
 < PLAY [InfluxDB] >
  -----------------
@@ -9332,8 +9334,8 @@ ok: [davidayson8-2]
                 ||----w |
                 ||     ||
 
-ok: [davidayson8-1]
 ok: [davidayson8-2]
+ok: [davidayson8-1]
  __________________________________________
 < TASK [agama : Install agama application] >
  ------------------------------------------
@@ -9343,8 +9345,8 @@ ok: [davidayson8-2]
                 ||----w |
                 ||     ||
 
-ok: [davidayson8-1]
 ok: [davidayson8-2]
+ok: [davidayson8-1]
  ______________________________________
 < TASK [agama : Download docker agama] >
  --------------------------------------
@@ -9365,42 +9367,25 @@ ok: [davidayson8-1]
                 ||----w |
                 ||     ||
 
-ok: [davidayson8-1]
 ok: [davidayson8-2]
- ______________________________________________
-< TASK [agama : Create Data Container for VM1] >
- ----------------------------------------------
+ok: [davidayson8-1]
+ ________________________________________
+< TASK [agama : Create a data container] >
+ ----------------------------------------
         \   ^__^
          \  (oo)\_______
             (__)\       )\/\
                 ||----w |
                 ||     ||
 
-skipping: [davidayson8-2] => (item=None) 
-skipping: [davidayson8-2] => (item=None) 
-skipping: [davidayson8-2] => (item=None) 
-skipping: [davidayson8-2]
-ok: [davidayson8-1] => (item=None)
-ok: [davidayson8-1] => (item=None)
-ok: [davidayson8-1] => (item=None)
-ok: [davidayson8-1]
- ______________________________________________
-< TASK [agama : Create Data Container for VM2] >
- ----------------------------------------------
-        \   ^__^
-         \  (oo)\_______
-            (__)\       )\/\
-                ||----w |
-                ||     ||
-
-skipping: [davidayson8-1] => (item=None) 
-skipping: [davidayson8-1] => (item=None) 
-skipping: [davidayson8-1] => (item=None) 
-skipping: [davidayson8-1]
 ok: [davidayson8-2] => (item=None)
+ok: [davidayson8-1] => (item=None)
 ok: [davidayson8-2] => (item=None)
+ok: [davidayson8-1] => (item=None)
 ok: [davidayson8-2] => (item=None)
 ok: [davidayson8-2]
+ok: [davidayson8-1] => (item=None)
+ok: [davidayson8-1]
  ______________________
 < TASK [Assign cnames] >
  ----------------------
@@ -9420,8 +9405,8 @@ included: cname for davidayson8-1, davidayson8-2
                 ||----w |
                 ||     ||
 
-ok: [davidayson8-2]
 ok: [davidayson8-1]
+ok: [davidayson8-2]
  _________________________________________________
 < TASK [cname : Add cname record for DNS servers] >
  -------------------------------------------------
@@ -9451,8 +9436,8 @@ ok: [davidayson8-2]
                 ||----w |
                 ||     ||
 
-ok: [davidayson8-1]
 ok: [davidayson8-2]
+ok: [davidayson8-1]
 ok: [davidayson8-3]
  _________________________________________
 < TASK [nginx : Install Nginx web server] >
@@ -9463,9 +9448,9 @@ ok: [davidayson8-3]
                 ||----w |
                 ||     ||
 
-ok: [davidayson8-3]
 ok: [davidayson8-1]
 ok: [davidayson8-2]
+ok: [davidayson8-3]
  _____________________________________
 < TASK [nginx : default Nginx config] >
  -------------------------------------
@@ -9475,9 +9460,9 @@ ok: [davidayson8-2]
                 ||----w |
                 ||     ||
 
+ok: [davidayson8-2]
 ok: [davidayson8-1]
 ok: [davidayson8-3]
-ok: [davidayson8-2]
  _______________________________
 < TASK [nginx : Flush handlers] >
  -------------------------------
@@ -9527,9 +9512,9 @@ ok: [davidayson8-2]
                 ||----w |
                 ||     ||
 
+ok: [davidayson8-2]
 ok: [davidayson8-1]
 ok: [davidayson8-3]
-ok: [davidayson8-2]
  ___________________________________________________________
 / TASK [nginx : Ensure Prometheus-nginx-exporter is started \
 \ and enabled]                                              /
@@ -9642,24 +9627,24 @@ ok: [davidayson8-3]
                 ||----w |
                 ||     ||
 
-davidayson8-1              : ok=83   changed=0    unreachable=0    failed=0    skipped=3    rescued=0    ignored=0   
-davidayson8-2              : ok=83   changed=0    unreachable=0    failed=0    skipped=3    rescued=0    ignored=0   
+davidayson8-1              : ok=83   changed=0    unreachable=0    failed=0    skipped=2    rescued=0    ignored=0   
+davidayson8-2              : ok=83   changed=0    unreachable=0    failed=0    skipped=2    rescued=0    ignored=0   
 davidayson8-3              : ok=86   changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
 
 + ansible all -b -m reboot -a test_command=uptime
 davidayson8-3 | CHANGED => {
     "changed": true,
-    "elapsed": 32,
-    "rebooted": true
-}
-davidayson8-2 | CHANGED => {
-    "changed": true,
-    "elapsed": 43,
+    "elapsed": 33,
     "rebooted": true
 }
 davidayson8-1 | CHANGED => {
     "changed": true,
-    "elapsed": 43,
+    "elapsed": 44,
+    "rebooted": true
+}
+davidayson8-2 | CHANGED => {
+    "changed": true,
+    "elapsed": 47,
     "rebooted": true
 }
 + sleep 15
@@ -9709,9 +9694,9 @@ ok: [davidayson8-3]
                 ||----w |
                 ||     ||
 
-ok: [davidayson8-1]
-ok: [davidayson8-3]
 ok: [davidayson8-2]
+ok: [davidayson8-3]
+ok: [davidayson8-1]
  _______________________________________
 < TASK [init : Install Prometheus node] >
  ---------------------------------------
@@ -9721,9 +9706,9 @@ ok: [davidayson8-2]
                 ||----w |
                 ||     ||
 
+ok: [davidayson8-3]
 ok: [davidayson8-1]
 ok: [davidayson8-2]
-ok: [davidayson8-3]
  ____________________________________
 < TASK [init : Run Rsyslog template] >
  ------------------------------------
@@ -9733,9 +9718,9 @@ ok: [davidayson8-3]
                 ||----w |
                 ||     ||
 
+ok: [davidayson8-3]
 ok: [davidayson8-1]
 ok: [davidayson8-2]
-ok: [davidayson8-3]
  __________________________________
 < TASK [init : Create backup user] >
  ----------------------------------
@@ -9745,9 +9730,9 @@ ok: [davidayson8-3]
                 ||----w |
                 ||     ||
 
-ok: [davidayson8-2]
-ok: [davidayson8-1]
 ok: [davidayson8-3]
+ok: [davidayson8-1]
+ok: [davidayson8-2]
  ____________________________________
 < TASK [init : Generate SSH keypair] >
  ------------------------------------
@@ -9757,9 +9742,9 @@ ok: [davidayson8-3]
                 ||----w |
                 ||     ||
 
-ok: [davidayson8-2]
-ok: [davidayson8-1]
 ok: [davidayson8-3]
+ok: [davidayson8-1]
+ok: [davidayson8-2]
  ____________________________________________________________
 < TASK [init : Ensure .ssh directory exists for backup user] >
  ------------------------------------------------------------
@@ -9769,9 +9754,9 @@ ok: [davidayson8-3]
                 ||----w |
                 ||     ||
 
-ok: [davidayson8-2]
-ok: [davidayson8-1]
 ok: [davidayson8-3]
+ok: [davidayson8-1]
+ok: [davidayson8-2]
  _______________________________________________________
 / TASK [init : Add backup server key to known_hosts for \
 \ backup user]                                          /
@@ -9782,9 +9767,9 @@ ok: [davidayson8-3]
                 ||----w |
                 ||     ||
 
+ok: [davidayson8-3]
 ok: [davidayson8-2]
 ok: [davidayson8-1]
-ok: [davidayson8-3]
  _____________________________________________
 < TASK [init : Make Backup owner of INIT DIR] >
  ---------------------------------------------
@@ -9795,8 +9780,8 @@ ok: [davidayson8-3]
                 ||     ||
 
 ok: [davidayson8-2]
-ok: [davidayson8-1]
 ok: [davidayson8-3]
+ok: [davidayson8-1]
  _________________________________
 < TASK [init : Install Duplicity] >
  ---------------------------------
@@ -9806,9 +9791,9 @@ ok: [davidayson8-3]
                 ||----w |
                 ||     ||
 
+ok: [davidayson8-3]
 ok: [davidayson8-2]
 ok: [davidayson8-1]
-ok: [davidayson8-3]
  _________________________
 < PLAY [host DNS servers] >
  -------------------------
@@ -9827,9 +9812,9 @@ ok: [davidayson8-3]
                 ||----w |
                 ||     ||
 
-ok: [davidayson8-2]
 ok: [davidayson8-1]
 ok: [davidayson8-3]
+ok: [davidayson8-2]
  _____________________________
 < TASK [bind : Install Bind9] >
  -----------------------------
@@ -9840,8 +9825,8 @@ ok: [davidayson8-3]
                 ||     ||
 
 ok: [davidayson8-2]
-ok: [davidayson8-3]
 ok: [davidayson8-1]
+ok: [davidayson8-3]
  ___________________________________________________
 < TASK [bind : Configure named.conf files Template] >
  ---------------------------------------------------
@@ -9852,14 +9837,14 @@ ok: [davidayson8-1]
                 ||     ||
 
 ok: [davidayson8-2] => (item=None)
+ok: [davidayson8-3] => (item=None)
 ok: [davidayson8-1] => (item=None)
 ok: [davidayson8-3] => (item=None)
+ok: [davidayson8-3]
 ok: [davidayson8-2] => (item=None)
 ok: [davidayson8-2]
 ok: [davidayson8-1] => (item=None)
 ok: [davidayson8-1]
-ok: [davidayson8-3] => (item=None)
-ok: [davidayson8-3]
  _________________________________
 < TASK [bind : Run Zone template] >
  ---------------------------------
@@ -9869,9 +9854,9 @@ ok: [davidayson8-3]
                 ||----w |
                 ||     ||
 
-ok: [davidayson8-2]
-ok: [davidayson8-1]
 ok: [davidayson8-3]
+ok: [davidayson8-1]
+ok: [davidayson8-2]
  _________________________________________
 < TASK [bind : Run Reverse Zone template] >
  -----------------------------------------
@@ -9893,8 +9878,8 @@ ok: [davidayson8-3]
                 ||----w |
                 ||     ||
 
-ok: [davidayson8-1]
 ok: [davidayson8-3]
+ok: [davidayson8-1]
 ok: [davidayson8-2]
  ________________________________
 < TASK [bind : Execute handlers] >
@@ -9942,9 +9927,9 @@ ok: [davidayson8-3]
                 ||----w |
                 ||     ||
 
+ok: [davidayson8-3]
 ok: [davidayson8-2]
 ok: [davidayson8-1]
-ok: [davidayson8-3]
  _________________________________________
 < TASK [bind : Create bind_exporter user] >
  -----------------------------------------
@@ -9954,9 +9939,9 @@ ok: [davidayson8-3]
                 ||----w |
                 ||     ||
 
+ok: [davidayson8-3]
 ok: [davidayson8-2]
 ok: [davidayson8-1]
-ok: [davidayson8-3]
  _______________________________________
 < TASK [bind : Download Bind9 exporter] >
  ---------------------------------------
@@ -9978,9 +9963,9 @@ ok: [davidayson8-1]
                 ||----w |
                 ||     ||
 
+ok: [davidayson8-3]
 ok: [davidayson8-2]
 ok: [davidayson8-1]
-ok: [davidayson8-3]
  ______________________________________
 < TASK [bind : Extract Bind9 exporter] >
  --------------------------------------
@@ -9990,9 +9975,9 @@ ok: [davidayson8-3]
                 ||----w |
                 ||     ||
 
-ok: [davidayson8-1]
 ok: [davidayson8-3]
 ok: [davidayson8-2]
+ok: [davidayson8-1]
  _____________________________________________________
 / TASK [bind : Create a symlink for the Bind Exporter \
 \ executable]                                         /
@@ -10003,9 +9988,9 @@ ok: [davidayson8-2]
                 ||----w |
                 ||     ||
 
-ok: [davidayson8-2]
-ok: [davidayson8-1]
 ok: [davidayson8-3]
+ok: [davidayson8-1]
+ok: [davidayson8-2]
  _____________________________________________________
 < TASK [bind : Create Bind9 exporter systemd service] >
  -----------------------------------------------------
@@ -10015,9 +10000,9 @@ ok: [davidayson8-3]
                 ||----w |
                 ||     ||
 
+ok: [davidayson8-3]
 ok: [davidayson8-2]
 ok: [davidayson8-1]
-ok: [davidayson8-3]
  ___________________________________________________________
 / TASK [bind : Ensure Bind9 exporter service is started and \
 \ running]                                                  /
@@ -10028,9 +10013,9 @@ ok: [davidayson8-3]
                 ||----w |
                 ||     ||
 
-ok: [davidayson8-2]
 ok: [davidayson8-1]
 ok: [davidayson8-3]
+ok: [davidayson8-2]
  ______________________
 < TASK [Assign cnames] >
  ----------------------
@@ -10050,9 +10035,9 @@ included: cname for davidayson8-3, davidayson8-1, davidayson8-2
                 ||----w |
                 ||     ||
 
+ok: [davidayson8-3]
 ok: [davidayson8-2]
 ok: [davidayson8-1]
-ok: [davidayson8-3]
  _________________________________________________
 < TASK [cname : Add cname record for DNS servers] >
  -------------------------------------------------
@@ -10063,8 +10048,8 @@ ok: [davidayson8-3]
                 ||     ||
 
 ok: [davidayson8-3]
-ok: [davidayson8-1]
 ok: [davidayson8-2]
+ok: [davidayson8-1]
  _________________________
 < PLAY [Setup custom DNS] >
  -------------------------
@@ -10083,9 +10068,9 @@ ok: [davidayson8-2]
                 ||----w |
                 ||     ||
 
+ok: [davidayson8-3]
 ok: [davidayson8-2]
 ok: [davidayson8-1]
-ok: [davidayson8-3]
  ______________________________________
 < TASK [resolver : Update resolv.conf] >
  --------------------------------------
@@ -10095,9 +10080,9 @@ ok: [davidayson8-3]
                 ||----w |
                 ||     ||
 
+ok: [davidayson8-3]
 ok: [davidayson8-2]
 ok: [davidayson8-1]
-ok: [davidayson8-3]
  _______________________________________________
 < TASK [resolver : System-resolved is shutdown] >
  -----------------------------------------------
@@ -10229,8 +10214,8 @@ ok: [davidayson8-1]
                 ||----w |
                 ||     ||
 
-ok: [davidayson8-2]
 ok: [davidayson8-1]
+ok: [davidayson8-2]
  ________________________________________
 < TASK [keepalived : Install Keepalived] >
  ----------------------------------------
@@ -10240,8 +10225,8 @@ ok: [davidayson8-1]
                 ||----w |
                 ||     ||
 
-ok: [davidayson8-1]
 ok: [davidayson8-2]
+ok: [davidayson8-1]
  ______________________________________________
 < TASK [keepalived : Create keepalived_script] >
  ----------------------------------------------
@@ -10318,8 +10303,8 @@ skipping: [davidayson8-1]
                 ||----w |
                 ||     ||
 
-ok: [davidayson8-2]
 ok: [davidayson8-1]
+ok: [davidayson8-2]
  _____________________________________________________
 / TASK [keepalived : Ensure Keepalived is enabled and \
 \ started]                                            /
@@ -10361,8 +10346,8 @@ ok: [davidayson8-1]
                 ||----w |
                 ||     ||
 
-ok: [davidayson8-1]
 ok: [davidayson8-2]
+ok: [davidayson8-1]
  _________________________________
 < TASK [haproxy : Haproxy Config] >
  ---------------------------------
@@ -10372,8 +10357,8 @@ ok: [davidayson8-2]
                 ||----w |
                 ||     ||
 
-ok: [davidayson8-2]
 ok: [davidayson8-1]
+ok: [davidayson8-2]
  ___________________________________________
 < TASK [haproxy : Install Haproxy Exporter] >
  -------------------------------------------
@@ -10383,8 +10368,8 @@ ok: [davidayson8-1]
                 ||----w |
                 ||     ||
 
-ok: [davidayson8-1]
 ok: [davidayson8-2]
+ok: [davidayson8-1]
  __________________________________________
 < TASK [haproxy : Haproxy Exporter config] >
  ------------------------------------------
@@ -10415,8 +10400,8 @@ included: cname for davidayson8-1, davidayson8-2
                 ||----w |
                 ||     ||
 
-ok: [davidayson8-2]
 ok: [davidayson8-1]
+ok: [davidayson8-2]
  _________________________________________________
 < TASK [cname : Add cname record for DNS servers] >
  -------------------------------------------------
@@ -10446,9 +10431,9 @@ ok: [davidayson8-1]
                 ||----w |
                 ||     ||
 
-ok: [davidayson8-2]
-ok: [davidayson8-1]
 ok: [davidayson8-3]
+ok: [davidayson8-1]
+ok: [davidayson8-2]
  ______________________________________________
 < TASK [docker : Install docker and Resources] >
  ----------------------------------------------
@@ -10458,9 +10443,9 @@ ok: [davidayson8-3]
                 ||----w |
                 ||     ||
 
-ok: [davidayson8-1]
-ok: [davidayson8-2]
 ok: [davidayson8-3]
+ok: [davidayson8-2]
+ok: [davidayson8-1]
  ________________________
 < PLAY [Install Grafana] >
  ------------------------
@@ -10630,8 +10615,8 @@ ok: [davidayson8-1]
                 ||----w |
                 ||     ||
 
-ok: [davidayson8-2]
 ok: [davidayson8-1]
+ok: [davidayson8-2]
  ________________________________________________
 < TASK [mysql : Add MySQL bind address override] >
  ------------------------------------------------
@@ -10652,8 +10637,8 @@ ok: [davidayson8-1]
                 ||----w |
                 ||     ||
 
-ok: [davidayson8-1]
 ok: [davidayson8-2]
+ok: [davidayson8-1]
  _______________________________
 < TASK [mysql : MySQL database] >
  -------------------------------
@@ -10663,8 +10648,8 @@ ok: [davidayson8-2]
                 ||----w |
                 ||     ||
 
-ok: [davidayson8-1]
 ok: [davidayson8-2]
+ok: [davidayson8-1]
  __________________________________
 < TASK [mysql : Create MySQL user] >
  ----------------------------------
@@ -10685,8 +10670,8 @@ ok: [davidayson8-1]
                 ||----w |
                 ||     ||
 
-ok: [davidayson8-2]
 ok: [davidayson8-1]
+ok: [davidayson8-2]
  ____________________________________________________
 / TASK [mysql : Passing authentication data to MySQL \
 \ Exporter]                                          /
@@ -10817,8 +10802,8 @@ ok: [davidayson8-1]
                 ||----w |
                 ||     ||
 
-ok: [davidayson8-2]
 ok: [davidayson8-1]
+ok: [davidayson8-2]
  _________________
 < PLAY [InfluxDB] >
  -----------------
@@ -11038,8 +11023,8 @@ ok: [davidayson8-1]
                 ||----w |
                 ||     ||
 
-ok: [davidayson8-2]
 ok: [davidayson8-1]
+ok: [davidayson8-2]
  __________________________________________
 < TASK [agama : Install agama application] >
  ------------------------------------------
@@ -11071,40 +11056,23 @@ ok: [davidayson8-1]
                 ||----w |
                 ||     ||
 
-ok: [davidayson8-1]
 ok: [davidayson8-2]
- ______________________________________________
-< TASK [agama : Create Data Container for VM1] >
- ----------------------------------------------
+ok: [davidayson8-1]
+ ________________________________________
+< TASK [agama : Create a data container] >
+ ----------------------------------------
         \   ^__^
          \  (oo)\_______
             (__)\       )\/\
                 ||----w |
                 ||     ||
 
-skipping: [davidayson8-2] => (item=None) 
-skipping: [davidayson8-2] => (item=None) 
-skipping: [davidayson8-2] => (item=None) 
-skipping: [davidayson8-2]
+ok: [davidayson8-2] => (item=None)
 ok: [davidayson8-1] => (item=None)
 ok: [davidayson8-1] => (item=None)
+ok: [davidayson8-2] => (item=None)
 ok: [davidayson8-1] => (item=None)
 ok: [davidayson8-1]
- ______________________________________________
-< TASK [agama : Create Data Container for VM2] >
- ----------------------------------------------
-        \   ^__^
-         \  (oo)\_______
-            (__)\       )\/\
-                ||----w |
-                ||     ||
-
-skipping: [davidayson8-1] => (item=None) 
-skipping: [davidayson8-1] => (item=None) 
-skipping: [davidayson8-1] => (item=None) 
-skipping: [davidayson8-1]
-ok: [davidayson8-2] => (item=None)
-ok: [davidayson8-2] => (item=None)
 ok: [davidayson8-2] => (item=None)
 ok: [davidayson8-2]
  ______________________
@@ -11157,9 +11125,9 @@ ok: [davidayson8-1]
                 ||----w |
                 ||     ||
 
-ok: [davidayson8-2]
-ok: [davidayson8-1]
 ok: [davidayson8-3]
+ok: [davidayson8-1]
+ok: [davidayson8-2]
  _________________________________________
 < TASK [nginx : Install Nginx web server] >
  -----------------------------------------
@@ -11169,9 +11137,9 @@ ok: [davidayson8-3]
                 ||----w |
                 ||     ||
 
-ok: [davidayson8-2]
-ok: [davidayson8-1]
 ok: [davidayson8-3]
+ok: [davidayson8-1]
+ok: [davidayson8-2]
  _____________________________________
 < TASK [nginx : default Nginx config] >
  -------------------------------------
@@ -11181,9 +11149,9 @@ ok: [davidayson8-3]
                 ||----w |
                 ||     ||
 
-ok: [davidayson8-2]
-ok: [davidayson8-1]
 ok: [davidayson8-3]
+ok: [davidayson8-1]
+ok: [davidayson8-2]
  _______________________________
 < TASK [nginx : Flush handlers] >
  -------------------------------
@@ -11222,8 +11190,8 @@ ok: [davidayson8-3]
                 ||     ||
 
 ok: [davidayson8-1]
-ok: [davidayson8-2]
 ok: [davidayson8-3]
+ok: [davidayson8-2]
  _______________________________________
 < TASK [nginx : Install Nginx Exporter] >
  ---------------------------------------
@@ -11233,9 +11201,9 @@ ok: [davidayson8-3]
                 ||----w |
                 ||     ||
 
-ok: [davidayson8-2]
-ok: [davidayson8-1]
 ok: [davidayson8-3]
+ok: [davidayson8-1]
+ok: [davidayson8-2]
  ___________________________________________________________
 / TASK [nginx : Ensure Prometheus-nginx-exporter is started \
 \ and enabled]                                              /
@@ -11246,9 +11214,9 @@ ok: [davidayson8-3]
                 ||----w |
                 ||     ||
 
-ok: [davidayson8-2]
-ok: [davidayson8-1]
 ok: [davidayson8-3]
+ok: [davidayson8-1]
+ok: [davidayson8-2]
  ___________________________
 < PLAY [Agama-Client setup] >
  ---------------------------
@@ -11348,9 +11316,9 @@ ok: [davidayson8-3]
                 ||----w |
                 ||     ||
 
-davidayson8-1              : ok=83   changed=0    unreachable=0    failed=0    skipped=3    rescued=0    ignored=0   
-davidayson8-2              : ok=83   changed=0    unreachable=0    failed=0    skipped=3    rescued=0    ignored=0   
+davidayson8-1              : ok=83   changed=0    unreachable=0    failed=0    skipped=2    rescued=0    ignored=0   
+davidayson8-2              : ok=83   changed=0    unreachable=0    failed=0    skipped=2    rescued=0    ignored=0   
 davidayson8-3              : ok=86   changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
 
 + date
-Mon Jan 20 22:51:08 CET 2025
+Tue Jan 21 12:50:48 CET 2025

@@ -38,12 +38,11 @@ listen my_ha_frontend
     default_backend my_ha_backend
 
 backend my_ha_backend
-    server docker-1-8001 lb-1:8001 check
-    server docker-1-8002 lb-1:8002 check
-    server docker-1-8003 lb-1:8003 check
-    server docker-2-8001 lb-2:8001 check
-    server docker-2-8002 lb-2:8002 check
-    server docker-2-8003 lb-2:8003 check
+    {% for num in range(0, container_number) %}
+    server docker-1-{{ num }} lb-1:{{ 8001 + num }} check
+    server docker-2-{{ num }} lb-2:{{ 8001 + num }} check
+    {% endfor %}
+
 
 listen stats
     bind :9188

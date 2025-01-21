@@ -22,34 +22,19 @@
     build:
       path: /opt/agama
 
-- name: Create Data Container for VM1
+- name: Create a data container
   community.docker.docker_container:
-    name: agama-1-{{ item }}
+    name: agama-{{ item }}
     image: agama
-    state: started
     volumes: /opt/agama:/opt/agama
-    env: 
+    env:
       AGAMA_DATABASE_URI=mysql+pymysql://{{ mysql_user }}:{{ mysql_password }}@{{ mysql_host }}/{{mysql_database}}
-    ports: "{{ item }}:8000"
+    ports: "{{ agama_port + item }}:8000"
+    state: started
     restart_policy: always
-  with_items: "{{ agama_ports }}"
-  when: "inventory_hostname == 'davidayson8-1'"
+  loop: "{{ range(0, container_number) | list }}"
   no_log: true
 
-- name: Create Data Container for VM2
-  community.docker.docker_container:
-    name: agama-2-{{ item }}
-    image: agama
-    state: started
-    volumes: /opt/agama:/opt/agama
-    env: 
-      AGAMA_DATABASE_URI=mysql+pymysql://{{ mysql_user }}:{{ mysql_password }}@{{ mysql_host }}/{{mysql_database}}
-    ports: "{{ item }}:8000"
-    restart_policy: always
-  with_items: "{{ agama_ports }}"
-  when: "inventory_hostname == 'davidayson8-2'"
-  no_log: true 
-  
 - name: Assign cnames
   include_role:
     name: "cname"
