@@ -11,7 +11,8 @@ Verify the file and run as user root:
 `ls -l /home/backup/restore/mysql`
 `sudo su`
 
-Restore contents of agama database and verify mysql status: 
+Drop database and restore contents of agama database and verify mysql status: 
+`DROP DATABASE agama`
 `mysql agama < /home/backup/restore/mysql/agama.sql`
 `systemctl status mysql` should see active(running)
 
