@@ -1,5 +1,5 @@
-Backup SLA
-Coverage
+#Backup SLA
+##Coverage
 
 We back up services that satisfy at least one of these criteria:
 
@@ -9,49 +9,50 @@ We back up services that satisfy at least one of these criteria:
 
 Services that are backed up:
 
-Schedule
+MySQL
+InfluxDB
 
-_____ backups are created every _____; it takes up to _____ to create and store the backup.
+##Schedule
 
-_____ backups are created every _____; it takes up to _____ to create and store the backup.
+MySQL backups are created every daily at 22:55 UTC; it takes up to 5 minutes to create and store the backup.
 
-_____ backups are created every _____; it takes up to _____ to create and store the backup.
+InfluxDB backups are created daily at 22:15; it takes up to 5 minutes to create and store the backup.
 
-All backups are started automatically by _____.
+
+All backups are started automatically by Cron Jobs.
 
 Backup RPO (recovery point objective) is:
 
-    _____ for _____
-    _____ for _____
-    _____ for _____
+    24 hours for MySQL database
+    24 hours for InfluxDB database
 
-Storage
 
-_____ and _____ backups are uploaded to the backup server.
+##Storage
 
-_____ is mirrored to the internal Git server.
+MySQL and InfluxDB backups are uploaded to the backup server at rsync://<username>@backup/<backup>.
+
 
 Backup data from both servers will be synchronized to encrypted AWS S3 bucket in future (work in progress).
-Retention
 
-_____ backups are stored for _____; _____ versions (recovery points) are available to restore.
+##Retention
 
-_____ backups are stored for _____; _____ versions are available to restore.
+MySQL backups are stored for 30 days; 30 versions (recovery points) are available to restore.
 
-_____ backups are stored for _____; _____ versions are available to restore.
+InfluxDB backups are stored for 30; 30 versions are available to restore.
+
 Usability checks
 
-_____ backups are verified every _____ by _____.
+MySQL backups are verified every weekly by manually restoring and checking integrity.
 
-_____ backups are verified every _____ by _____.
+InfluxDB backups are verified every weekly by manually restoring and checking integrity.
 
-_____ backups are verified every _____ by _____.
-Restore process
+##Restore process
 
 Service is recovered from the backup in case of an incident, and when service cannot be restored in any other way.
 
+mysql -u <username> -p agama < /home/backup/mysql/agama.sql
+influxd restore -portable -db telegraf /home/backup/influxdb
+
 RTO (recovery time objective) is:
 
-    _____ for _____
-    _____ for _____
-    _____ for _____
+    1 hour for MySQL and InfluxDB

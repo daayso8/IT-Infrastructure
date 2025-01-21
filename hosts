@@ -1,7 +1,7 @@
-davidayson8-1 ansible_host=193.40.156.67 ansible_port=7422 ansible_user=ubuntu
-davidayson8-2 ansible_host=193.40.156.67 ansible_port=13722 ansible_user=ubuntu
-davidayson8-3 ansible_host=193.40.156.67 ansible_port=11222 ansible_user=ubuntu
-
+davidayson8-1 ansible_host=193.40.156.67 ansible_port=40722 ansible_user=ubuntu
+davidayson8-2 ansible_host=193.40.156.67 ansible_port=30322 ansible_user=ubuntu
+davidayson8-3 ansible_host=193.40.156.67 ansible_port=30422 ansible_user=ubuntu
+ 
 [agama]
 davidayson8-1
 davidayson8-2
