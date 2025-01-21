@@ -77,7 +77,7 @@
     password: "{{ backup_password }}"
     priv: "{{ mysql_database }}.*:LOCK TABLES, SELECT"
     login_unix_socket: /var/run/mysqld/mysqld.sock
-    host: "{{ inventory_hostname }}"
+    host: "localhost"
   no_log: true
 
 - name: Create backup template
