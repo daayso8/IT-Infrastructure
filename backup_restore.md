@@ -12,7 +12,9 @@ Verify the file and run as user root:
 `sudo su`
 
 Drop database and restore contents of agama database and verify mysql status: 
-`DROP DATABASE agama`
+`mysql -e 'DROP DATABASE IF EXISTS agama; CREATE DATABASE agama;'`
+`rm -rf /home/backup/restore/mysql/*`
+`sudo -u backup duplicity --no-encryption restore rsync://<username>@backup/mysql /home/backup/restore/mysql`
 `mysql agama < /home/backup/restore/mysql/agama.sql`
 `systemctl status mysql` should see active(running)
 
